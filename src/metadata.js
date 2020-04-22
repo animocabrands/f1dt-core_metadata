@@ -1,4 +1,4 @@
-const { inventoryIds } = require('@animoca/blockchain-metadata_base');
+const { inventoryIds } = require('@animoca/blockchain-inventory_metadata');
 const BigInteger = require("big-integer");
 const { encode, decode } = require("bits.js");
 const constants = require("./constants");
