@@ -1,0 +1,20 @@
+{
+  "name": "@animoca/f1dt-core_metadata",
+  "version": "0.0.1",
+  "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:animocabrands/f1dt-core_metadata.git"
+  },
+  "author": "Animoca Brands",
+  "license": "MIT",
+  "dependencies": {
+    "@animoca/blockchain-inventory_metadata": "^0.0.1",
+    "bits.js": "^0.1.1",
+    "commander": "^5.0.0"
+  }
+}
