@@ -57,6 +57,7 @@ function coreMetadataFromId(id) {
     }
 }
 
+
 function attributesFromCoreMetadata(coreMetadata) {
     let nTypeId = Number(coreMetadata.typeId);
     let nTeamId = Number(coreMetadata.teamId);
@@ -80,7 +81,6 @@ function attributesFromCoreMetadata(coreMetadata) {
     let openseaRacingAttrs = []
 
     let racingAttributes = [];
-
     if (coreMetadata.type == 'Car' ||
         coreMetadata.type == 'Driver' ||
         coreMetadata.type == 'Part' ||
@@ -260,24 +260,24 @@ function fullMetadataFromId(id, network = 'mainnet') {
     const collectionId = inventoryIds.NonFungible.getCollectionId(BigInteger(id), constants.NFCollectionMaskLength);
 
     let meta;
-
     if (coreMetadata.season == '2019') {
         const Season = require(`./mappings/2019`);
+
         const subTypeKey = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
         switch (coreMetadata.type) {
             case 'Car':
                 if (coreMetadata.rarityTier == 'Apex') {
                     meta = Season.Cars.ByCounter[coreMetadata.counter];
-                } else if (coreMetadata.team) {
+                } else if (coreMetadata.team && coreMetadata.team != "None") {
                     meta = Season.Cars.ByTeam[coreMetadata.team];
                 } else if (coreMetadata.model) {
                     meta = Season.Cars.ByModel[coreMetadata.model];
                 }
                 break;
             case 'Driver':
-                if (coreMetadata.driverNumber) {
+                if (coreMetadata.driverNumber != "0") {
                     meta = Season.Drivers.ByNumber[coreMetadata.driverNumber];
-                } else if (model) {
+                } else if (coreMetadata.model) {
                     meta = Season.Drivers.ByModel[coreMetadata.model];
                 }
                 break;
@@ -292,10 +292,8 @@ function fullMetadataFromId(id, network = 'mainnet') {
                 break;
         }
     }
-
-    // const image = tokenImage(meta.season, meta.track, meta.type, meta.subType, meta.name, meta.rarityTier);
-
-    return {
+    
+    const fullMetadata = {
         id,
         ...meta,
         external_url: config[network].external_url.replace("{id}", id),
@@ -304,8 +302,33 @@ function fullMetadataFromId(id, network = 'mainnet') {
         license: "",
         ...attributes
     }
+
+    if(!fullMetadata.hasOwnProperty("image_url"))
+        fullMetadata.image_url = getTokenImage({...coreMetadata,...meta});
+
+    return fullMetadata;
 }
 
+    function getTokenImage(meta){ 
+        console.log(meta.name,meta.subType,meta.type)
+        return `https://nft.f1deltatime.com/image/${getTokenImageKey(meta.season,meta.type,meta.subType,meta.name,meta.rarityTier)}`;
+    }
+   
+   function getTokenImageKey(season, type, subType, name, tier) {
+       let key;
+   
+       type = type.toLowerCase();
+       tier = tier.toLowerCase();
+       if (type == 'car' || type == 'driver') {
+           key = `${season}_${name.replace(/\s+/, '')}_${tier}.png`;
+       }
+       else {
+           key = `${season}_${subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+       }
+   
+       return key;
+   }
+   
 module.exports = {
     coreMetadataFromId,
     fullMetadataFromId,
