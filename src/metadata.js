@@ -311,7 +311,7 @@ function fullMetadataFromId(id, network = 'mainnet') {
 
     function getTokenImage(meta){ 
         console.log(meta.name,meta.subType,meta.type)
-        return `https://nft.f1deltatime.com/image/${getTokenImageKey(meta.season,meta.type,meta.subType,meta.name,meta.rarityTier)}`;
+        return `${config[network].metadata_url}/image/${getTokenImageKey(meta.season,meta.type,meta.subType,meta.name,meta.rarityTier)}`;
     }
    
    function getTokenImageKey(season, type, subType, name, tier) {
