@@ -10,5 +10,3 @@ module.exports = {
     Types,
     Labels,
 }
-
-// console.dir(module.exports);

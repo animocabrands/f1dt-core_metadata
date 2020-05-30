@@ -11,5 +11,3 @@ module.exports = {
     NumbersByTeam,
     RacingAttributes
 };
-
-// console.dir(module.exports);
