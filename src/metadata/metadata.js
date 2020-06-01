@@ -1,9 +1,10 @@
 const { inventoryIds } = require('@animoca/blockchain-inventory_metadata');
 const BigInteger = require("big-integer");
 const { encode, decode } = require("bits.js");
-const constants = require("./constants");
-const Common = require('./mappings/Common');
-const config = require('../config');
+const constants = require("../constants");
+const Common = require('../mappings/Common');
+const config = require('../../config');
+const { getTokenImage } = require('./image');
 
 function coreMetadataFromId(id) {
     const encoded = BigInteger(id);
@@ -18,7 +19,7 @@ function coreMetadataFromId(id) {
     const rarityTier = Common.Rarities.TierByRarity[decoded.rarity];
 
     if (season == '2019') {
-        const Season = require(`./mappings/2019`);
+        const Season = require(`../mappings`)['2019'];
         const subTypeKey = `${decoded.type},${decoded.subType}`;
         const subType = Season.SubTypes[subTypeKey].category_name;
         const team = Season.Teams.NameById[decoded.team];
@@ -292,7 +293,7 @@ function fullMetadataFromId(id, network = 'mainnet') {
                 break;
         }
     }
-    
+
     const fullMetadata = {
         id,
         ...meta,
@@ -303,34 +304,14 @@ function fullMetadataFromId(id, network = 'mainnet') {
         ...attributes
     }
 
-    if(!fullMetadata.hasOwnProperty("image_url"))
-        fullMetadata.image_url = getTokenImage({...coreMetadata,...meta});
+    if (!fullMetadata.hasOwnProperty("image_url"))
+        fullMetadata.image_url = getTokenImage({ ...coreMetadata, ...meta });
 
     return fullMetadata;
 }
 
-    function getTokenImage(meta){ 
-        console.log(meta.name,meta.subType,meta.type)
-        return `${config[network].metadata_url}/image/${getTokenImageKey(meta.season,meta.type,meta.subType,meta.name,meta.rarityTier)}`;
-    }
-   
-   function getTokenImageKey(season, type, subType, name, tier) {
-       let key;
-   
-       type = type.toLowerCase();
-       tier = tier.toLowerCase();
-       if (type == 'car' || type == 'driver') {
-           key = `${season}_${name.replace(/\s+/, '')}_${tier}.png`;
-       }
-       else {
-           key = `${season}_${subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
-       }
-   
-       return key;
-   }
-   
+
 module.exports = {
     coreMetadataFromId,
     fullMetadataFromId,
-    // tokenImage
 }
