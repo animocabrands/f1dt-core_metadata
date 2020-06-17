@@ -1,9 +1,15 @@
 const Common = require('./Common');
-const season2019 = require('./2019');
+const Season2019 = require('./Season2019');
+const Season2020 = require('./Season2020');
 
 module.exports = {
     Common,
-    '2019' : season2019
+
+    Season2019,
+    '2019' : Season2019,
+
+    Season2020,
+    '2020' : Season2020,
 };
 
 // console.dir(module.exports);

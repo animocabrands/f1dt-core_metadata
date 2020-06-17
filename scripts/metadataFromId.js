@@ -1,4 +1,4 @@
-const { coreMetadataFromId, fullMetadataFromId } = require('./metadata');
+const { coreMetadataFromId, fullMetadataFromId } = require('../src/metadata');
 const program = require('commander');
 program.version('0.0.1')
     .option('-i, --id <id>', 'F1DT Inventory ID')
