@@ -93,11 +93,11 @@ function attributesFromCoreMetadata(coreMetadata) {
             case 'Car':
             case 'Part':
             case 'Tyres':
-                racingAttributes = require(`./mappings/${coreMetadata.season}/Cars`).RacingAttributes;
+                racingAttributes = require(`../mappings/Season${coreMetadata.season}/Cars`).RacingAttributes;
                 break;
             case 'Driver':
             case 'Gear':
-                racingAttributes = require(`./mappings/${coreMetadata.season}/Drivers`).RacingAttributes;
+                racingAttributes = require(`../mappings/Season${coreMetadata.season}/Drivers`).RacingAttributes;
                 break;
         }
         internalRacingAttrs[racingAttributes.core[0]] = nAttr1;
@@ -261,37 +261,35 @@ function fullMetadataFromId(id, network = 'mainnet') {
     const collectionId = inventoryIds.NonFungible.getCollectionId(BigInteger(id), constants.NFCollectionMaskLength);
 
     let meta;
-    if (coreMetadata.season == '2019') {
-        const Season = require(`./mappings/2019`);
+    const Season = require(`../mappings/Season${coreMetadata.season}`);
 
-        const subTypeKey = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
-        switch (coreMetadata.type) {
-            case 'Car':
-                if (coreMetadata.rarityTier == 'Apex') {
-                    meta = Season.Cars.ByCounter[coreMetadata.counter];
-                } else if (coreMetadata.team && coreMetadata.team != "None") {
-                    meta = Season.Cars.ByTeam[coreMetadata.team];
-                } else if (coreMetadata.model) {
-                    meta = Season.Cars.ByModel[coreMetadata.model];
-                }
-                break;
-            case 'Driver':
-                if (coreMetadata.driverNumber != "0") {
-                    meta = Season.Drivers.ByNumber[coreMetadata.driverNumber];
-                } else if (coreMetadata.model) {
-                    meta = Season.Drivers.ByModel[coreMetadata.model];
-                }
-                break;
-            case 'Part':
-                meta = Season.Parts.ByTypes[subTypeKey];
-                break;
-            case 'Gear':
-                meta = Season.Gears.ByTypes[subTypeKey];
-                break;
-            case 'Tyres':
-                meta = Season.Tyres.ByTypes[subTypeKey];
-                break;
-        }
+    const subTypeKey = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
+    switch (coreMetadata.type) {
+        case 'Car':
+            if (coreMetadata.rarityTier == 'Apex') {
+                meta = Season.Cars.ByCounter[coreMetadata.counter];
+            } else if (coreMetadata.team && coreMetadata.team != "None") {
+                meta = Season.Cars.ByTeam[coreMetadata.team];
+            } else if (coreMetadata.model) {
+                meta = Season.Cars.ByModel[coreMetadata.model];
+            }
+            break;
+        case 'Driver':
+            if (coreMetadata.driverNumber != "0") {
+                meta = Season.Drivers.ByNumber[coreMetadata.driverNumber];
+            } else if (coreMetadata.model) {
+                meta = Season.Drivers.ByModel[coreMetadata.model];
+            }
+            break;
+        case 'Part':
+            meta = Season.Parts.ByTypes[subTypeKey];
+            break;
+        case 'Gear':
+            meta = Season.Gears.ByTypes[subTypeKey];
+            break;
+        case 'Tyres':
+            meta = Season.Tyres.ByTypes[subTypeKey];
+            break;
     }
 
     const fullMetadata = {
