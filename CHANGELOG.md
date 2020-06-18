@@ -1,6 +1,11 @@
 # Changelog
 
-## 0.1.0 (30/04/2020)
+## 0.1.1 (18/06/2020)
+
+### Bugfixes
+* Fix require paths for seasons.
+
+## 0.1.0 (17/06/2020)
 
 ### New Features
 * Added `collections` with support for inventory metadata layouts.
