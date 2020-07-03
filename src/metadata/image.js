@@ -1,7 +1,6 @@
 const config = require('../../config');
 
 function getTokenImage(meta, network = 'mainnet'){ 
-    console.log(meta.name,meta.subType,meta.type)
     return `${config[network].metadata_url}/image/${getTokenImageKey(
         meta.season,
         meta.type,
@@ -14,9 +13,21 @@ function getTokenImage(meta, network = 'mainnet'){
 function getTokenImageKey(season, type, subType, name, tier) {
     type = type.toLowerCase();
     tier = tier.toLowerCase();
-    return (type == 'car' || type == 'driver')?
-        `${season}_${name.replace(/\s+/, '')}_${tier}.png`:
-        `${season}_${subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+    let out = "";
+    switch (type) {
+        case "car":
+        case "driver":
+            out = `${season}_${name.replace(/\s+/, '')}_${tier}.png`;
+            break;
+        case "tyres":
+            out = `${season}_${name.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+            break;
+        default:
+            out = `${season}_${subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+            break;
+    }
+
+    return out;
 }
 
 module.exports = {
