@@ -1,11 +1,11 @@
 const mappings = require('../mappings');
-const { Common, Season2019 } = mappings;
+const { Common, Season2020 } = mappings;
 const { encodeCollectionId, subTypeCollectionsByType } = require('./Common');
 
 const SeasonName = '2020';
 
-const CarRacingAttributes = Season2019.Cars.RacingAttributes;
-const DriverRacingAttributes = Season2019.Drivers.RacingAttributes;
+const CarRacingAttributes = Season2020.Cars.RacingAttributes;
+const DriverRacingAttributes = Season2020.Drivers.RacingAttributes;
 
 const CarRacingAttributesLayout = [
     { name: CarRacingAttributes.core[0], length: 16, index: 120 },
