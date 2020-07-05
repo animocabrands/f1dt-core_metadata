@@ -6,6 +6,127 @@ const Common = require('../mappings/Common');
 const config = require('../../config');
 const { getTokenImage } = require('./image');
 
+function validateCommonMetadata(metadata) {
+    const commonMappings = require('../mappings/Common');
+
+    if (metadata.season) {
+        if (metadata.seasonId) {
+            const expected = commonMappings.Seasons.NameById[metadata.seasonId];
+            if (metadata.season != expected) {
+                throw Error(`Wrong season, expected '${expected}' for seasonId ${metadata.seasonId} but got '${metadata.season}'`);
+            }
+        } else {
+            const seasonId = commonMappings.Seasons.IdByName[metadata.season];
+            if (seasonId) {
+                metadata.seasonId = seasonId;
+            } else {
+                throw Error(`Could not retrieve seasonId for season '${metadata.season}'`);
+            }
+        }
+    } else {
+        if (metadata.seasonId) {
+            metadata.season = commonMappings.Seasons.NameById[metadata.seasonId];
+            if (!metadata.season) {
+                throw Error(`Could not retrieve season for seasonId '${metadata.seasonId}'`);
+            }
+        } else {
+            throw Error(`Missing data for season`);
+        }
+    }
+
+    if (metadata.type) {
+        if (metadata.typeId) {
+            const expected = commonMappings.Types.NameById[metadata.typeId];
+            if (metadata.type != expected) {
+                throw Error(`Wrong type, expected '${expected}' for typeId ${metadata.typeId} but got '${metadata.type}'`);
+            }
+        } else {
+            const typeId = commonMappings.Types.IdByName[metadata.type];
+            if (typeId) {
+                metadata.typeId = typeId;
+            } else {
+                throw Error(`Could not retrieve typeId for type '${metadata.type}'`);
+            }
+        }
+    } else {
+        if (metadata.typeId) {
+            metadata.type = commonMappings.Types.NameById[metadata.typeId];
+            if (!metadata.type) {
+                throw Error(`Could not retrieve type for typeId '${metadata.typeId}'`);
+            }
+        } else {
+            throw Error(`Missing data for type`);
+        }
+    }
+
+    // const seasonMappings = require(`../mappings/Season${metadata.season}`);
+    const seasonMappings = require(`../mappings/Season2019`);
+
+    if (metadata.subType) {
+        if (metadata.subTypeId) {
+            const fullSubTypeId = `${metadata.typeId},${metadata.subTypeId}`;
+            const expected = seasonMappings.SubTypes.NameById[fullSubTypeId];
+            if (metadata.subType != expected) {
+                throw Error(`Wrong subType, expected '${expected}' for subTypeId ${fullSubTypeId} but got '${metadata.subType}'`);
+            }
+        } else {
+            if (metadata.subType == 'None') {
+                metadata.subTypeId = 0;
+            } else {
+                const subTypeId = seasonMappings.SubTypes.IdByName[metadata.subType].split(',')[1];
+                if (subTypeId) {
+                    metadata.subTypeId = subTypeId;
+                } else {
+                    throw Error(`Could not retrieve subTypeId for subType '${metadata.subType}'`);
+                }
+            }
+        }
+    } else {
+        if (metadata.subTypeId) {
+            const fullSubTypeId = `${metadata.typeId},${metadata.subTypeId}`;
+            metadata.subType = seasonMappings.SubTypes.NameById[fullSubTypeId];
+            if (!metadata.subType) {
+                throw Error(`Could not retrieve subType for subTypeId '${fullSubTypeId}'`);
+            }
+        } else {
+            throw Error(`Missing data for subType`);
+        }
+    }
+}
+
+function idFromCoreMetadata(metadata) {
+    validateCommonMetadata(metadata);
+
+    //TODO validate season/type/subType-specific rules
+
+    const fieldsToEncode = {
+        counter: metadata.counter? BigInteger(metadata.counter): BigInteger(),
+        special2: metadata.special2? BigInteger(metadata.special2): BigInteger(),
+        special1: metadata.special1? BigInteger(metadata.special1): BigInteger(),
+        effect: metadata.effect? BigInteger(metadata.effect): BigInteger(),
+        luck: metadata.luck? BigInteger(metadata.luck): BigInteger(),
+        stat3: metadata.stat3? BigInteger(metadata.stat3): BigInteger(),
+        stat2: metadata.stat2? BigInteger(metadata.stat2): BigInteger(),
+        stat1: metadata.stat1? BigInteger(metadata.stat1): BigInteger(),
+        driverNumber: metadata.driverNumber? BigInteger(metadata.driverNumber): BigInteger(),
+        label: metadata.labelId? BigInteger(metadata.labelId): BigInteger(),
+        track: metadata.trackId? BigInteger(metadata.trackId): BigInteger(),
+        rarity: metadata.rarity? BigInteger(metadata.rarity): BigInteger(),
+        team: metadata.teamId? BigInteger(metadata.teamId): BigInteger(),
+        model: metadata.modelId? BigInteger(metadata.modelId): BigInteger(),
+        padding2: metadata.padding2? BigInteger(metadata.padding2): BigInteger(),
+        season: metadata.seasonId? BigInteger(metadata.seasonId): BigInteger(),
+        subType: metadata.subTypeId? BigInteger(metadata.subTypeId): BigInteger(),
+        type: metadata.typeId? BigInteger(metadata.typeId): BigInteger(),
+        padding1: metadata.padding1? BigInteger(metadata.padding1): BigInteger(),
+        nfFlag: BigInteger(1),
+    }
+
+    console.log(Object.entries(fieldsToEncode).map(([k, v]) => [k, v.toString()]));
+
+    return encode(constants.BitsLayout, fieldsToEncode);
+}
+
 function coreMetadataFromId(id) {
     const encoded = BigInteger(id);
     let decoded = decode(constants.BitsLayout, encoded);
@@ -312,4 +433,5 @@ function fullMetadataFromId(id, network = 'mainnet') {
 module.exports = {
     coreMetadataFromId,
     fullMetadataFromId,
+    idFromCoreMetadata
 }

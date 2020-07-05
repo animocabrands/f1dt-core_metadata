@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (05/07/2020)
+
+### New Features
+ * Added function `idFromCoreMetadata` (WIP)
+
+### Bugfixes
+* Fix require paths for seasons.
+
 ## 0.1.1 (18/06/2020)
 
 ### Bugfixes
