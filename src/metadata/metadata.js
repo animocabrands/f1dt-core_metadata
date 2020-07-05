@@ -59,6 +59,12 @@ function validateCommonMetadata(metadata) {
         }
     }
 
+    // TODO:
+    //  - rarity / rarityTier
+    //  - labelId / label
+}
+
+function validateSeasonMetadata(metadata) {
     // const seasonMappings = require(`../mappings/Season${metadata.season}`);
     const seasonMappings = require(`../mappings/Season2019`);
 
@@ -89,15 +95,28 @@ function validateCommonMetadata(metadata) {
                 throw Error(`Could not retrieve subType for subTypeId '${fullSubTypeId}'`);
             }
         } else {
-            throw Error(`Missing data for subType`);
+            throw Error(`Missing data for sub-type`);
         }
     }
+
+    // TODO:
+    //  - trackId / track
+    //  - teamId / team
+    //  - modelId / model
+    //  - driverNumber
+    //  - counter
+    //  - racing.stat1
+    //  - racing.stat2
+    //  - racing.stat3
+    //  - racing.luck
+    //  - racing.special1
+    //  - racing.special2
+    //  - racing.effect
 }
 
 function idFromCoreMetadata(metadata) {
     validateCommonMetadata(metadata);
-
-    //TODO validate season/type/subType-specific rules
+    validateSeasonMetadata(metadata);
 
     const fieldsToEncode = {
         counter: metadata.counter? BigInteger(metadata.counter): BigInteger(),
