@@ -65,8 +65,7 @@ function validateCommonMetadata(metadata) {
 }
 
 function validateSeasonMetadata(metadata) {
-    // const seasonMappings = require(`../mappings/Season${metadata.season}`);
-    const seasonMappings = require(`../mappings/Season2019`);
+    const seasonMappings = require(`../mappings/Season${metadata.season}`);
 
     if (metadata.subType) {
         if (metadata.subTypeId) {
