@@ -6,111 +6,201 @@ const Common = require('../mappings/Common');
 const config = require('../../config');
 const { getTokenImage } = require('./image');
 
+function validateMetadataByNameAndId(mapping, metadata, nameKey, idKey, required) {
+    if (metadata[nameKey] !== undefined) {
+        if (metadata[idKey] !== undefined) {
+            const expected = mapping.NameById[metadata[idKey]];
+            if (expected === undefined) {
+                throw Error(`Could not retrieve expected ${nameKey} for ${idKey} '${metadata[idKey]}'`);
+            } else if (metadata[nameKey] != expected) {
+                throw Error(`Wrong ${nameKey}, expected '${expected}' for ${idKey} ${metadata[idKey]} but got '${metadata[nameKey]}'`);
+            }
+        } else {
+            const id = mapping.IdByName[metadata[nameKey]];
+            if (id !== undefined) {
+                metadata[idKey] = id;
+            } else {
+                throw Error(`Could not retrieve ${idKey} for ${nameKey} '${metadata[nameKey]}'`);
+            }
+        }
+    } else {
+        if (metadata[idKey] !== undefined) {
+            metadata[nameKey] = mapping.NameById[metadata[idKey]];
+            if (metadata[nameKey] === undefined) {
+                throw Error(`Could not retrieve ${nameKey} for ${idKey} '${metadata[idKey]}'`);
+            }
+        } else if (required) {
+            throw Error(`Missing data for ${nameKey}`);
+        }
+    }
+}
+
 function validateCommonMetadata(metadata) {
     const commonMappings = require('../mappings/Common');
 
-    if (metadata.season) {
-        if (metadata.seasonId) {
-            const expected = commonMappings.Seasons.NameById[metadata.seasonId];
-            if (metadata.season != expected) {
-                throw Error(`Wrong season, expected '${expected}' for seasonId ${metadata.seasonId} but got '${metadata.season}'`);
+    validateMetadataByNameAndId(
+        commonMappings.Seasons,
+        metadata,
+        'season',
+        'seasonId',
+        true);
+
+    validateMetadataByNameAndId(
+        commonMappings.Types,
+        metadata,
+        'type',
+        'typeId',
+        true);
+
+    if (metadata.rarityTier !== undefined) {
+        if (metadata.rarity !== undefined) {
+            const expected = commonMappings.Rarities.TierByRarity[metadata.rarity];
+            if (expected === undefined) {
+                throw Error(`Could not retrieve expected rarity tier for rarity '${metadata.rarity}'`);
+            } else if (metadata.rarityTier != expected) {
+                throw Error(`Wrong type, expected '${expected}' for rarity ${metadata.rarity} but got '${metadata.rarityTier}'`);
             }
         } else {
-            const seasonId = commonMappings.Seasons.IdByName[metadata.season];
-            if (seasonId) {
-                metadata.seasonId = seasonId;
-            } else {
-                throw Error(`Could not retrieve seasonId for season '${metadata.season}'`);
-            }
+            // many-to-one relationship between rarity and rarity tier
+            throw Error(`Could not retrieve rarity for rarity tier '${metadata.rarityTier}'`);
         }
     } else {
-        if (metadata.seasonId) {
-            metadata.season = commonMappings.Seasons.NameById[metadata.seasonId];
-            if (!metadata.season) {
-                throw Error(`Could not retrieve season for seasonId '${metadata.seasonId}'`);
+        if (metadata.rarity !== undefined) {
+            metadata.rarityTier = commonMappings.Rarities.TierByRarity[metadata.rarity];
+            if (metadata.rarityTier === undefined) {
+                throw Error(`Could not retrieve rarity tier for rarity '${metadata.rarity}'`);
             }
         } else {
-            throw Error(`Missing data for season`);
+            throw Error(`Missing data for rarity`);
         }
     }
 
-    if (metadata.type) {
-        if (metadata.typeId) {
-            const expected = commonMappings.Types.NameById[metadata.typeId];
-            if (metadata.type != expected) {
-                throw Error(`Wrong type, expected '${expected}' for typeId ${metadata.typeId} but got '${metadata.type}'`);
-            }
-        } else {
-            const typeId = commonMappings.Types.IdByName[metadata.type];
-            if (typeId) {
-                metadata.typeId = typeId;
-            } else {
-                throw Error(`Could not retrieve typeId for type '${metadata.type}'`);
-            }
-        }
-    } else {
-        if (metadata.typeId) {
-            metadata.type = commonMappings.Types.NameById[metadata.typeId];
-            if (!metadata.type) {
-                throw Error(`Could not retrieve type for typeId '${metadata.typeId}'`);
-            }
-        } else {
-            throw Error(`Missing data for type`);
-        }
-    }
-
-    // TODO:
-    //  - rarity / rarityTier
-    //  - labelId / label
+    validateMetadataByNameAndId(
+        commonMappings.Labels,
+        metadata,
+        'label',
+        'labelId',
+        true);
 }
 
 function validateSeasonMetadata(metadata) {
     const seasonMappings = require(`../mappings/Season${metadata.season}`);
 
-    if (metadata.subType) {
-        if (metadata.subTypeId) {
-            const fullSubTypeId = `${metadata.typeId},${metadata.subTypeId}`;
-            const expected = seasonMappings.SubTypes.NameById[fullSubTypeId];
-            if (metadata.subType != expected) {
-                throw Error(`Wrong subType, expected '${expected}' for subTypeId ${fullSubTypeId} but got '${metadata.subType}'`);
-            }
-        } else {
-            if (metadata.subType == 'None') {
-                metadata.subTypeId = 0;
-            } else {
-                const subTypeId = seasonMappings.SubTypes.IdByName[metadata.subType].split(',')[1];
-                if (subTypeId) {
-                    metadata.subTypeId = subTypeId;
+    switch (metadata.type) {
+        case 'Part':
+        case 'Gear':
+        case 'Tyres':
+            if (metadata.subType !== undefined) {
+                if (metadata.subTypeId !== undefined) {
+                    const fullSubTypeId = `${metadata.typeId},${metadata.subTypeId}`;
+                    const expected = seasonMappings.SubTypes.NameById[fullSubTypeId];
+                    if (expected === undefined) {
+                        throw Error(`Could not retrieve expected subType for full subTypeId '${fullSubTypeId}'`);
+                    } if (metadata.subType != expected.name) {
+                        throw Error(`Wrong subType, expected '${expected.name}' for full subTypeId ${fullSubTypeId} but got '${metadata.subType}'`);
+                    }
                 } else {
-                    throw Error(`Could not retrieve subTypeId for subType '${metadata.subType}'`);
+                    const fullSubTypeId = seasonMappings.SubTypes.IdByName[metadata.subType];
+                    if (fullSubTypeId !== undefined) {
+                        const subTypeId = fullSubTypeId.split(',')[1];
+                        if (subTypeId !== undefined) {
+                            metadata.subTypeId = subTypeId;
+                        } else {
+                            throw Error(`Could not retrieve subTypeId for subType '${metadata.subType}'`);
+                        }
+                    } else {
+                        throw Error(`Could not retrieve full subTypeId for subType '${metadata.subType}'`);
+                    }
+                }
+            } else {
+                if (metadata.subTypeId !== undefined) {
+                    const fullSubTypeId = `${metadata.typeId},${metadata.subTypeId}`;
+                    metadata.subType = seasonMappings.SubTypes.NameById[fullSubTypeId];
+                    if (metadata.subType === undefined) {
+                        throw Error(`Could not retrieve subType for full subTypeId '${fullSubTypeId}'`);
+                    }
+                } else {
+                    throw Error(`Missing data for sub-type`);
                 }
             }
-        }
-    } else {
-        if (metadata.subTypeId) {
-            const fullSubTypeId = `${metadata.typeId},${metadata.subTypeId}`;
-            metadata.subType = seasonMappings.SubTypes.NameById[fullSubTypeId];
-            if (!metadata.subType) {
-                throw Error(`Could not retrieve subType for subTypeId '${fullSubTypeId}'`);
+            break;
+        default:
+            if (((metadata.subType !== undefined) && (metadata.subType != 'None')) ||
+                ((metadata.subTypeId !== undefined) && (Number(metadata.subTypeId) != 0))) {
+                throw Error(`Unexpected sub-type data for type ${metadata.type}`);
             }
-        } else {
-            throw Error(`Missing data for sub-type`);
-        }
     }
 
-    // TODO:
-    //  - trackId / track
-    //  - teamId / team
-    //  - modelId / model
-    //  - driverNumber
-    //  - counter
-    //  - racing.stat1
-    //  - racing.stat2
-    //  - racing.stat3
-    //  - racing.luck
-    //  - racing.special1
-    //  - racing.special2
-    //  - racing.effect
+    validateMetadataByNameAndId(
+        seasonMappings.Tracks,
+        metadata,
+        'track',
+        'trackId',
+        false);
+
+    switch (metadata.type) {
+        case 'Car':
+        case 'Driver':
+            validateMetadataByNameAndId(
+                seasonMappings.Teams,
+                metadata,
+                'team',
+                'teamId',
+                false);
+            break;
+        default:
+            if (((metadata.team !== undefined) && (metadata.team != 'None')) ||
+                ((metadata.teamId !== undefined) && (Number(metadata.teamId) != 0))) {
+                throw Error(`Unexpected team data for type ${metadata.type}`);
+            }
+    }
+
+    switch (metadata.type) {
+        case 'Car':
+        case 'Driver':
+            validateMetadataByNameAndId(
+                seasonMappings.Models,
+                metadata,
+                'model',
+                'modelId',
+                false);
+            break;
+        default:
+            if (((metadata.model !== undefined) && (metadata.model != 'None')) ||
+                ((metadata.modelId !== undefined) && (Number(metadata.modelId) != 0))) {
+                throw Error(`Unexpected model data for type ${metadata.type}`);
+            }
+    }
+
+    switch (metadata.type) {
+        case 'Car':
+        case 'Driver':
+            if ((metadata.teamId !== undefined) &&
+                (Number(metadata.teamId) != 0) &&
+                (metadata.modelId !== undefined) &&
+                (Number(metadata.modelId) != 0)) {
+                throw Error(`Conflicting team and model data for type ${metadata.type}`);
+            }
+            if ((metadata.teamId === undefined) &&
+                (metadata.modelId === undefined)) {
+                throw Error(`Missing team or model data for type ${metadata.type}`);
+            }
+            break;
+    }
+
+    if ((metadata.type == 'Driver') &&
+        (metadata.driverNumber !== undefined) &&
+        (Number(metadata.driverNumber) != 0)) {
+        if ((metadata.teamId === undefined) || (Number(metadata.teamId) == 0)) {
+            throw Error(`Missing team data for driver`);
+        }
+        const expected = seasonMappings.Teams.IdByDriver[metadata.driverNumber];
+        if (expected === undefined) {
+            throw Error(`Could not retrieve expected teamId for driverNumber '${metadata.driverNumber}'`);
+        } if (metadata.teamId != expected) {
+            throw Error(`Wrong teamId, expected '${expected}' for driverNumber ${metadata.driverNumber} but got '${metadata.teamId}'`);
+        }
+    }
 }
 
 function idFromCoreMetadata(metadata) {
