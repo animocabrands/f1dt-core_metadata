@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 (08/07/2020)
+
+### Bugfixes
+* Fixed image url generation for tyres
+
+### Chores
+* Removed `console.log` from `metadata/image.js`
+
 ## 0.1.1 (18/06/2020)
 
 ### Bugfixes
