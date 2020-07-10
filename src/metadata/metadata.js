@@ -230,8 +230,6 @@ function idFromCoreMetadata(metadata) {
         nfFlag: BigInteger(1),
     }
 
-    console.log(Object.entries(fieldsToEncode).map(([k, v]) => [k, v.toString()]));
-
     return encode(constants.BitsLayout, fieldsToEncode);
 }
 
@@ -250,7 +248,7 @@ function coreMetadataFromId(id) {
     if (season == '2019') {
         const Season = require(`../mappings`)['2019'];
         const subTypeKey = `${decoded.type},${decoded.subType}`;
-        const subType = Season.SubTypes[subTypeKey].category_name;
+        const subType = Season.SubTypes.NameById[subTypeKey].category_name;
         const team = Season.Teams.NameById[decoded.team];
         const model = Season.Models.NameById[decoded.model];
         const track = Season.Tracks.NameById[decoded.track];
