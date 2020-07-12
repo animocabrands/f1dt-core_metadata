@@ -5,7 +5,5 @@ const RacingAttributes = require('../Drivers/RacingAttributes');
 module.exports = {
     ByTypes,
     TypesByName,
-    RacingAttributes
-}
-
-// console.dir(module.exports);
+    RacingAttributes,
+};

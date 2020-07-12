@@ -8,6 +8,4 @@ module.exports = {
     NameById,
     IdByDriver,
     NameByDriver,
-}
-
-// console.dir(module.exports);
+};

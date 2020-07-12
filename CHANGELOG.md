@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0 (12/07/2020)
+
+### New Features
+ * 
+
+### Bugfixes
+ * Several minor fixes.
+
+### Improvements
+ * Improved documentation.
+ * Integrated `prettier`.
+
+
 ## 0.2.0 (05/07/2020)
 
 ### New Features

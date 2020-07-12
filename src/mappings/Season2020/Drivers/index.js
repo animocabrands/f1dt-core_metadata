@@ -9,5 +9,5 @@ module.exports = {
     ByNumber,
     NumberByName,
     NumbersByTeam,
-    RacingAttributes
+    RacingAttributes,
 };

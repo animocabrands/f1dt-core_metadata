@@ -1,12 +1,11 @@
-const Labels = require('./Labels');
-const Rarities = require('./Rarities');
-const Seasons = require('./Seasons');
-const Types = require('./Types');
-
+const Label = require('./Label');
+const Rarity = require('./Rarity');
+const Season = require('./Season');
+const Type = require('./Type');
 
 module.exports = {
-    Seasons,
-    Rarities,
-    Types,
-    Labels,
-}
+    Season,
+    Rarity,
+    Type,
+    Label,
+};

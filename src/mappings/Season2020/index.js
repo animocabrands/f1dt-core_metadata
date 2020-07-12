@@ -17,7 +17,5 @@ module.exports = {
     Teams,
     Tracks,
     Models,
-    SubTypes
-}
-
-// console.dir(module.exports);
+    SubTypes,
+};

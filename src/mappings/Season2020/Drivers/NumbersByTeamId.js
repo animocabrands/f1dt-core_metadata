@@ -8,7 +8,7 @@ const NumbersByTeamId = {
     '7': ['33', '10'],
     '8': ['3', '27'],
     '9': ['26', '23'],
-    '10': ['63', '88']
+    '10': ['63', '88'],
 };
 
 module.exports = NumbersByTeamId;

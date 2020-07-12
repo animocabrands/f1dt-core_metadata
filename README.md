@@ -38,7 +38,7 @@ Here is the current list of the core attributes:
 
 `Collection Identifier` indicates whether the attribute is part of the collection identifier. Collection identifiers are primarily composed of the _typeId_, _subTypeId_ and _seasonId_. For example _Car 2019_ or _Intermediate Tyres 2020_.
 
-Some attributes may or may not be nedded, depending on the type, sybType and season of the token. Refer to the season-specific mappings for more details.
+Some attributes may or may not be needed, depending on the type, subType and season of the token (refer to the season-specific mapping files for more details).
 
 ### Mapped core attributes
 
@@ -96,6 +96,17 @@ Some project constants such as the bits layout object and the fixed number of bi
 ### `module.mappings` object
 
 All the mappings necessary to manipulate metadata divided in common mappings and season-specific mappings.
+
+Retrieve the name of a team from its id for season 2019:
+```javascript
+const seasonMappings = require('@animoca/f1dt-core_metadata').mappings['2019'];
+
+```
+
+Retrieve the Tier for a rarity:
+```javascript
+
+```
 
 ### `module.collections` object
 

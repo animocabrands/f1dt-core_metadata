@@ -7,11 +7,7 @@ const SubTypes = {
     '2,0': { category_name: 'None' }, // Drivers
     ...PartsByTypes,
     ...GearsByTypes,
-    ...TyresByTypes
-}
+    ...TyresByTypes,
+};
 
 module.exports = SubTypes;
-
-// SubTypes.
-
-// console.dir(module.exports);

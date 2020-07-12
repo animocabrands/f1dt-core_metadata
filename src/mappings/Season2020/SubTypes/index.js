@@ -3,7 +3,6 @@ const NameById = require('./NameById');
 
 module.exports = {
     IdByName,
-    NameById
-}
+    NameById,
+};
 
-// console.dir(module.exports);

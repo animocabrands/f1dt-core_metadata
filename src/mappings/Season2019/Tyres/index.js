@@ -1,11 +1,21 @@
-const ByTypes = require('./ByTypes');
-const TypesByName = require('./TypesByName');
-const RacingAttributes = require('../Cars/RacingAttributes');
+const Tyres = require('./Tyres');
 
-module.exports = {
-    ByTypes,
-    TypesByName,
-    RacingAttributes
+const TypeId = '5';
+
+const ByName = {};
+const BySubTypeId = {};
+const ByFullTypeId = {};
+
+for (const tyres of Tyres) {
+    ByName[tyres.subType] = tyres;
+    BySubTypeId[tyres.subTypeId] = tyres;
+    ByFullTypeId[tyres.fullTypeId] = tyres;
 }
 
-// console.dir(module.exports);
+module.exports = {
+    All: Tyres,
+    ByName,
+    BySubTypeId,
+    ByFullTypeId,
+    typeId: TypeId,
+}

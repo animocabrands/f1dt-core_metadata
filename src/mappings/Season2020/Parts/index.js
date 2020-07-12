@@ -5,7 +5,6 @@ const RacingAttributes = require('../Cars/RacingAttributes');
 module.exports = {
     ByTypes,
     TypesByName,
-    RacingAttributes
-}
+    RacingAttributes,
+};
 
-// console.dir(module.exports);

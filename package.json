@@ -4,7 +4,7 @@
   "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettier": "prettier --write src"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
     "@animoca/blockchain-inventory_metadata": "^0.0.1",
     "bits.js": "^0.1.1",
     "commander": "^5.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }

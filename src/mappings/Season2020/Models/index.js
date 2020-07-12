@@ -7,7 +7,5 @@ const List = list(NameById);
 module.exports = {
     NameById,
     IdByName,
-    List
-}
-
-// console.dir(module.exports);
+    List,
+};

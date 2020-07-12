@@ -7,7 +7,5 @@ module.exports = {
     ByTeam,
     ByModel,
     ByCounter,
-    RacingAttributes
-}
-
-// console.dir(module.exports);
+    RacingAttributes,
+};
