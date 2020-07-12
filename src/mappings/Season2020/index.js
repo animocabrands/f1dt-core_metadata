@@ -1,21 +1,25 @@
-const Cars = require('./Cars');
-const Drivers = require('./Drivers');
-const Parts = require('./Parts');
-const Gears = require('./Gears');
+const Season = require('./Season');
+const Collection = require('./Collection');
+const SubType = require('./SubType');
+const Car = require('./Car');
+const Driver = require('./Driver');
+const Part = require('./Part');
+const Gear = require('./Gear');
 const Tyres = require('./Tyres');
-const Teams = require('./Teams');
-const Tracks = require('./Tracks');
-const Models = require('./Models');
-const SubTypes = require('./SubTypes');
+const Team = require('./Team');
+const GrandPrix = require('./GrandPrix');
+const Model = require('./Model');
 
 module.exports = {
-    Cars,
-    Drivers,
-    Parts,
-    Gears,
+    Season,
+    Collection,
+    SubType,
+    Car,
+    Driver,
+    Part,
+    Gear,
     Tyres,
-    Teams,
-    Tracks,
-    Models,
-    SubTypes,
+    Team,
+    GrandPrix,
+    Model,
 };
