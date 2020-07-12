@@ -6,31 +6,6 @@ const Common = require('../mappings/Common');
 const config = require('../../config');
 const { validateCommonMetadata, validateSeasonMetadata, getTokenImage } = require('./utils');
 
-function createCollectionId(seasonId, typeId, subTypeId) {
-    return encode(CollectionEncodingBitsLayout, {
-        nfFlag: BigInteger(1),
-        padding1: BigInteger(0),
-        typeId: BigInteger(typeId),
-        subTypeId: BigInteger(subTypeId),
-        seasonId: BigInteger(seasonId),
-        _: BigInteger(0),
-    }).toString(10);
-}
-
-function getSubTypeCollectionAttributes(seasonName, typeName) {
-    // function getSubTypeCollectionAttributes(seasonName, typeName, layout) {
-    return Object.entries(mappings[seasonName][typeName].ByTypes).map(([typeIds, meta]) => {
-        return {
-            id: createCollectionId(
-                mappings.Common.Seasons.IdByName[seasonName],
-                typeIds.split(',')[0],
-                typeIds.split(',')[1]
-            ),
-            name: `${meta.name} ${seasonName}`,
-        };
-    });
-}
-
 function createTokenId(metadata) {
     validateCommonMetadata(metadata);
     validateSeasonMetadata(metadata);
@@ -74,8 +49,7 @@ function getCoreMetadata(id) {
     const rarityTier = Common.Rarity.ByRarity[decoded.rarity].rarityTier;
 
     if (season == '2019') {
-        // const Season = require(`../mappings`)['2019'];
-        const seasonMappings = require('../mappings/Season2019');
+        const seasonMappings = require(`../mappings/Season2019`);
         const fullTypeId = `${decoded.typeId},${decoded.subTypeId}`;
         const subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;
         const track = seasonMappings.GrandPrix.ById[decoded.trackId].track;
@@ -312,15 +286,8 @@ function getFullMetadata(id, network = 'mainnet') {
         case 'Part':
         case 'Gear':
         case 'Tyres':
-            // TODO rename folders exactly as type names
             extendedMetadata = Season[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta;
             break;
-        // // TODO rename folders exactly as type names
-        // extendedMetadata = Season.Gear.ByTypes[fullTypeId];
-        // break;
-        // // TODO rename folders exactly as type names
-        // extendedMetadata = Season.Tyres.ByTypes[fullTypeId];
-        // break;
     }
 
     const collectionId = inventoryIds.NonFungible.getCollectionId(BigInteger(id), constants.NFCollectionMaskLength);
@@ -346,8 +313,4 @@ module.exports = {
     getCoreMetadata,
     getFullMetadata,
     createTokenId,
-    // Old API
-    coreMetadataFromId: getCoreMetadata,
-    fullMetadataFromId: getFullMetadata,
-    idFromCoreMetadata: createTokenId,
 };

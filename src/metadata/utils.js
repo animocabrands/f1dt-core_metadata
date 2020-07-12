@@ -1,6 +1,5 @@
 const { encode } = require('bits.js');
 const BigInteger = require('big-integer');
-// const mappings = require('../mappings');
 const { CollectionEncodingBitsLayout } = require('../constants');
 
 function validateCoreAttribute(mapping, metadata, nameKey, idKey, required) {
@@ -76,8 +75,7 @@ function validateCommonMetadata(metadata) {
 }
 
 function validateSeasonMetadata(metadata) {
-    // const seasonMappings = require(`../mappings/Season${metadata.season}`);
-    const seasonMappings = require(`../mappings/Season2019`);
+    const seasonMappings = require(`../mappings/Season${metadata.season}`);
 
     switch (metadata.type) {
         case 'Part':

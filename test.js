@@ -1,9 +1,9 @@
-const { getCoreMetadata, fullMetadataFromId } = require('./src/metadata');
+const { getCoreMetadata, getFullMetadata } = require('./src/metadata');
 
 const tokenId = '57897811519642769433138067471762254623735906850517137802921006713614358282351'; // the 1-1-1
 const coreMetadata = getCoreMetadata(tokenId);
 console.log(coreMetadata);
-const fullMetadata = fullMetadataFromId(tokenId);
+const fullMetadata = getFullMetadata(tokenId);
 console.log(fullMetadata);
 
 const { createTokenId } = require('./src/metadata');
