@@ -11,13 +11,11 @@ function validateCoreMetadata(metadata) {
     validateSeasonMetadata(metadata);
 }
 
-// function validateFullMetadata(fullMetadata) {
-//     try {
-//         validateCoreMetadata(fullMetadata.core_attributes);
-//     } catch (error) {
-
-//     } 
-// }
+function validateFullMetadata(fullMetadata) {
+    validateCoreMetadata(fullMetadata.core_attributes);
+    // fetch url
+    // compare fields
+}
 
 function createTokenId(metadata) {
     validateCoreMetadata(metadata);
@@ -325,4 +323,6 @@ module.exports = {
     createTokenId,
     getCoreMetadata,
     getFullMetadata,
+    validateCoreMetadata,
+    validateFullMetadata,
 };
