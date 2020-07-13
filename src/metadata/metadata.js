@@ -98,26 +98,6 @@ function getCoreMetadata(id) {
             },
         };
 
-        // TODO see if it's useful
-        // let racingAttributes;
-        // switch (type) {
-        //     case 'Car':
-        //     case 'Part':
-        //     case 'Tyres':
-        //         racingAttributes = require('../mappings')[coreMetadata.season].Cars.RacingAttributes.core;
-        //         break;
-        //     case 'Driver':
-        //     case 'Gear':
-        //         racingAttributes = require('../mappings')[coreMetadata.season].Drivers.RacingAttributes.core;
-        //         // racingAttributes = require(`../mappings/Season${coreMetadata.season}/Drivers`).RacingAttributes;
-        //         break;
-        // }
-        // if (racingAttributes) {
-        //     coreMetadata.racing[racingAttributes[0]] = decoded.stat1;
-        //     coreMetadata.racing[racingAttributes[1]] = decoded.stat2;
-        //     coreMetadata.racing[racingAttributes[2]] = decoded.stat3;
-        // }
-
         return coreMetadata;
     }
 }
