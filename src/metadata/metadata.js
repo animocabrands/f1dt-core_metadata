@@ -130,8 +130,7 @@ function getOpenseaMetadata(coreMetadata) {
         coreMetadata.type == 'Part' ||
         coreMetadata.type == 'Gear' ||
         coreMetadata.type == 'Tyres'
-    ) {
-        let racingAttributes = [];
+        ) {
         switch (coreMetadata.type) {
             case 'Car':
             case 'Part':
