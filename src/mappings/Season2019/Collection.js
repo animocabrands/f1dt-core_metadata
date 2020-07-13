@@ -1,24 +1,20 @@
-const Car = require('./Car');
-const Driver = require('./Driver');
-const Parts = require('./Part');
-const Gears = require('./Gear');
-const Tyres = require('./Tyres');
+const TokenTypes = require('./TokenTypes');
 
 const Collections = [
     {
-        collection: Car.collection,
-        collectionId: Car.collectionId,
-        fullTypeId: Car.fullTypeId,
+        collection: TokenTypes.Car.collection,
+        collectionId: TokenTypes.Car.collectionId,
+        fullTypeId: TokenTypes.Car.fullTypeId,
     },
     {
-        collection: Driver.collection,
-        collectionId: Driver.collectionId,
-        fullTypeId: Driver.fullTypeId,
+        collection: TokenTypes.Driver.collection,
+        collectionId: TokenTypes.Driver.collectionId,
+        fullTypeId: TokenTypes.Driver.fullTypeId,
     },
 ];
 
 Collections.push(
-    [...Parts.All, ...Gears.All, ...Tyres.All].map((subType) => {
+    [...TokenTypes.Part.All, ...TokenTypes.Gear.All, ...TokenTypes.Tyres.All].map((subType) => {
         return {
             collection: subType.collection,
             collectionId: subType.collectionId,

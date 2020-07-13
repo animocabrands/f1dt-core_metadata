@@ -1,10 +1,12 @@
-const Car = require('./Car');
-const Driver = require('./Driver');
-const Gear = require('./Gear');
-const Part = require('./Part');
-const Tyres = require('./Tyres');
+const TokenTypes = require('./TokenTypes');
 
-const SubTypes = [Car, Driver, ...Part.All, ...Gear.All, ...Tyres.All];
+const SubTypes = [
+    TokenTypes.Car,
+    TokenTypes.Driver,
+    ...TokenTypes.Part.All,
+    ...TokenTypes.Gear.All,
+    ...TokenTypes.Tyres.All,
+];
 
 const ByName = {};
 const ByFullTypeId = {};

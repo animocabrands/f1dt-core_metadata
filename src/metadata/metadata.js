@@ -4,7 +4,7 @@ const { encode, decode } = require('bits.js');
 const { validateCommonMetadata, validateSeasonMetadata, getTokenImage } = require('./utils');
 const constants = require('../constants');
 const config = require('../../config');
-const commonMappings = require('../mappings/Common');
+const commonMappings = require('../mappings/CommonAttributes');
 
 function validateCoreMetadata(metadata) {
     validateCommonMetadata(metadata);
@@ -32,7 +32,7 @@ function createTokenId(metadata) {
         rarity: metadata.rarity ? BigInteger(metadata.rarity) : BigInteger(),
         trackId: metadata.trackId ? BigInteger(metadata.trackId) : BigInteger(),
         labelId: metadata.labelId ? BigInteger(metadata.labelId) : BigInteger(),
-        driverNumber: metadata.driverNumber ? BigInteger(metadata.driverNumber) : BigInteger(),
+        driverId: metadata.driverId ? BigInteger(metadata.driverId) : BigInteger(),
         stat1: metadata.stat1 ? BigInteger(metadata.stat1) : BigInteger(),
         stat2: metadata.stat2 ? BigInteger(metadata.stat2) : BigInteger(),
         stat3: metadata.stat3 ? BigInteger(metadata.stat3) : BigInteger(),
@@ -62,10 +62,11 @@ function getCoreMetadata(id) {
         const seasonMappings = require(`../mappings/Season2019`);
         const fullTypeId = `${decoded.typeId},${decoded.subTypeId}`;
         const subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;
-        const track = seasonMappings.GrandPrix.ById[decoded.trackId].track;
-        const team = seasonMappings.Team.ById[decoded.teamId].team;
-        const model = seasonMappings.Model.ById[decoded.modelId].model;
-        const driver = seasonMappings.Driver.ByNumber[decoded.driverNumber].driver;
+        const track = seasonMappings.Attributes.Track.ById[decoded.trackId].track;
+        const team = seasonMappings.Attributes.Team.ById[decoded.teamId].team;
+        const model = seasonMappings.Attributes.Model.ById[decoded.modelId].model;
+
+        const driver = seasonMappings.TokenTypes.Driver.ByNumber[decoded.driverId].driver;
 
         const coreMetadata = {
             seasonId: decoded.seasonId,
@@ -82,7 +83,7 @@ function getCoreMetadata(id) {
             team,
             modelId: decoded.modelId,
             model,
-            driverNumber: decoded.driverNumber,
+            driverId: decoded.driverId,
             driver,
             labelId: decoded.labelId,
             label,
@@ -110,16 +111,17 @@ function getOpenseaMetadata(coreMetadata) {
         coreMetadata.type == 'Part' ||
         coreMetadata.type == 'Gear' ||
         coreMetadata.type == 'Tyres'
-        ) {
+    ) {
         switch (coreMetadata.type) {
             case 'Car':
             case 'Part':
             case 'Tyres':
-                racingAttributes = require(`../mappings/Season${coreMetadata.season}/Car`).RacingAttributes;
+                racingAttributes = require(`../mappings/Season${coreMetadata.season}/TokenTypes/Car`).RacingAttributes;
                 break;
             case 'Driver':
             case 'Gear':
-                racingAttributes = require(`../mappings/Season${coreMetadata.season}/Driver`).RacingAttributes;
+                racingAttributes = require(`../mappings/Season${coreMetadata.season}TokenTypes/Driver`)
+                    .RacingAttributes;
                 break;
         }
 
@@ -211,11 +213,11 @@ function getOpenseaMetadata(coreMetadata) {
         });
     }
 
-    if (coreMetadata.driverNumber) {
+    if (coreMetadata.driverId) {
         attributes.push({
             display_type: 'number',
             trait_type: 'driver_number',
-            value: coreMetadata.driverNumber,
+            value: coreMetadata.driverId,
         });
     }
 
@@ -258,24 +260,24 @@ function getFullMetadata(id, network = 'mainnet') {
     switch (coreMetadata.type) {
         case 'Car':
             if (coreMetadata.rarityTier == 'Apex') {
-                extendedMetadata = seasonMappings.Car.ByCounter[coreMetadata.counter].extendedMeta;
+                extendedMetadata = seasonMappings.TokenTypes.Car.ByCounter[coreMetadata.counter].extendedMeta;
             } else if (coreMetadata.team && coreMetadata.team != 'None') {
-                extendedMetadata = seasonMappings.Car.ByTeam[coreMetadata.team].extendedMeta;
+                extendedMetadata = seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta;
             } else if (coreMetadata.model) {
-                extendedMetadata = seasonMappings.Car.ByModel[coreMetadata.model].extendedMeta;
+                extendedMetadata = seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta;
             }
             break;
         case 'Driver':
-            if (coreMetadata.driverNumber != 0) {
-                extendedMetadata = seasonMappings.Driver.ByNumber[coreMetadata.driverNumber].extendedMeta;
+            if (coreMetadata.driverId != 0) {
+                extendedMetadata = seasonMappings.TokenTypes.Driver.ByNumber[coreMetadata.driverId].extendedMeta;
             } else if (coreMetadata.model) {
-                extendedMetadata = seasonMappings.Driver.ByModel[coreMetadata.model].extendedMeta;
+                extendedMetadata = seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta;
             }
             break;
         case 'Part':
         case 'Gear':
         case 'Tyres':
-            extendedMetadata = seasonMappings[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta;
+            extendedMetadata = seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta;
             break;
     }
 

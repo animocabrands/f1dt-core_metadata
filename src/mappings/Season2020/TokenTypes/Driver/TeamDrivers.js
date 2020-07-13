@@ -1,9 +1,9 @@
 const NoDriver = {
-    driverNumber: '0',
+    driverId: '0',
     driver: 'None'
 };
 const DanielRicciardo = {
-    driverNumber: '3',
+    driverId: '3',
     driver: 'Daniel Ricciardo',
     team: 'Renault F1® Team',
     extendedMeta: {
@@ -13,7 +13,7 @@ const DanielRicciardo = {
     },
 };
 const LandoNorris = {
-    driverNumber: '4',
+    driverId: '4',
     driver: 'Lando Norris',
     team: 'McLaren F1® Team',
     extendedMeta: {
@@ -23,7 +23,7 @@ const LandoNorris = {
     },
 };
 const SebastianVettel = {
-    driverNumber: '5',
+    driverId: '5',
     driver: 'Sebastian Vettel',
     team: 'Scuderia Ferrari',
     extendedMeta: {
@@ -33,7 +33,7 @@ const SebastianVettel = {
     },
 };
 const KimiRaikkonen = {
-    driverNumber: '7',
+    driverId: '7',
     driver: 'Kimi Räikkönen',
     team: 'Alfa Romeo Racing',
     extendedMeta: {
@@ -43,7 +43,7 @@ const KimiRaikkonen = {
     },
 };
 const RomainGrosjean = {
-    driverNumber: '8',
+    driverId: '8',
     driver: 'Romain Grosjean',
     team: 'Haas F1® Team',
     extendedMeta: {
@@ -53,7 +53,7 @@ const RomainGrosjean = {
     },
 };
 const PierreGasly = {
-    driverNumber: '10',
+    driverId: '10',
     driver: 'Pierre Gasly',
     team: 'Aston Martin Red Bull Racing',
     extendedMeta: {
@@ -63,7 +63,7 @@ const PierreGasly = {
     },
 };
 const SergioPerez = {
-    driverNumber: '11',
+    driverId: '11',
     driver: 'Sergio Pérez',
     team: 'SpScore Racing Point F1® Team',
     extendedMeta: {
@@ -73,7 +73,7 @@ const SergioPerez = {
     },
 };
 const CharlesLeclerc = {
-    driverNumber: '16',
+    driverId: '16',
     driver: 'Charles Leclerc',
     team: 'Scuderia Ferrari',
     extendedMeta: {
@@ -83,7 +83,7 @@ const CharlesLeclerc = {
     },
 };
 const LanceStroll = {
-    driverNumber: '18',
+    driverId: '18',
     driver: 'Lance Stroll',
     team: 'SpScore Racing Point F1® Team',
     extendedMeta: {
@@ -93,7 +93,7 @@ const LanceStroll = {
     },
 };
 const KevinMagnussen = {
-    driverNumber: '20',
+    driverId: '20',
     driver: 'Kevin Magnussen',
     team: 'Haas F1® Team',
     extendedMeta: {
@@ -103,7 +103,7 @@ const KevinMagnussen = {
     },
 };
 const AlexanderAlbon = {
-    driverNumber: '23',
+    driverId: '23',
     driver: 'Alexander Albon',
     team: 'Red Bull Toro Rosso Honda',
     extendedMeta: {
@@ -113,7 +113,7 @@ const AlexanderAlbon = {
     },
 };
 const DaniilKvyat = {
-    driverNumber: '26',
+    driverId: '26',
     driver: 'Daniil Kvyat',
     team: 'Red Bull Toro Rosso Honda',
     extendedMeta: {
@@ -123,7 +123,7 @@ const DaniilKvyat = {
     },
 };
 const NicoHulkenberg = {
-    driverNumber: '27',
+    driverId: '27',
     driver: 'Nico Hülkenberg',
     team: 'Renault F1® Team',
     extendedMeta: {
@@ -133,7 +133,7 @@ const NicoHulkenberg = {
     },
 };
 const MaxVerstappen = {
-    driverNumber: '33',
+    driverId: '33',
     driver: 'Max Verstappen',
     team: 'Aston Martin Red Bull Racing',
     extendedMeta: {
@@ -143,7 +143,7 @@ const MaxVerstappen = {
     },
 };
 const LewisHamilton = {
-    driverNumber: '44',
+    driverId: '44',
     driver: 'Lewis Hamilton',
     team: 'Mercedes-AMG Petronas Motorsport',
     extendedMeta: {
@@ -153,7 +153,7 @@ const LewisHamilton = {
     },
 };
 const CarlosSainz = {
-    driverNumber: '55',
+    driverId: '55',
     driver: 'Carlos Sainz',
     team: 'McLaren F1® Team',
     extendedMeta: {
@@ -163,7 +163,7 @@ const CarlosSainz = {
     },
 };
 const GeorgeRussell = {
-    driverNumber: '63',
+    driverId: '63',
     driver: 'George Russell',
     team: 'ROKiT Williams Racing',
     extendedMeta: {
@@ -173,7 +173,7 @@ const GeorgeRussell = {
     },
 };
 const ValtteriBottas = {
-    driverNumber: '77',
+    driverId: '77',
     driver: 'Valtteri Bottas',
     team: 'Mercedes-AMG Petronas Motorsport',
     extendedMeta: {
@@ -183,7 +183,7 @@ const ValtteriBottas = {
     },
 };
 const RobertKubica = {
-    driverNumber: '88',
+    driverId: '88',
     driver: 'Robert Kubica',
     team: 'ROKiT Williams Racing',
     extendedMeta: {
@@ -193,7 +193,7 @@ const RobertKubica = {
     },
 };
 const AntonioGiovinazzi = {
-    driverNumber: '99',
+    driverId: '99',
     driver: 'Antonio Giovinazzi',
     team: 'Alfa Romeo Racing',
     extendedMeta: {

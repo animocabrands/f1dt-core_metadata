@@ -2,8 +2,11 @@
 
 ## 1.0.0 (12/07/2020)
 
-### New Features
- * 
+### Breaking changes
+ * Major code refactor.
+
+### New features
+ * Metadata validation.
 
 ### Bugfixes
  * Several minor fixes.

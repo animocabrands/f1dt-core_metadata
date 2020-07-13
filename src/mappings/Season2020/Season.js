@@ -1,9 +1,9 @@
-const Seasons = require('../Common/Season');
+const Season = require('../CommonAttributes/Season');
 
-const Season = '2020';
-const SeasonId = Seasons.ByName[Season].seasonId;
+const _Season = '2020';
+const SeasonId = Season.ByName[_Season].seasonId;
 
 module.exports = {
-    season: Season,
+    season: _Season,
     seasonId: SeasonId,
 };

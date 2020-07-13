@@ -1,5 +1,5 @@
-const { createCollectionId } = require('../../../metadata/utils/collection');
-const Season = require('../Season');
+const { createCollectionId } = require('../../../../metadata/utils/collection');
+const Season = require('../../Season');
 const TeamDrivers = require('./TeamDrivers');
 const GenericDrivers = require('./GenericDrivers');
 const RacingAttributes = require('./RacingAttributes');
@@ -17,7 +17,7 @@ const ByNumber = {};
 const ByModel = {};
 
 for (const teamDriver of TeamDrivers) {
-    ByNumber[teamDriver.driverNumber] = teamDriver;
+    ByNumber[teamDriver.driverId] = teamDriver;
     ByName[teamDriver.driver] = teamDriver;
 }
 

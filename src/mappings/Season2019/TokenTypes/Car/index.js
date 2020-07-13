@@ -1,5 +1,5 @@
-const { createCollectionId } = require('../../../metadata/utils/collection');
-const Season = require('../Season');
+const { createCollectionId } = require('../../../../metadata/utils/collection');
+const Season = require('../../Season');
 const TeamCars = require('./TeamCars');
 const GenericCars = require('./GenericCars');
 const UniqueCars = require('./UniqueCars');

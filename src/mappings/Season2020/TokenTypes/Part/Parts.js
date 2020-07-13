@@ -1,5 +1,5 @@
-const Season = require('../Season');
-const { createCollectionId } = require('../../../metadata/utils/collection');
+const Season = require('../../Season');
+const { createCollectionId } = require('../../../../metadata/utils/collection');
 
 const PowerUnit = {
     subType: 'Power Unit',

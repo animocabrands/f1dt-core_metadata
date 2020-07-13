@@ -22,7 +22,7 @@ Here is the current list of the core attributes:
 | rarity           | 176  | uint8  | yes | no  | no  | The rarity level of the token. |
 | trackId          | 168  | uint8  | no  | yes | no  | Numerical representation of the track of the token, for example _Monaco_. |
 | labelId          | 152  | uint16 | no  | no  | no  | Numerical representation of label of the token. Label are used for specific tokens and is intended to be used for collection and gamfication. |
-| driverNumber     | 136  | uint16 | no  | no  | no  | The driver number for a _Driver_. |
+| driverId     | 136  | uint16 | no  | no  | no  | The driver number for a _Driver_. |
 | stat1            | 120  | uint16 | no  | yes | no  | The _Top Speed_ of a _Car_/_Part_/_Tyre_ **or** the _Stamina_ of a _Driver_/_Gear_. |
 | stat2            | 104  | uint16 | no  | yes | no  | The _Acceleration_ of a _Car_/_Part_/_Tyre_ **or** the _Aggression_ of a _Driver_/_Gear_. |
 | stat3            | 88   | uint16 | no  | yes | no  | The _Grip_ of a _Car_/_Part_/_Tyre_ **or** the _Concentration_ of a _Driver_/_Gear_. |

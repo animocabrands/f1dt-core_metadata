@@ -1,85 +1,103 @@
-function validateCoreAttribute(mapping, metadata, nameKey, idKey, required) {
-    if (metadata[nameKey] !== undefined) {
-        if (metadata[idKey] !== undefined) {
-            const coreAttribute = mapping.ById[metadata[idKey]];
+function validateAndMapCoreAttribute(mapping, metadata, attributeName, required) {
+    const attributeId = attributeName + 'Id';
+    if (metadata[attributeName] !== undefined) {
+        if (metadata[attributeId] !== undefined) {
+            const coreAttribute = mapping.ById[metadata[attributeId]];
             if (coreAttribute === undefined) {
-                throw Error(`Could not retrieve expected ${nameKey} for ${idKey} '${metadata[idKey]}'`);
-            } else if (metadata[nameKey] != coreAttribute[nameKey]) {
                 throw Error(
-                    `Wrong ${nameKey}, expected '${coreAttribute[nameKey]}' for ${idKey} ${metadata[idKey]} but got '${metadata[nameKey]}'`
+                    `Could not retrieve expected ${attributeName} for ${attributeId} '${metadata[attributeId]}'`
+                );
+            } else if (metadata[attributeName] != coreAttribute[attributeName]) {
+                throw Error(
+                    `Wrong ${attributeName}, expected '${coreAttribute[attributeName]}' for ${attributeId} ${metadata[attributeId]} but got '${metadata[attributeName]}'`
                 );
             }
         } else {
-            const coreAttribute = mapping.ByName[metadata[nameKey]];
+            const coreAttribute = mapping.ByName[metadata[attributeName]];
             if (coreAttribute !== undefined) {
-                metadata[idKey] = coreAttribute[idKey];
+                metadata[attributeId] = coreAttribute[attributeId];
             } else {
-                throw Error(`Could not retrieve ${idKey} for ${nameKey} '${metadata[nameKey]}'`);
+                throw Error(`Could not retrieve ${attributeId} for ${attributeName} '${metadata[attributeName]}'`);
             }
         }
     } else {
-        if (metadata[idKey] !== undefined) {
-            const coreAttribute = mapping.ById[metadata[idKey]];
+        if (metadata[attributeId] !== undefined) {
+            const coreAttribute = mapping.ById[metadata[attributeId]];
             if (coreAttribute === undefined) {
-                throw Error(`Could not retrieve ${nameKey} for ${idKey} '${metadata[idKey]}'`);
+                throw Error(`Could not retrieve ${attributeName} for ${attributeId} '${metadata[attributeId]}'`);
             } else {
-                metadata[nameKey] = coreAttribute[nameKey];
+                metadata[attributeName] = coreAttribute[attributeName];
             }
         } else if (required) {
-            throw Error(`Missing data for ${nameKey}`);
+            throw Error(`Missing data for ${attributeName}`);
         }
     }
 }
 
 function validateCommonMetadata(metadata) {
-    const commonMappings = require('../../mappings/Common');
+    const commonMappings = require('../../mappings/CommonAttributes');
 
     const errors = [];
 
     try {
-        validateCoreAttribute(commonMappings.Season, metadata, 'season', 'seasonId', true);
+        validateAndMapCoreAttribute(commonMappings.Season, metadata, 'season', true);
     } catch (error) {
         errors.push(error);
     }
     try {
-        validateCoreAttribute(commonMappings.Type, metadata, 'type', 'typeId', true);
+        validateAndMapCoreAttribute(commonMappings.Type, metadata, 'type', true);
     } catch (error) {
         errors.push(error);
     }
     try {
-        validateCoreAttribute(commonMappings.Label, metadata, 'label', 'labelId', false);
+        validateAndMapCoreAttribute(commonMappings.Label, metadata, 'label', false);
     } catch (error) {
         errors.push(error);
     }
 
-    if (metadata.rarityTier !== undefined) {
-        if (metadata.rarity !== undefined) {
-            const expected = commonMappings.Rarity.ByRarity[metadata.rarity];
-            if (expected === undefined) {
-                errors.push(Error(`Could not retrieve expected rarity tier for rarity '${metadata.rarity}'`));
-            } else if (metadata.rarityTier != expected.rarityTier) {
-                errors.push(
-                    Error(
-                        `Wrong type, expected '${expected.rarityTier}' for rarity ${metadata.rarity} but got '${metadata.rarityTier}'`
-                    )
-                );
+    if (metadata.rarity !== undefined) {
+        const rarityTier = commonMappings.Rarity.ByRarity[metadata.rarity];
+        if (rarityTier !== undefined) {
+            if (metadata.rarityTier !== undefined && metadata.rarityTier != rarityTier) {
+                errors.push(Error(`Wrong rarityTier, expected '${rarityTier}' but got '${metadata.rarityTier}'`));
+            } else {
+                metadata.rarityTier = commonMappings.Rarity.ByRarity[metadata.rarity].rarityTier;
             }
         } else {
-            // many-to-one relationship between rarity and rarity tier
-            errors.push(Error(`Could not retrieve rarity for rarity tier '${metadata.rarityTier}'`))
+            errors.push(Error(`Could not retrieve rarityTier for rarity '${metadata.rarity}'`));
         }
     } else {
-        if (metadata.rarity !== undefined) {
-            const rarity = commonMappings.Rarity.ByRarity[metadata.rarity];
-            if (rarity === undefined) {
-                errors.push(Error(`Could not retrieve rarity tier for rarity '${metadata.rarity}'`));
-            } else {
-                metadata.rarityTier = rarity.rarityTier;
-            }
-        } else {
-            errors.push(Error(`Missing data for rarity`));
-        }
+        errors.push(Error(`Missing rarity`));
     }
+
+    // if (metadata.rarityTier !== undefined) {
+    //     if (metadata.rarity !== undefined) {
+    //         const expected = commonMappings.Rarity.ByRarity[metadata.rarity];
+    //         if (expected === undefined) {
+    //             errors.push(Error(`Could not retrieve expected rarity tier for rarity '${metadata.rarity}'`));
+    //         } else if (metadata.rarityTier != expected.rarityTier) {
+    //             errors.push(
+    //                 Error(
+    //                     `Wrong type, expected '${expected.rarityTier}' for rarity ${metadata.rarity} but got '${metadata.rarityTier}'`
+    //                 )
+    //             );
+    //         }
+    //     } else {
+    //         // many-to-one relationship between rarity and rarity tier
+    //         errors.push(Error(`Could not retrieve rarity for rarity tier '${metadata.rarityTier}'`))
+    //     }
+    // } else {
+    //     if (metadata.rarity !== undefined) {
+    //         const rarity = commonMappings.Rarity.ByRarity[metadata.rarity];
+    //         if (rarity === undefined) {
+    //             errors.push(Error(`Could not retrieve rarity tier for rarity '${metadata.rarity}'`));
+    //         } else {
+    //             metadata.rarityTier = rarity.rarityTier;
+    //         }
+    //     } else {
+    //         errors.push(Error(`Missing data for rarity`));
+    //     }
+    // }
 
     if (errors.length > 0) {
         throw errors;
@@ -103,9 +121,11 @@ function validateSeasonMetadata(metadata) {
                         errors.push(Error(`Could not retrieve expected subType for full subTypeId '${fullTypeId}'`));
                     }
                     if (metadata.subType != expected.extendedMeta.name) {
-                        errors.push(Error(
-                            `Wrong subType, expected '${expected.extendedMeta.name}' for full subTypeId ${fullTypeId} but got '${metadata.subType}'`
-                        ));
+                        errors.push(
+                            Error(
+                                `Wrong subType, expected '${expected.extendedMeta.name}' for full subTypeId ${fullTypeId} but got '${metadata.subType}'`
+                            )
+                        );
                     }
                 } else {
                     const subType = seasonMappings.SubType.ByName[metadata.subType];
@@ -139,12 +159,12 @@ function validateSeasonMetadata(metadata) {
             }
     }
 
-    validateCoreAttribute(seasonMappings.GrandPrix, metadata, 'track', 'trackId', false);
+    validateAndMapCoreAttribute(seasonMappings.Attributes.Track, metadata, 'track', false);
 
     switch (metadata.type) {
         case 'Car':
         case 'Driver':
-            validateCoreAttribute(seasonMappings.Team, metadata, 'team', 'teamId', false);
+            validateAndMapCoreAttribute(seasonMappings.Attributes.Team, metadata, 'team', false);
             break;
         default:
             if (
@@ -158,7 +178,7 @@ function validateSeasonMetadata(metadata) {
     switch (metadata.type) {
         case 'Car':
         case 'Driver':
-            validateCoreAttribute(seasonMappings.Model, metadata, 'model', 'modelId', false);
+            validateAndMapCoreAttribute(seasonMappings.Attributes.Model, metadata, 'model', false);
             break;
         default:
             if (
@@ -186,19 +206,21 @@ function validateSeasonMetadata(metadata) {
             break;
     }
 
-    if (metadata.type == 'Driver' && metadata.driverNumber !== undefined && Number(metadata.driverNumber) != 0) {
+    if (metadata.type == 'Driver' && metadata.driverId !== undefined && Number(metadata.driverId) != 0) {
         if (metadata.teamId === undefined || Number(metadata.teamId) == 0) {
             errors.push(Error(`Missing team data for driver`));
         }
-        const driver = seasonMappings.Driver.ByNumber[metadata.driverNumber];
+        const driver = seasonMappings.TokenTypes.Driver.ByNumber[metadata.driverId];
         if (driver === undefined) {
-            errors.push(Error(`Could not retrieve driver for driverNumber '${metadata.driverNumber}'`));
+            errors.push(Error(`Could not retrieve driver for driverId '${metadata.driverId}'`));
         }
-        const team = seasonMappings.Team.ByDriver[driver];
+        const team = seasonMappings.TokenTypes.Team.ByDriver[driver];
         if (metadata.teamId != team.teamId) {
-            errors.push(Error(
-                `Wrong teamId, expected '${team.teamId}' for driverNumber ${metadata.driverNumber} but got '${metadata.teamId}'`
-            ));
+            errors.push(
+                Error(
+                    `Wrong teamId, expected '${team.teamId}' for driverId '${metadata.driverId}' but got '${metadata.teamId}'`
+                )
+            );
         }
     }
 
