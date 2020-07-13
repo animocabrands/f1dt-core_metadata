@@ -1,14 +1,26 @@
 const { inventoryIds } = require('@animoca/blockchain-inventory_metadata');
 const BigInteger = require('big-integer');
 const { encode, decode } = require('bits.js');
-const constants = require('../constants');
-const Common = require('../mappings/Common');
-const config = require('../../config');
 const { validateCommonMetadata, validateSeasonMetadata, getTokenImage } = require('./utils');
+const constants = require('../constants');
+const config = require('../../config');
+const commonMappings = require('../mappings/Common');
 
-function createTokenId(metadata) {
+function validateCoreMetadata(metadata) {
     validateCommonMetadata(metadata);
     validateSeasonMetadata(metadata);
+}
+
+// function validateFullMetadata(fullMetadata) {
+//     try {
+//         validateCoreMetadata(fullMetadata.core_attributes);
+//     } catch (error) {
+
+//     } 
+// }
+
+function createTokenId(metadata) {
+    validateCoreMetadata(metadata);
 
     const fieldsToEncode = {
         nfFlag: BigInteger(1),
@@ -43,10 +55,10 @@ function getCoreMetadata(id) {
         decoded[key] = Number(decoded[key].toString(10));
     }
 
-    const type = Common.Type.ById[decoded.typeId].type;
-    const label = Common.Label.ById[decoded.labelId].label;
-    const season = Common.Season.ById[decoded.seasonId].season;
-    const rarityTier = Common.Rarity.ByRarity[decoded.rarity].rarityTier;
+    const type = commonMappings.Type.ById[decoded.typeId].type;
+    const label = commonMappings.Label.ById[decoded.labelId].label;
+    const season = commonMappings.Season.ById[decoded.seasonId].season;
+    const rarityTier = commonMappings.Rarity.ByRarity[decoded.rarity].rarityTier;
 
     if (season == '2019') {
         const seasonMappings = require(`../mappings/Season2019`);
@@ -263,30 +275,30 @@ function getFullMetadata(id, network = 'mainnet') {
     const openseaMetadata = getOpenseaMetadata(coreMetadata);
 
     let extendedMetadata = {};
-    const Season = require(`../mappings/Season${coreMetadata.season}`);
+    const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
 
     const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
     switch (coreMetadata.type) {
         case 'Car':
             if (coreMetadata.rarityTier == 'Apex') {
-                extendedMetadata = Season.Car.ByCounter[coreMetadata.counter].extendedMeta;
+                extendedMetadata = seasonMappings.Car.ByCounter[coreMetadata.counter].extendedMeta;
             } else if (coreMetadata.team && coreMetadata.team != 'None') {
-                extendedMetadata = Season.Car.ByTeam[coreMetadata.team].extendedMeta;
+                extendedMetadata = seasonMappings.Car.ByTeam[coreMetadata.team].extendedMeta;
             } else if (coreMetadata.model) {
-                extendedMetadata = Season.Car.ByModel[coreMetadata.model].extendedMeta;
+                extendedMetadata = seasonMappings.Car.ByModel[coreMetadata.model].extendedMeta;
             }
             break;
         case 'Driver':
             if (coreMetadata.driverNumber != 0) {
-                extendedMetadata = Season.Driver.ByNumber[coreMetadata.driverNumber].extendedMeta;
+                extendedMetadata = seasonMappings.Driver.ByNumber[coreMetadata.driverNumber].extendedMeta;
             } else if (coreMetadata.model) {
-                extendedMetadata = Season.Driver.ByModel[coreMetadata.model].extendedMeta;
+                extendedMetadata = seasonMappings.Driver.ByModel[coreMetadata.model].extendedMeta;
             }
             break;
         case 'Part':
         case 'Gear':
         case 'Tyres':
-            extendedMetadata = Season[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta;
+            extendedMetadata = seasonMappings[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta;
             break;
     }
 
@@ -310,7 +322,7 @@ function getFullMetadata(id, network = 'mainnet') {
 }
 
 module.exports = {
+    createTokenId,
     getCoreMetadata,
     getFullMetadata,
-    createTokenId,
 };

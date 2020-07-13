@@ -23,6 +23,12 @@ const tokenId2 = createTokenId({ // using mapped values
     rarity: '0', // Apex
 });
 console.log(tokenId1, tokenId2);
-tokenId1 == tokenId2
+// tokenId1 == tokenId2
+
+const tokenId3 = createTokenId({ // using mapped values
+    // type: 'Part',
+    // season: '2019',
+    // rarity: '0',
+});
 
 // const seasonMappings = require('@animoca/f1dt-core_metadata').mappings['2019'];

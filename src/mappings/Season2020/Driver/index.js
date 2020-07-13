@@ -1,4 +1,4 @@
-const { createCollectionId } = require('../../../metadata/utils');
+const { createCollectionId } = require('../../../metadata/utils/collection');
 const Season = require('../Season');
 const TeamDrivers = require('./TeamDrivers');
 const GenericDrivers = require('./GenericDrivers');
