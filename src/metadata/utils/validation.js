@@ -70,35 +70,6 @@ function validateCommonMetadata(metadata) {
         errors.push(Error(`Missing rarity`));
     }
 
-    // if (metadata.rarityTier !== undefined) {
-    //     if (metadata.rarity !== undefined) {
-    //         const expected = commonMappings.Rarity.ByRarity[metadata.rarity];
-    //         if (expected === undefined) {
-    //             errors.push(Error(`Could not retrieve expected rarity tier for rarity '${metadata.rarity}'`));
-    //         } else if (metadata.rarityTier != expected.rarityTier) {
-    //             errors.push(
-    //                 Error(
-    //                     `Wrong type, expected '${expected.rarityTier}' for rarity ${metadata.rarity} but got '${metadata.rarityTier}'`
-    //                 )
-    //             );
-    //         }
-    //     } else {
-    //         // many-to-one relationship between rarity and rarity tier
-    //         errors.push(Error(`Could not retrieve rarity for rarity tier '${metadata.rarityTier}'`))
-    //     }
-    // } else {
-    //     if (metadata.rarity !== undefined) {
-    //         const rarity = commonMappings.Rarity.ByRarity[metadata.rarity];
-    //         if (rarity === undefined) {
-    //             errors.push(Error(`Could not retrieve rarity tier for rarity '${metadata.rarity}'`));
-    //         } else {
-    //             metadata.rarityTier = rarity.rarityTier;
-    //         }
-    //     } else {
-    //         errors.push(Error(`Missing data for rarity`));
-    //     }
-    // }
-
     if (errors.length > 0) {
         throw errors;
     }

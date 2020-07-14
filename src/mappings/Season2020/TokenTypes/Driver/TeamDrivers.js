@@ -1,6 +1,6 @@
 const NoDriver = {
     driverId: '0',
-    driver: 'None'
+    driver: 'None',
 };
 const DanielRicciardo = {
     driverId: '3',

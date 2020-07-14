@@ -1,5 +1,3 @@
-
-
 const C38 = {
     car: 'C38',
     team: 'Alfa Romeo Racing',
@@ -90,15 +88,4 @@ const FW42 = {
     },
 };
 
-module.exports = [
-    C38,
-    SF90,
-    VF19,
-    MCL34,
-    W10,
-    RP19,
-    RB15,
-    RS19,
-    STR14,
-    FW42,
-];
+module.exports = [C38, SF90, VF19, MCL34, W10, RP19, RB15, RS19, STR14, FW42];

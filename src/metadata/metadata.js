@@ -43,12 +43,12 @@ function createTokenId(metadata) {
         counter: metadata.counter ? BigInteger(metadata.counter) : BigInteger(),
     };
 
-    return encode(constants.BitsLayout, fieldsToEncode).toString(10);
+    return encode(constants.TokenBitsLayout, fieldsToEncode).toString(10);
 }
 
 function getCoreMetadata(id) {
     const encoded = BigInteger(id);
-    let decoded = decode(constants.BitsLayout, encoded);
+    let decoded = decode(constants.TokenBitsLayout, encoded);
     for (const key in decoded) {
         decoded[key] = Number(decoded[key].toString(10));
     }
@@ -285,7 +285,7 @@ function getFullMetadata(id, network = 'mainnet') {
     if (extendedMetadata.collection_id === undefined) {
         extendedMetadata.collection_id = inventoryIds.NonFungible.getCollectionId(
             BigInteger(id),
-            constants.NFCollectionMaskLength
+            constants.CollectionMaskLength
         );
     }
     extendedMetadata.collection_url = `${config[network].metadata_url}/json/${extendedMetadata.collection_id}`;

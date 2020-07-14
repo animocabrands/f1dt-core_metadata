@@ -89,15 +89,4 @@ const FossilCar = {
     },
 };
 
-module.exports = [
-    SatsumaCar,
-    CarbonCar,
-    JetCar,
-    TiburonCar,
-    CloverCar,
-    RayCar,
-    PlumeCar,
-    SparkCar,
-    CharCar,
-    FossilCar,
-];
+module.exports = [SatsumaCar, CarbonCar, JetCar, TiburonCar, CloverCar, RayCar, PlumeCar, SparkCar, CharCar, FossilCar];

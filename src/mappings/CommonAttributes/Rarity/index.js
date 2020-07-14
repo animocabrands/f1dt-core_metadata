@@ -15,4 +15,4 @@ module.exports = {
     All: Rarities,
     ByRarity,
     ByTier,
-}
+};

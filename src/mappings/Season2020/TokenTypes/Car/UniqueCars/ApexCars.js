@@ -10,6 +10,4 @@ const AustraliaEdition2020 = {
     },
 };
 
-module.exports = [
-    AustraliaEdition2020,
-];
+module.exports = [AustraliaEdition2020];

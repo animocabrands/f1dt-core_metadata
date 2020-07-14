@@ -20,4 +20,4 @@ module.exports = {
     ByFullTypeId,
     ByTokenId,
     typeId: TypeId,
-}
+};

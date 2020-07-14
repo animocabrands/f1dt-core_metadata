@@ -44,7 +44,4 @@ module.exports = {
     TokenBitsLayout,
     CollectionDecodingBitsLayout,
     CollectionEncodingBitsLayout,
-    // Old APIs
-    NFCollectionMaskLength: CollectionMaskLength,
-    BitsLayout: TokenBitsLayout,
 };

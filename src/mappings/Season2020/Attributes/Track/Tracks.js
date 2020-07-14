@@ -87,7 +87,6 @@ const AbuDhabi = {
     trackId: '21',
 };
 
-
 module.exports = [
     NoGrandPrix,
     Australia,

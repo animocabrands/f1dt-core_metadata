@@ -1,46 +1,46 @@
 const NoModel = {
     model: 'None',
-    modelId: '0'
+    modelId: '0',
 };
 const SatsumaModel = {
     model: 'Satsuma',
-    modelId: '1'
+    modelId: '1',
 };
 const CarbonModel = {
     model: 'Carbon',
-    modelId: '2'
+    modelId: '2',
 };
 const JetModel = {
     model: 'Jet',
-    modelId: '3'
+    modelId: '3',
 };
 const TiburonModel = {
     model: 'Tiburon',
-    modelId: '4'
+    modelId: '4',
 };
 const CloverModel = {
     model: 'Clover',
-    modelId: '5'
+    modelId: '5',
 };
 const RayModel = {
     model: 'Ray',
-    modelId: '6'
+    modelId: '6',
 };
 const PlumeModel = {
     model: 'Plume',
-    modelId: '7'
+    modelId: '7',
 };
 const SparkModel = {
     model: 'Spark',
-    modelId: '8'
+    modelId: '8',
 };
 const CharModel = {
     model: 'Char',
-    modelId: '9'
+    modelId: '9',
 };
 const FossilModel = {
     model: 'Fossil',
-    modelId: '10'
+    modelId: '10',
 };
 
 module.exports = [

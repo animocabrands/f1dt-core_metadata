@@ -51,7 +51,7 @@ const ROKiTWilliamsRacing = {
 const F1DeltaTimeTeam = {
     teamId: '111',
     team: 'F1® Delta Time',
-    drivers: []
+    drivers: [],
 };
 
 module.exports = [
@@ -65,5 +65,5 @@ module.exports = [
     RenaultF1Team,
     RedBullToroRossoHonda,
     ROKiTWilliamsRacing,
-    F1DeltaTimeTeam
+    F1DeltaTimeTeam,
 ];

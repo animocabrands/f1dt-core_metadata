@@ -12,4 +12,4 @@ module.exports = {
     All: Seasons,
     ById,
     ByName,
-}
+};

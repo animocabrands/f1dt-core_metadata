@@ -6,4 +6,4 @@ module.exports = {
     Model,
     Team,
     Track,
-}
+};
