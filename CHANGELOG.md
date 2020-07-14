@@ -6,23 +6,23 @@
  * Major code refactor.
 
 ### New features
+ * Token id creation from metadata.
  * Metadata validation.
-
-### Bugfixes
- * Several minor fixes.
 
 ### Improvements
  * Improved documentation.
  * Integrated `prettier`.
 
+### Bugfixes
+* Several bugfixes.
 
-## 0.2.0 (05/07/2020)
-
-### New Features
- * Added function `idFromCoreMetadata` (WIP)
+## 0.1.2 (08/07/2020)
 
 ### Bugfixes
-* Fix require paths for seasons.
+* Fixed image url generation for tyres
+
+### Chores
+* Removed `console.log` from `metadata/image.js`
 
 ## 0.1.1 (18/06/2020)
 
