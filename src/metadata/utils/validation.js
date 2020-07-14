@@ -210,7 +210,7 @@ function validateSeasonMetadata(metadata) {
         if (metadata.teamId === undefined || Number(metadata.teamId) == 0) {
             errors.push(Error(`Missing team data for driver`));
         }
-        const driver = seasonMappings.TokenTypes.Driver.ByNumber[metadata.driverId];
+        const driver = seasonMappings.TokenTypes.Driver.ById[metadata.driverId];
         if (driver === undefined) {
             errors.push(Error(`Could not retrieve driver for driverId '${metadata.driverId}'`));
         }

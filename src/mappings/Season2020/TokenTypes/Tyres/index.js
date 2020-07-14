@@ -5,6 +5,7 @@ const TypeId = '5';
 const ByName = {};
 const BySubTypeId = {};
 const ByFullTypeId = {};
+const ByTokenId = {};
 
 for (const tyres of Tyres) {
     ByName[tyres.subType] = tyres;
@@ -17,5 +18,6 @@ module.exports = {
     ByName,
     BySubTypeId,
     ByFullTypeId,
+    ByTokenId,
     typeId: TypeId,
 }

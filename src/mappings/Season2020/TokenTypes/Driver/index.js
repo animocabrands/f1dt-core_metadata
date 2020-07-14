@@ -13,11 +13,12 @@ const Collection = `${Type} ${Season.season}`;
 const CollectionId = createCollectionId(Season.seasonId, TypeId, SubTypeId);
 
 const ByName = {};
-const ByNumber = {};
+const ById = {};
 const ByModel = {};
+const ByTokenId = {};
 
 for (const teamDriver of TeamDrivers) {
-    ByNumber[teamDriver.driverId] = teamDriver;
+    ById[teamDriver.driverId] = teamDriver;
     ByName[teamDriver.driver] = teamDriver;
 }
 
@@ -31,8 +32,9 @@ module.exports = {
     TeamDrivers,
     GenericDrivers,
     ByModel,
-    ByNumber,
+    ById,
     ByName,
+    ByTokenId,
     RacingAttributes,
     collection: Collection,
     collectionId: CollectionId,

@@ -16,7 +16,7 @@ const CollectionId = createCollectionId(Season.seasonId, TypeId, SubTypeId);
 const ByName = {};
 const ByTeam = {};
 const ByModel = {};
-const ByCounter = {};
+const ByTokenId = {};
 
 for (const teamCar of TeamCars) {
     ByName[teamCar.car] = teamCar;
@@ -30,7 +30,7 @@ for (const genericCar of GenericCars) {
 
 for (const uniqueCar of UniqueCars) {
     ByName[uniqueCar.car] = uniqueCar;
-    ByCounter[uniqueCar.counter] = uniqueCar;
+    ByTokenId[uniqueCar.extendedMeta.id] = uniqueCar;
 }
 
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
     ByName,
     ByTeam,
     ByModel,
-    ByCounter,
+    ByTokenId,
     RacingAttributes,
     collection: Collection,
     collectionId: CollectionId,

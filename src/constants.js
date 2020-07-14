@@ -14,7 +14,7 @@ const TokenBitsLayout = [
     { name: 'rarity', bits: 8 }, //        176
     { name: 'trackId', bits: 8 }, //       168
     { name: 'labelId', bits: 16 }, //      152
-    { name: 'driverId', bits: 16 }, // 136
+    { name: 'driverId', bits: 16 }, //     136
     { name: 'stat1', bits: 16 }, //        120
     { name: 'stat2', bits: 16 }, //        104
     { name: 'stat3', bits: 16 }, //        88
@@ -26,17 +26,17 @@ const TokenBitsLayout = [
 ].reverse();
 
 const CollectionEncodingBitsLayout = [
-    { name: 'nfFlag', bits: 1 }, //        255
-    { name: 'padding1', bits: 7 }, //      248
-    { name: 'typeId', bits: 8 }, //        240
-    { name: 'subTypeId', bits: 8 }, //     232
-    { name: 'seasonId', bits: 8 }, //      224
-    { name: '_', bits: 256 - CollectionMaskLength },
+    { name: 'nfFlag', bits: 1 }, //                     255
+    { name: 'padding1', bits: 7 }, //                   248
+    { name: 'typeId', bits: 8 }, //                     240
+    { name: 'subTypeId', bits: 8 }, //                  232
+    { name: 'seasonId', bits: 8 }, //                   224
+    { name: '_', bits: 256 - CollectionMaskLength }, // 0
 ].reverse();
 
 const CollectionDecodingBitsLayout = [
-    { name: 'collectionId', bits: CollectionMaskLength },
-    { name: '_', bits: 256 - CollectionMaskLength },
+    { name: 'collectionId', bits: CollectionMaskLength }, // 224
+    { name: '_', bits: 256 - CollectionMaskLength }, //      0
 ].reverse();
 
 module.exports = {

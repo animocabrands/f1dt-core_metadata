@@ -58,49 +58,47 @@ function getCoreMetadata(id) {
     const season = commonMappings.Season.ById[decoded.seasonId].season;
     const rarityTier = commonMappings.Rarity.ByRarity[decoded.rarity].rarityTier;
 
-    if (season == '2019') {
-        const seasonMappings = require(`../mappings/Season2019`);
-        const fullTypeId = `${decoded.typeId},${decoded.subTypeId}`;
-        const subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;
-        const track = seasonMappings.Attributes.Track.ById[decoded.trackId].track;
-        const team = seasonMappings.Attributes.Team.ById[decoded.teamId].team;
-        const model = seasonMappings.Attributes.Model.ById[decoded.modelId].model;
+    const seasonMappings = require(`../mappings/Season${season}`);
+    const fullTypeId = `${decoded.typeId},${decoded.subTypeId}`;
+    const subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;
+    const track = seasonMappings.Attributes.Track.ById[decoded.trackId].track;
+    const team = seasonMappings.Attributes.Team.ById[decoded.teamId].team;
+    const model = seasonMappings.Attributes.Model.ById[decoded.modelId].model;
 
-        const driver = seasonMappings.TokenTypes.Driver.ByNumber[decoded.driverId].driver;
+    const driver = seasonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
 
-        const coreMetadata = {
-            seasonId: decoded.seasonId,
-            season,
-            typeId: decoded.typeId,
-            type,
-            subTypeId: decoded.subTypeId,
-            subType,
-            rarity: decoded.rarity,
-            rarityTier,
-            trackId: decoded.trackId,
-            track,
-            teamId: decoded.teamId,
-            team,
-            modelId: decoded.modelId,
-            model,
-            driverId: decoded.driverId,
-            driver,
-            labelId: decoded.labelId,
-            label,
-            counter: decoded.counter,
-            racing: {
-                stat1: decoded.stat1,
-                stat2: decoded.stat2,
-                stat3: decoded.stat3,
-                luck: decoded.luck,
-                special1: decoded.special1,
-                special2: decoded.special2,
-                effect: decoded.effect,
-            },
-        };
+    const coreMetadata = {
+        seasonId: decoded.seasonId,
+        season,
+        typeId: decoded.typeId,
+        type,
+        subTypeId: decoded.subTypeId,
+        subType,
+        rarity: decoded.rarity,
+        rarityTier,
+        trackId: decoded.trackId,
+        track,
+        teamId: decoded.teamId,
+        team,
+        modelId: decoded.modelId,
+        model,
+        driverId: decoded.driverId,
+        driver,
+        labelId: decoded.labelId,
+        label,
+        counter: decoded.counter,
+        racing: {
+            stat1: decoded.stat1,
+            stat2: decoded.stat2,
+            stat3: decoded.stat3,
+            luck: decoded.luck,
+            special1: decoded.special1,
+            special2: decoded.special2,
+            effect: decoded.effect,
+        },
+    };
 
-        return coreMetadata;
-    }
+    return coreMetadata;
 }
 
 function getOpenseaMetadata(coreMetadata) {
@@ -259,17 +257,15 @@ function getFullMetadata(id, network = 'mainnet') {
     const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
     switch (coreMetadata.type) {
         case 'Car':
-            if (coreMetadata.rarityTier == 'Apex') {
-                extendedMetadata = seasonMappings.TokenTypes.Car.ByCounter[coreMetadata.counter].extendedMeta;
-            } else if (coreMetadata.team && coreMetadata.team != 'None') {
+            if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
                 extendedMetadata = seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta;
-            } else if (coreMetadata.model) {
+            } else if (coreMetadata.model != 'None') {
                 extendedMetadata = seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta;
             }
             break;
         case 'Driver':
-            if (coreMetadata.driverId != 0) {
-                extendedMetadata = seasonMappings.TokenTypes.Driver.ByNumber[coreMetadata.driverId].extendedMeta;
+            if (coreMetadata.driver != 'None') {
+                extendedMetadata = seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta;
             } else if (coreMetadata.model) {
                 extendedMetadata = seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta;
             }
@@ -281,18 +277,26 @@ function getFullMetadata(id, network = 'mainnet') {
             break;
     }
 
-    const collectionId = inventoryIds.NonFungible.getCollectionId(BigInteger(id), constants.NFCollectionMaskLength);
+    const uniqueTokenOverride = seasonMappings.TokenTypes[coreMetadata.type].ByTokenId[id];
+    if (uniqueTokenOverride !== undefined) {
+        extendedMetadata = Object.assign(extendedMetadata, uniqueTokenOverride.extendedMeta);
+    }
+
+    if (extendedMetadata.collection_id === undefined) {
+        extendedMetadata.collection_id = inventoryIds.NonFungible.getCollectionId(
+            BigInteger(id),
+            constants.NFCollectionMaskLength
+        );
+    }
+    extendedMetadata.collection_url = `${config[network].metadata_url}/json/${extendedMetadata.collection_id}`;
+    if (extendedMetadata.image_url === undefined) {
+        extendedMetadata.collection_url = getTokenImage({ ...coreMetadata, ...extendedMetadata });
+    }
+    extendedMetadata.external_url = config[network].external_url.replace('{id}', id);
 
     const fullMetadata = {
         id,
-        collection_id: collectionId,
-        collection_url: `${config[network].metadata_url}/json/${collectionId}`,
-        name: extendedMetadata.name,
-        description: extendedMetadata.description,
-        image_url: extendedMetadata.image_url
-            ? extendedMetadata.image_url
-            : getTokenImage({ ...coreMetadata, ...extendedMetadata }),
-        external_url: config[network].external_url.replace('{id}', id),
+        ...extendedMetadata,
         attributes: openseaMetadata,
         core_attributes: coreMetadata,
     };
