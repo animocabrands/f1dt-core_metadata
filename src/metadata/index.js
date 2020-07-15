@@ -1,6 +1,7 @@
-const { coreMetadataFromId, fullMetadataFromId } = require('./metadata');
+const { createTokenId, getCoreMetadata, getFullMetadata } = require('./metadata');
 
 module.exports = {
-    coreMetadataFromId,
-    fullMetadataFromId,
-}
+    createTokenId,
+    getCoreMetadata,
+    getFullMetadata,
+};
