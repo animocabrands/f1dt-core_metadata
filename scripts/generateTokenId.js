@@ -1,4 +1,4 @@
-const { createTokenId } = require('../src/metadata');
+const { createTokenId } = require('../src/ids');
 const program = require('commander');
 program
     .version('0.0.1')

@@ -1,9 +1,9 @@
 const constants = require('./constants');
 const mappings = require('./mappings');
-const metadata = require('./metadata');
+const utils = require('./utils');
 
 module.exports = {
     constants,
     mappings,
-    metadata,
+    utils,
 };

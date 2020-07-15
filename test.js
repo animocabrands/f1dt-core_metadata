@@ -1,4 +1,4 @@
-const { getCoreMetadata, getFullMetadata } = require('./src/metadata');
+const { getCoreMetadata, getFullMetadata } = require('./src/utils/metadata');
 
 const tokenId = '57897811519642769433138067471762254623735906850517137802921006713614358282351'; // the 1-1-1
 const coreMetadata = getCoreMetadata(tokenId);
@@ -6,7 +6,7 @@ console.log(coreMetadata);
 const fullMetadata = getFullMetadata(tokenId);
 console.log(fullMetadata);
 
-const { createTokenId } = require('./src/metadata');
+const { createTokenId } = require('./src/utils/ids');
 
 const tokenId1 = createTokenId({ // using numerical values
     typeId: '1', // Car

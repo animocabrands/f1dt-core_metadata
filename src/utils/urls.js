@@ -1,13 +1,4 @@
-function getTokenImage(meta, network = 'mainnet') {
-    const config = require('../../../config');
-    return `${config[network].metadata_url}/image/${getTokenImageKey(
-        meta.season,
-        meta.type,
-        meta.subType,
-        meta.name,
-        meta.rarityTier
-    )}`;
-}
+const config = require('../../config');
 
 function getTokenImageKey(season, type, subType, name, tier) {
     tier = tier.toLowerCase();
@@ -29,6 +20,26 @@ function getTokenImageKey(season, type, subType, name, tier) {
     return out;
 }
 
+function getImageUrl(meta, network = 'mainnet') {
+    return `${config[network].assets_url}/image/${getTokenImageKey(
+        meta.season,
+        meta.type,
+        meta.subType,
+        meta.name,
+        meta.rarityTier
+    )}`;
+}
+
+function getExternalUrl(id, network = 'mainnet') {
+    return config[network].external_url.replace('{id}', id);
+}
+
+function getMetadataUrl(id, network = 'mainnet') {
+    return `${config[network].assets_url}/json/${id}`;
+}
+
 module.exports = {
-    getTokenImage,
+    getImageUrl,
+    getExternalUrl,
+    getMetadataUrl,
 };

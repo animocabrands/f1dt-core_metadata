@@ -35,7 +35,7 @@ function validateAndMapCoreAttribute(mapping, metadata, attributeName, required)
 }
 
 function validateCommonMetadata(metadata) {
-    const commonMappings = require('../../mappings/CommonAttributes');
+    const commonMappings = require('../mappings/CommonAttributes');
 
     const errors = [];
 
@@ -76,7 +76,7 @@ function validateCommonMetadata(metadata) {
 }
 
 function validateSeasonMetadata(metadata) {
-    const seasonMappings = require(`../../mappings/Season${metadata.season}`);
+    const seasonMappings = require(`../mappings/Season${metadata.season}`);
 
     const errors = [];
 
@@ -200,7 +200,11 @@ function validateSeasonMetadata(metadata) {
     }
 }
 
+function validateCoreMetadata(metadata) {
+    validateCommonMetadata(metadata);
+    validateSeasonMetadata(metadata);
+}
+
 module.exports = {
-    validateCommonMetadata,
-    validateSeasonMetadata,
+    validateCoreMetadata,
 };

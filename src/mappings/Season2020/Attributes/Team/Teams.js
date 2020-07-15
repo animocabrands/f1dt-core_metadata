@@ -1,3 +1,8 @@
+const NoTeam = {
+    teamId: '0',
+    team: 'None',
+    drivers: [],
+};
 const AlfaRomeoRacing = {
     teamId: '1',
     team: 'Alfa Romeo Racing',
@@ -55,6 +60,7 @@ const F1DeltaTimeTeam = {
 };
 
 module.exports = [
+    NoTeam,
     AlfaRomeoRacing,
     ScuderiaFerrari,
     HaasF1Team,

@@ -1,50 +1,10 @@
 const { inventoryIds } = require('@animoca/blockchain-inventory_metadata');
 const BigInteger = require('big-integer');
-const { encode, decode } = require('bits.js');
-const { validateCommonMetadata, validateSeasonMetadata, getTokenImage } = require('./utils');
+const { decode } = require('bits.js');
+const { getExternalUrl, getImageUrl, getMetadataUrl } = require('./urls');
+
 const constants = require('../constants');
-const config = require('../../config');
 const commonMappings = require('../mappings/CommonAttributes');
-
-function validateCoreMetadata(metadata) {
-    validateCommonMetadata(metadata);
-    validateSeasonMetadata(metadata);
-}
-
-function validateFullMetadata(fullMetadata) {
-    validateCoreMetadata(fullMetadata.core_attributes);
-    // fetch url
-    // compare fields
-}
-
-function createTokenId(metadata) {
-    validateCoreMetadata(metadata);
-
-    const fieldsToEncode = {
-        nfFlag: BigInteger(1),
-        padding1: BigInteger(),
-        typeId: metadata.typeId ? BigInteger(metadata.typeId) : BigInteger(),
-        subTypeId: metadata.subTypeId ? BigInteger(metadata.subTypeId) : BigInteger(),
-        seasonId: metadata.seasonId ? BigInteger(metadata.seasonId) : BigInteger(),
-        padding2: BigInteger(),
-        modelId: metadata.modelId ? BigInteger(metadata.modelId) : BigInteger(),
-        teamId: metadata.teamId ? BigInteger(metadata.teamId) : BigInteger(),
-        rarity: metadata.rarity ? BigInteger(metadata.rarity) : BigInteger(),
-        trackId: metadata.trackId ? BigInteger(metadata.trackId) : BigInteger(),
-        labelId: metadata.labelId ? BigInteger(metadata.labelId) : BigInteger(),
-        driverId: metadata.driverId ? BigInteger(metadata.driverId) : BigInteger(),
-        stat1: metadata.stat1 ? BigInteger(metadata.stat1) : BigInteger(),
-        stat2: metadata.stat2 ? BigInteger(metadata.stat2) : BigInteger(),
-        stat3: metadata.stat3 ? BigInteger(metadata.stat3) : BigInteger(),
-        luck: metadata.luck ? BigInteger(metadata.luck) : BigInteger(),
-        effect: metadata.effect ? BigInteger(metadata.effect) : BigInteger(),
-        special1: metadata.special1 ? BigInteger(metadata.special1) : BigInteger(),
-        special2: metadata.special2 ? BigInteger(metadata.special2) : BigInteger(),
-        counter: metadata.counter ? BigInteger(metadata.counter) : BigInteger(),
-    };
-
-    return encode(constants.TokenBitsLayout, fieldsToEncode).toString(10);
-}
 
 function getCoreMetadata(id) {
     const encoded = BigInteger(id);
@@ -118,7 +78,7 @@ function getOpenseaMetadata(coreMetadata) {
                 break;
             case 'Driver':
             case 'Gear':
-                racingAttributes = require(`../mappings/Season${coreMetadata.season}TokenTypes/Driver`)
+                racingAttributes = require(`../mappings/Season${coreMetadata.season}/TokenTypes/Driver`)
                     .RacingAttributes;
                 break;
         }
@@ -288,11 +248,11 @@ function getFullMetadata(id, network = 'mainnet') {
             constants.CollectionMaskLength
         );
     }
-    extendedMetadata.collection_url = `${config[network].metadata_url}/json/${extendedMetadata.collection_id}`;
+    extendedMetadata.collection_url = getMetadataUrl(extendedMetadata.collection_id);
     if (extendedMetadata.image_url === undefined) {
-        extendedMetadata.collection_url = getTokenImage({ ...coreMetadata, ...extendedMetadata });
+        extendedMetadata.collection_url = getImageUrl({ ...coreMetadata, ...extendedMetadata });
     }
-    extendedMetadata.external_url = config[network].external_url.replace('{id}', id);
+    extendedMetadata.external_url = getExternalUrl(id);
 
     const fullMetadata = {
         id,
@@ -305,9 +265,6 @@ function getFullMetadata(id, network = 'mainnet') {
 }
 
 module.exports = {
-    createTokenId,
     getCoreMetadata,
     getFullMetadata,
-    validateCoreMetadata,
-    validateFullMetadata,
 };

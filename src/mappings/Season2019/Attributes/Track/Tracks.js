@@ -1,4 +1,4 @@
-const NoGrandPrix = {
+const NoTrack = {
     track: 'None',
     trackId: '0',
 };
@@ -88,7 +88,7 @@ const AbuDhabi = {
 };
 
 module.exports = [
-    NoGrandPrix,
+    NoTrack,
     Australia,
     Bahrain,
     China,
