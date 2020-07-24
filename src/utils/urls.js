@@ -1,33 +1,27 @@
 const config = require('../../config');
 
-function getTokenImageKey(season, type, subType, name, tier) {
-    tier = tier.toLowerCase();
+function getImageKey(name, coreMetadata) {
+    const tier = coreMetadata.rarityTier.toLowerCase();
 
-    let out = "";
-    switch (type) {
-        case "Car":
-        case "Driver":
-            out = `${season}_${name.replace(/\s+/, '')}_${tier}.png`;
+    let imageKey = '';
+    switch (coreMetadata.type) {
+        case 'Car':
+        case 'Driver':
+            imageKey = `${coreMetadata.season}_${name.replace(/\s+/, '')}_${tier}.png`;
             break;
-        case "Tyres":
-            out = `${season}_${name.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+        case 'Tyres':
+            imageKey = `${coreMetadata.season}_${name.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
             break;
         default:
-            out = `${season}_${subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+            imageKey = `${coreMetadata.season}_${coreMetadata.subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
             break;
     }
 
-    return out;
+    return imageKey;
 }
 
-function getImageUrl(meta, network = 'mainnet') {
-    return `${config[network].assets_url}/image/${getTokenImageKey(
-        meta.season,
-        meta.type,
-        meta.subType,
-        meta.name,
-        meta.rarityTier
-    )}`;
+function getImageUrl(name, coreMetadata, network = 'mainnet') {
+    return `${config[network].assets_url}/image/${getImageKey(name, coreMetadata)}`;
 }
 
 function getExternalUrl(id, network = 'mainnet') {

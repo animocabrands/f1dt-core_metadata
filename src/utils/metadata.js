@@ -106,28 +106,29 @@ function getOpenseaMetadata(coreMetadata) {
                 display_type: 'boost_number',
                 trait_type: 'luck',
                 value: coreMetadata.racing.luck,
+                max_value: 1001,
             });
         }
 
-        if (coreMetadata.racing.effect) {
-            racingAttributes.push({
-                trait_type: 'effect',
-                value: coreMetadata.racing.effect,
-            });
-        }
+        // if (coreMetadata.racing.effect) {
+        //     racingAttributes.push({
+        //         trait_type: 'effect',
+        //         value: coreMetadata.racing.effect,
+        //     });
+        // }
 
-        if (coreMetadata.racing.special1) {
-            racingAttributes.push({
-                trait_type: 'special_1',
-                value: coreMetadata.racing.special1,
-            });
-        }
-        if (coreMetadata.racing.special2) {
-            racingAttributes.push({
-                trait_type: 'special_2',
-                value: coreMetadata.racing.special2,
-            });
-        }
+        // if (coreMetadata.racing.special1) {
+        //     racingAttributes.push({
+        //         trait_type: 'special_1',
+        //         value: coreMetadata.racing.special1,
+        //     });
+        // }
+        // if (coreMetadata.racing.special2) {
+        //     racingAttributes.push({
+        //         trait_type: 'special_2',
+        //         value: coreMetadata.racing.special2,
+        //     });
+        // }
     }
 
     let attributes = [
@@ -218,22 +219,22 @@ function getFullMetadata(id, network = 'mainnet') {
     switch (coreMetadata.type) {
         case 'Car':
             if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
-                extendedMetadata = seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta;
+                extendedMetadata = {...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta};
             } else if (coreMetadata.model != 'None') {
-                extendedMetadata = seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta;
+                extendedMetadata = {...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta};
             }
             break;
         case 'Driver':
             if (coreMetadata.driver != 'None') {
-                extendedMetadata = seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta;
+                extendedMetadata = {...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta};
             } else if (coreMetadata.model) {
-                extendedMetadata = seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta;
+                extendedMetadata = {...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta};
             }
             break;
         case 'Part':
         case 'Gear':
         case 'Tyres':
-            extendedMetadata = seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta;
+            extendedMetadata = {...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta};
             break;
     }
 
@@ -248,11 +249,11 @@ function getFullMetadata(id, network = 'mainnet') {
             constants.CollectionMaskLength
         );
     }
-    extendedMetadata.collection_url = getMetadataUrl(extendedMetadata.collection_id);
-    if (extendedMetadata.image_url === undefined) {
-        extendedMetadata.collection_url = getImageUrl({ ...coreMetadata, ...extendedMetadata });
+    extendedMetadata.collection_url = getMetadataUrl(extendedMetadata.collection_id, network);
+    if (extendedMetadata.image === undefined) {
+        extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
     }
-    extendedMetadata.external_url = getExternalUrl(id);
+    extendedMetadata.external_url = getExternalUrl(id, network);
 
     const fullMetadata = {
         id,

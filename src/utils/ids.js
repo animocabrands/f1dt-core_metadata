@@ -15,30 +15,38 @@ function createCollectionId(seasonId, typeId, subTypeId) {
     }).toString(10);
 }
 
-function createTokenId(metadata) {
-    validateCoreMetadata(metadata);
+function createTokenId(coreMetadata) {
+    validateCoreMetadata(coreMetadata);
+
+    coreMetadata.stat1 = coreMetadata.stat1 || coreMetadata.racing.stat1;
+    coreMetadata.stat2 = coreMetadata.stat2 || coreMetadata.racing.stat2;
+    coreMetadata.stat3 = coreMetadata.stat3 || coreMetadata.racing.stat3;
+    coreMetadata.luck = coreMetadata.luck || coreMetadata.racing.luck;
+    coreMetadata.effect = coreMetadata.effect || coreMetadata.racing.effect;
+    coreMetadata.special1 = coreMetadata.special1 || coreMetadata.racing.special1;
+    coreMetadata.special2 = coreMetadata.special2 || coreMetadata.racing.special2;
 
     const fieldsToEncode = {
         nfFlag: BigInteger(1),
         padding1: BigInteger(),
-        typeId: metadata.typeId ? BigInteger(metadata.typeId) : BigInteger(),
-        subTypeId: metadata.subTypeId ? BigInteger(metadata.subTypeId) : BigInteger(),
-        seasonId: metadata.seasonId ? BigInteger(metadata.seasonId) : BigInteger(),
+        typeId: coreMetadata.typeId ? BigInteger(coreMetadata.typeId) : BigInteger(),
+        subTypeId: coreMetadata.subTypeId ? BigInteger(coreMetadata.subTypeId) : BigInteger(),
+        seasonId: coreMetadata.seasonId ? BigInteger(coreMetadata.seasonId) : BigInteger(),
         padding2: BigInteger(),
-        modelId: metadata.modelId ? BigInteger(metadata.modelId) : BigInteger(),
-        teamId: metadata.teamId ? BigInteger(metadata.teamId) : BigInteger(),
-        rarity: metadata.rarity ? BigInteger(metadata.rarity) : BigInteger(),
-        trackId: metadata.trackId ? BigInteger(metadata.trackId) : BigInteger(),
-        labelId: metadata.labelId ? BigInteger(metadata.labelId) : BigInteger(),
-        driverId: metadata.driverId ? BigInteger(metadata.driverId) : BigInteger(),
-        stat1: metadata.stat1 ? BigInteger(metadata.stat1) : BigInteger(),
-        stat2: metadata.stat2 ? BigInteger(metadata.stat2) : BigInteger(),
-        stat3: metadata.stat3 ? BigInteger(metadata.stat3) : BigInteger(),
-        luck: metadata.luck ? BigInteger(metadata.luck) : BigInteger(),
-        effect: metadata.effect ? BigInteger(metadata.effect) : BigInteger(),
-        special1: metadata.special1 ? BigInteger(metadata.special1) : BigInteger(),
-        special2: metadata.special2 ? BigInteger(metadata.special2) : BigInteger(),
-        counter: metadata.counter ? BigInteger(metadata.counter) : BigInteger(),
+        modelId: coreMetadata.modelId ? BigInteger(coreMetadata.modelId) : BigInteger(),
+        teamId: coreMetadata.teamId ? BigInteger(coreMetadata.teamId) : BigInteger(),
+        rarity: coreMetadata.rarity ? BigInteger(coreMetadata.rarity) : BigInteger(),
+        trackId: coreMetadata.trackId ? BigInteger(coreMetadata.trackId) : BigInteger(),
+        labelId: coreMetadata.labelId ? BigInteger(coreMetadata.labelId) : BigInteger(),
+        driverId: coreMetadata.driverId ? BigInteger(coreMetadata.driverId) : BigInteger(),
+        stat1: coreMetadata.stat1 ? BigInteger(coreMetadata.stat1) : BigInteger(),
+        stat2: coreMetadata.stat2 ? BigInteger(coreMetadata.stat2) : BigInteger(),
+        stat3: coreMetadata.stat3 ? BigInteger(coreMetadata.stat3) : BigInteger(),
+        luck: coreMetadata.luck ? BigInteger(coreMetadata.luck) : BigInteger(),
+        effect: coreMetadata.effect ? BigInteger(coreMetadata.effect) : BigInteger(),
+        special1: coreMetadata.special1 ? BigInteger(coreMetadata.special1) : BigInteger(),
+        special2: coreMetadata.special2 ? BigInteger(coreMetadata.special2) : BigInteger(),
+        counter: coreMetadata.counter ? BigInteger(coreMetadata.counter) : BigInteger(),
     };
 
     return encode(constants.TokenBitsLayout, fieldsToEncode).toString(10);

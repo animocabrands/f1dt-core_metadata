@@ -5,7 +5,7 @@ const The111 = {
         name: '1-1-1',
         description:
             'The 1-1-1 is the very first official Formula 1® non-fungible token. This is the first car to be released for F1® Delta Time, and we made this a hyper-limited edition: there is just one single 1-1-1, and there will never be another. It’s truly a one-of-a-kind digital collectible.',
-        image_url: 'https://nft.f1deltatime.com/image/1-1-1.png',
+        image: 'https://nft.f1deltatime.com/image/1-1-1.png',
         youtube_url: 'https://www.youtube.com/watch?v=ubo010n1Jns',
     },
 };
@@ -16,7 +16,7 @@ const MonacoEdition2019 = {
         name: 'Monaco Edition 2019',
         description:
             'The Monaco Edition 2019 car is a one of a kind asset, making it unique and exclusive. It is an extreme performance digital asset due to its blisteringly fast pace on the track. The car benefits from a hometown advantage - receiving a boost when racing at the Circuit de Monaco.',
-        image_url: 'https://nft.f1deltatime.com/image/MonacoEdition2019.png',
+        image: 'https://nft.f1deltatime.com/image/MonacoEdition2019.png',
         youtube_url: 'https://www.youtube.com/watch?v=DS5y8uZFInM',
     },
 };
@@ -27,7 +27,7 @@ const FranceEdition2019 = {
         name: 'France Edition 2019',
         description:
             'The France Edition 2019 car is an official Formula 1® collectible developed by Animoca Brands and Formula 1. Its livery is based on the tricolore featured on the French flag: blue, white, and red. The car’s various colourful design elements exist together in harmony, symbolizing the French motto of “Liberty, Equality, Fraternity”.',
-        image_url: 'https://nft.f1deltatime.com/image/FranceEdition2019.png',
+        image: 'https://nft.f1deltatime.com/image/FranceEdition2019.png',
         youtube_url: 'https://www.youtube.com/watch?v=l7K5ZecAtv8',
     },
 };
@@ -37,8 +37,8 @@ const JapanEdition2019 = {
         id: '57897811519642769433138073832223089278520463945971602252805153562392419895211',
         name: 'Japan Edition 2019',
         description:
-            '“Japan Edition 2019 is an official Formula 1® digital collectible and a powerful virtual racing car in the blockchain game F1® Delta Time. The livery of the car bears the kanji 令和, signifying Reiwa. Reiwa is the new era in Japan which began on 1 May 2019, and the word means “beautiful harmony”. The “Japan Edition 2019” car is the first official F1 ® product to celebrate the very first FORMULA 1 JAPANESE GRAND PRIX of the Reiwa era took place on 13 October 2019.',
-        image_url: 'https://nft.f1deltatime.com/image/JapanEdition2019.png',
+            'Japan Edition 2019 is an official Formula 1® digital collectible and a powerful virtual racing car in the blockchain game F1® Delta Time. The livery of the car bears the kanji 令和, signifying Reiwa. Reiwa is the new era in Japan which began on 1 May 2019, and the word means “beautiful harmony”. The “Japan Edition 2019” car is the first official F1 ® product to celebrate the very first FORMULA 1 JAPANESE GRAND PRIX of the Reiwa era took place on 13 October 2019.',
+        image: 'https://nft.f1deltatime.com/image/JapanEdition2019.png',
         youtube_url: 'https://www.youtube.com/watch?v=btGUj2-Nt60',
     },
 };
@@ -49,7 +49,7 @@ const ChinaEdition2019AzureDragon = {
         name: 'China Edition 2019 Azure Dragon',
         description:
             'The China Edition 2019 Azure Dragon NFT is the first of the F1® Delta Time “Four Guardians” race cars. The Azure Dragon (Qinglong in Chinese) is a mythological creature representing the East and the season of spring. The black and azure livery of the “China Edition 2019 Azure Dragon” is embellished by two gold dragons, each holding square-holed Chinese coins that represent great wealth for the car’s owner.',
-        image_url: 'https://nft.f1deltatime.com/image/ChinaDragonEdition2019.png',
+        image: 'https://nft.f1deltatime.com/image/ChinaDragonEdition2019.png',
         youtube_url: 'https://youtu.be/gXdJdxL91Fs',
     },
 };
@@ -60,7 +60,7 @@ const ChinaEdition2019VermilionBird = {
         name: 'China Edition 2019 Vermilion Bird',
         description:
             'The China Edition 2019 Vermilion Bird is the second of the Four Guardians race cars. The Vermilion Bird, alongside the Azure Dragon, is the only other surviving Guardian. The White Tiger and Black Turtle will never exist, and instead exist as memories.',
-        image_url: 'https://nft.f1deltatime.com/image/ChinaBirdEdition2019.png',
+        image: 'https://nft.f1deltatime.com/image/ChinaBirdEdition2019.png',
         youtube_url: 'https://www.youtube.com/watch?v=5qPA6Y1w9sM',
     },
 };

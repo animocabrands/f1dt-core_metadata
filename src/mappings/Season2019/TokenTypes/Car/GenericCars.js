@@ -76,7 +76,7 @@ const CharCar = {
     extendedMeta: {
         name: 'Char Car',
         description:
-            'The chasis of a Char has seen every track many times over. It can be relied upon to consistently deliver speed and results. Fast, agile, and sturdy, it stays around for a reason.',
+            'The chassis of a Char has seen every track many times over. It can be relied upon to consistently deliver speed and results. Fast, agile, and sturdy, it stays around for a reason.',
     },
 };
 const FossilCar = {
