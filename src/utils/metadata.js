@@ -185,19 +185,19 @@ function getOpenseaMetadata(coreMetadata) {
             case 'Gear':
                 attributes.push({
                     trait_type: 'gear_type',
-                    value: coreMetadata.subType.category_name,
+                    value: coreMetadata.subType,
                 });
                 break;
             case 'Part':
                 attributes.push({
                     trait_type: 'part_type',
-                    value: coreMetadata.subType.category_name,
+                    value: coreMetadata.subType,
                 });
                 break;
             case 'Tyres':
                 attributes.push({
                     trait_type: 'tyres_type',
-                    value: coreMetadata.subType.category_name,
+                    value: coreMetadata.subType,
                 });
                 break;
         }

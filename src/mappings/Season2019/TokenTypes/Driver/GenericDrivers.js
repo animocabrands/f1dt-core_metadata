@@ -31,7 +31,7 @@ const TiburonDriver = {
     extendedMeta: {
         name: 'Tiburon Driver',
         description:
-            'You will always see a Tiburon driver putting in quick times, qualitfying well, and grabbing podiums.',
+            'You will always see a Tiburon driver putting in quick times, qualifying well, and grabbing podiums.',
     },
 };
 const CloverDriver = {
@@ -40,7 +40,7 @@ const CloverDriver = {
     extendedMeta: {
         name: 'Clover Driver',
         description:
-            'Regardless of the season, weather or Driver, the Clover driver sets the benchmark for speed. Tearing throught the warm-up sessions, and constantly setting record splits.',
+            'Regardless of the season, weather or car, the Clover driver sets the benchmark for speed. Tearing through the warm-up sessions, and constantly setting record splits.',
     },
 };
 const RayDriver = {
@@ -49,7 +49,7 @@ const RayDriver = {
     extendedMeta: {
         name: 'Ray Driver',
         description:
-            "The Ray driver is a qualifying specialist. Always assured to deliver quick times and high grid placement, especially when the Driver is set-up with hot tyres and a lap's worth of fuel.",
+            "The Ray driver is a qualifying specialist. Always assured to deliver quick times and high grid placement, especially when the car is set-up with hot tyres and a lap's worth of fuel.",
     },
 };
 const PlumeDriver = {

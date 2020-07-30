@@ -23,7 +23,7 @@ const FirstEdition = {
     labelId: '6',
 };
 const GrandPrix2020 = {
-    label: 'Prime',
+    label: 'Grand Prix™ 2020',
     labelId: '7',
 };
 
