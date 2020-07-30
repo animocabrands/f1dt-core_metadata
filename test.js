@@ -40,11 +40,11 @@ try {
 
 assert(isEqual(tokenId1, tokenId2));
 
-// try {
-//     const tokenId = createTokenId({});
-// } catch (e) {
-//     console.error(e);
-// }
+try {
+    const tokenId = createTokenId({});
+} catch (e) {
+    console.error(e);
+}
 
 try {
     const tokenId = createTokenId({
