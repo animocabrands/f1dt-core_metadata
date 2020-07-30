@@ -1,3 +1,5 @@
+const { validateBitsLayout } = require('../src/utils/layout');
+
 const CollectionMaskLength = 32;
 
 const TokenBitsLayout = [
@@ -24,6 +26,8 @@ const TokenBitsLayout = [
     { name: 'racing.special2', bits: 8 }, //            48
     { name: 'counter', bits: 48 }, //                   0
 ].reverse();
+Object.freeze(TokenBitsLayout);
+validateBitsLayout(TokenBitsLayout);
 
 const CollectionEncodingBitsLayout = [
     { name: 'nfFlag', bits: 1 }, //                     255
@@ -33,11 +37,15 @@ const CollectionEncodingBitsLayout = [
     { name: 'seasonId', bits: 8 }, //                   224
     { name: '_', bits: 256 - CollectionMaskLength }, // 0
 ].reverse();
+Object.freeze(CollectionEncodingBitsLayout);
+validateBitsLayout(CollectionEncodingBitsLayout);
 
 const CollectionDecodingBitsLayout = [
     { name: 'collectionId', bits: CollectionMaskLength }, // 224
     { name: '_', bits: 256 - CollectionMaskLength }, //      0
 ].reverse();
+Object.freeze(CollectionDecodingBitsLayout);
+validateBitsLayout(CollectionDecodingBitsLayout);
 
 module.exports = {
     CollectionMaskLength,
