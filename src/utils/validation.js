@@ -1,97 +1,68 @@
-const ValidationErrors = {
-    AttributeOutOfRange: { type: 'AttributeOutOfRange', errorMessage: (attribute, attributeValue, maxValue) => `${attribute} out of range: ${attributeValue} (max ${maxValue})`},
-    UnsupportedAttributeValue: { type: 'UnsupportedAttributeValue', errorMessage: (id, idValue) => `Unsupported ${id}: ${idValue}`},
-    MissingAttribute: {type:'MissingAttribute',errorMessage: (id, name) => `Missing attribute ${id}/${name}`},
-    AttributeNameNotFound: {type:'AttributeNameNotFound',errorMessage: (name, id, idValue) => `'${name}' not found for '${id}'='${idValue}'`},
-    AttributeIdNotFound: {type:'AttributeIdNotFound',errorMessage: (id, name, nameValue) => `'${id}' not found for '${name}'='${nameValue}'`},
-    WrongIdMapping: {type:'WrongIdMapping',errorMessage: (name, nameValue, id, idFoundValue, idExpectedValue) => {
-    return `Retrieved value for {'${name}'='${nameValue}'}: '${id}'='${idFoundValue}' instead of expected '${idExpectedValue}'`;
-    }
-},
-    WrongNameMapping: {type:'WrongNameMapping',errorMessage: (name, nameValue, id, idFoundValue, idExpectedValue) => {
-        return `Retrieved value for {'${name}'='${nameValue}'}: '${id}'='${idFoundValue}' instead of expected '${idExpectedValue}'`;
-    }
-    },
-    WrongLinkedAttribute: {type:'WrongLinkedAttribute',errorMessage: (id, name, idValue, nameValue, linkedId, linkedName, linkedIdFoundValue, linkedNameFoundValue, linkedIdExpectedValue, linkedNameExpectedValue) => {
-        return `Retrieved linked value for {'${id}|${name}'='${idValue}|${nameValue}'}: '${linkedId}|${linkedName}'='${linkedIdFoundValue}|${linkedNameFoundValue}' instead of expected '${linkedIdExpectedValue}|${linkedNameExpectedValue}'`;
-    }},
-};
+function AttributeOutOfRange(attribute, attributeValue, attributeMaxValue) {
+    this.name = this.errorType = 'AttributeOutOfRange';
+    this.message = `${attribute} out of range: ${attributeValue} (max ${attributeMaxValue})`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+AttributeOutOfRange.prototype = new Error();
 
-class ValidationError extends Error {
-    errorType;
-    constructor(message, errorType) {
-        super(message)
-        this.errorType = errorType;
-    }
-};
+function UnsupportedAttributeValue(id, idValue) {
+    this.name = this.errorType = 'UnsupportedAttributeValue';
+    this.message = `Unsupported ${id}: ${idValue}`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+UnsupportedAttributeValue.prototype = new Error();
 
-class AttributeOutOfRange extends ValidationError {
-    constructor(attribute, attributeValue, maxValue) {
-        const message = ValidationErrors.AttributeOutOfRange.errorMessage(attribute, attributeValue, maxValue);
-        super(message, ValidationErrors.AttributeOutOfRange.type);
-    }
-};
+function MissingAttribute(id, name) {
+    this.name = this.errorType = 'MissingAttribute';
+    this.message = `Missing attribute ${id}/${name}`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+MissingAttribute.prototype = new Error();
 
-class UnsupportedAttributeValue extends ValidationError {
-    constructor(attributeId, attributeIdValue) {
-        const message = ValidationErrors.UnsupportedAttributeValue.errorMessage(attributeId, attributeIdValue);
-        super(message, ValidationErrors.UnsupportedAttributeValue.type);
-    }
-};
+function AttributeNameNotFound(name, id, idValue) {
+    this.name = this.errorType = 'AttributeNameNotFound';
+    this.message = `'${name}' not found for '${id}'='${idValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+AttributeNameNotFound.prototype = new Error();
 
-class MissingAttribute extends ValidationError {
-    constructor(attributeId, attributeName) {
-        const message = ValidationErrors.MissingAttribute.errorMessage(attributeId, attributeName);
-        super(message, ValidationErrors.MissingAttribute.type);
-    }
-};
+function AttributeIdNotFound(id, name, nameValue) {
+    this.name = this.errorType = 'AttributeIdNotFound';
+    this.message = `'${id}' not found for '${name}'='${nameValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+AttributeIdNotFound.prototype = new Error();
 
-class AttributeNameNotFound extends ValidationError {
-    constructor(attributeName, attributeId, attributeIdValue) {
-        const message = ValidationErrors.AttributeNameNotFound.errorMessage(attributeName, attributeId, attributeIdValue);
-        super(message, ValidationErrors.AttributeNameNotFound.type);
-    }
-};
+function WrongIdMapping(name, nameValue, id, idFoundValue, idExpectedValue) {
+    this.name = this.errorType = 'WrongIdMapping';
+    this.message = `Retrieved value for {'${name}'='${nameValue}'}: '${id}'='${idFoundValue}' instead of expected '${idExpectedValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+WrongIdMapping.prototype = new Error();
 
-class AttributeIdNotFound extends ValidationError {
-    constructor(attributeId, attributeName, attributeNameValue) {
-        const message = ValidationErrors.AttributeIdNotFound.errorMessage(attributeId, attributeName, attributeNameValue);
-        super(message, ValidationErrors.AttributeIdNotFound.type);
-    }
-};
+function WrongNameMapping(id, idValue, name, nameFoundValue, nameExpectedValue) {
+    this.name = this.errorType = 'WrongNameMapping';
+    this.message = `Retrieved id for {'${id}'='${idValue}'}: '${name}'='${nameFoundValue}' instead of expected '${nameExpectedValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+WrongNameMapping.prototype = new Error();
 
-class WrongIdMapping extends ValidationError {
-    constructor(attributeName, attributeNameValue, attributeId, attributeIdFoundValue, attributeIdExpectedValue) {
-        const message = ValidationErrors.WrongIdMapping.errorMessage(attributeName, attributeNameValue, attributeId, attributeIdFoundValue, attributeIdExpectedValue);
-        super(message, ValidationErrors.WrongIdMapping.type);
-    }
-};
-
-class WrongNameMapping extends ValidationError {
-    constructor(attributeId, attributeIdValue, attributeName, attributeNameFoundValue, attributeNameExpectedValue) {
-        const message = ValidationErrors.WrongNameMapping.errorMessage(attributeId, attributeIdValue, attributeName, attributeNameFoundValue, attributeNameExpectedValue);
-        super(message, ValidationErrors.WrongNameMapping.type);
-    }
-};
-
-class WrongLinkedAttribute extends ValidationError {
-    constructor(
-        attributeId, attributeName, // source
-        attributeIdValue, attributeNameValue, // source values
-        linkedAttributeId, linkedAttributeName, // linked
-        linkedAttributeIdFoundValue, linkedAttributeNameFoundValue, // linked found values
-        linkedAttributeIdExpectedValue, linkedAttributeNameExpectedValue // linked expected values
-    ) {
-        const message = ValidationErrors.WrongLinkedAttribute.errorMessage(
-            attributeId, attributeName, // source
-            attributeIdValue, attributeNameValue, // source values
-            linkedAttributeId, linkedAttributeName, // linked
-            linkedAttributeIdFoundValue, linkedAttributeNameFoundValue, // linked found values
-            linkedAttributeIdExpectedValue, linkedAttributeNameExpectedValue// linked expected values
-        );
-        super(message, ValidationErrors.WrongLinkedAttribute.type);
-    }
-};
+function WrongLinkedAttribute(
+    id,
+    name,
+    idValue,
+    nameValue,
+    linkedName,
+    linkedIdFoundValue,
+    linkedNameFoundValue,
+    linkedIdExpectedValue,
+    linkedNameExpectedValue
+) {
+    this.name = this.errorType = 'WrongLinkedAttribute';
+    this.message = `Retrieved linked value for {'${id}|${name}'='${idValue}|${nameValue}'}: '${linkedId}|${linkedName}'='${linkedIdFoundValue}|${linkedNameFoundValue}' instead of expected '${linkedIdExpectedValue}|${linkedNameExpectedValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+}
+WrongLinkedAttribute.prototype = new Error();
 
 function validateAndMapCoreAttribute(mapping, coreMetadata, attributeName, required) {
     const attributeId = attributeName + 'Id';
@@ -101,7 +72,13 @@ function validateAndMapCoreAttribute(mapping, coreMetadata, attributeName, requi
             if (coreAttribute === undefined) {
                 throw new AttributeNameNotFound(attributeName, attributeId, coreMetadata[attributeId]);
             } else if (coreMetadata[attributeName] != coreAttribute[attributeName]) {
-                throw new WrongIdMapping(attributeName, coreAttribute[attributeName], attributeId, coreMetadata[attributeId], coreAttribute[attributeId]);
+                throw new WrongIdMapping(
+                    attributeName,
+                    coreAttribute[attributeName],
+                    attributeId,
+                    coreMetadata[attributeId],
+                    coreAttribute[attributeId]
+                );
             }
         } else {
             const coreAttribute = mapping.ByName[coreMetadata[attributeName]];
@@ -150,7 +127,15 @@ function validateCommonMetadata(coreMetadata) {
         const rarityTier = commonMappings.Rarity.ByRarity[coreMetadata.rarity].rarityTier;
         if (rarityTier !== undefined) {
             if (coreMetadata.rarityTier !== undefined && coreMetadata.rarityTier != rarityTier) {
-                errors.push(new WrongNameMapping('rarity', coreMetadata.rarity, 'rarityTier', coreMetadata.rarityTier, rarityTier));
+                errors.push(
+                    new WrongNameMapping(
+                        'rarity',
+                        coreMetadata.rarity,
+                        'rarityTier',
+                        coreMetadata.rarityTier,
+                        rarityTier
+                    )
+                );
             } else {
                 coreMetadata.rarityTier = commonMappings.Rarity.ByRarity[coreMetadata.rarity].rarityTier;
             }
@@ -166,10 +151,9 @@ function validateCommonMetadata(coreMetadata) {
     }
 }
 
-
 function validateRacingAttribute(coreMetadata, attribute, maxValue) {
     if (coreMetadata.racing && coreMetadata.racing[attribute] > maxValue) {
-        throw new AttributeOutOfRange(attribute, coreMetadata[attribute], maxValue);
+        throw new AttributeOutOfRange(attribute, coreMetadata.racing[attribute], maxValue);
     }
 }
 function validateRacingAttributes(coreMetadata) {
@@ -177,43 +161,43 @@ function validateRacingAttributes(coreMetadata) {
 
     try {
         validateRacingAttribute(coreMetadata, 'stat1', 1001);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
     try {
         validateRacingAttribute(coreMetadata, 'stat2', 1001);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
     try {
         validateRacingAttribute(coreMetadata, 'stat3', 1001);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
     try {
         validateRacingAttribute(coreMetadata, 'luck', 1001);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
     try {
         validateRacingAttribute(coreMetadata, 'effect', 255);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
     try {
         validateRacingAttribute(coreMetadata, 'special1', 255);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
     try {
         validateRacingAttribute(coreMetadata, 'special2', 255);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
@@ -239,7 +223,15 @@ function validateSeasonMetadata(coreMetadata) {
                         errors.push(new AttributeNameNotFound('fullType', 'fullTypeId', fullTypeId));
                     }
                     if (coreMetadata.subType != expected.subType) {
-                        errors.push(new WrongNameMapping('fullTypeId', fullTypeId, 'fullType', coreMetadata.subType, expected.subType));
+                        errors.push(
+                            new WrongNameMapping(
+                                'fullTypeId',
+                                fullTypeId,
+                                'fullType',
+                                coreMetadata.subType,
+                                expected.subType
+                            )
+                        );
                     }
                 } else {
                     const subType = seasonMappings.SubType.ByName[coreMetadata.subType];
@@ -275,7 +267,7 @@ function validateSeasonMetadata(coreMetadata) {
 
     try {
         validateAndMapCoreAttribute(seasonMappings.Attributes.Track, coreMetadata, 'track', false);
-    } catch(e) {
+    } catch (e) {
         errors.push(e);
     }
 
@@ -284,7 +276,7 @@ function validateSeasonMetadata(coreMetadata) {
         case 'Driver':
             try {
                 validateAndMapCoreAttribute(seasonMappings.Attributes.Team, coreMetadata, 'team', false);
-            } catch(e) {
+            } catch (e) {
                 errors.push(e);
             }
             break;
@@ -293,13 +285,20 @@ function validateSeasonMetadata(coreMetadata) {
                 (coreMetadata.team !== undefined && coreMetadata.team != 'None') ||
                 (coreMetadata.teamId !== undefined && Number(coreMetadata.teamId) != 0)
             ) {
-                errors.push(new WrongLinkedAttribute(
-                    'typeId', 'type', // source
-                    coreMetadata.typeId, coreMetadata.type, // source values
-                    'teamId', 'team', // linked
-                    coreMetadata.teamId, coreMetadata.team, // linked retrieved
-                    '0', 'None'  // linked expected
-                ));
+                errors.push(
+                    new WrongLinkedAttribute(
+                        'typeId',
+                        'type', // source
+                        coreMetadata.typeId,
+                        coreMetadata.type, // source values
+                        'teamId',
+                        'team', // linked
+                        coreMetadata.teamId,
+                        coreMetadata.team, // linked retrieved
+                        '0',
+                        'None' // linked expected
+                    )
+                );
             }
     }
 
@@ -308,7 +307,7 @@ function validateSeasonMetadata(coreMetadata) {
         case 'Driver':
             try {
                 validateAndMapCoreAttribute(seasonMappings.Attributes.Model, coreMetadata, 'model', false);
-            } catch(e) {
+            } catch (e) {
                 errors.push(e);
             }
             break;
@@ -317,13 +316,20 @@ function validateSeasonMetadata(coreMetadata) {
                 (coreMetadata.model !== undefined && coreMetadata.model != 'None') ||
                 (coreMetadata.modelId !== undefined && Number(coreMetadata.modelId) != 0)
             ) {
-                errors.push(new WrongLinkedAttribute(
-                    'typeId', 'type', // source
-                    coreMetadata.typeId, coreMetadata.type, // source values
-                    'modelId', 'model', // linked
-                    coreMetadata.modelId, coreMetadata.model, // linked retrieved
-                    '0', 'None'  // linked expected
-                ));
+                errors.push(
+                    new WrongLinkedAttribute(
+                        'typeId',
+                        'type', // source
+                        coreMetadata.typeId,
+                        coreMetadata.type, // source values
+                        'modelId',
+                        'model', // linked
+                        coreMetadata.modelId,
+                        coreMetadata.model, // linked retrieved
+                        '0',
+                        'None' // linked expected
+                    )
+                );
             }
     }
 
@@ -336,13 +342,20 @@ function validateSeasonMetadata(coreMetadata) {
                 coreMetadata.modelId !== undefined &&
                 Number(coreMetadata.modelId) != 0
             ) {
-                errors.push(new WrongLinkedAttribute(
-                    'teamId', 'team', // source
-                    coreMetadata.teamId, coreMetadata.team, // source values
-                    'modelId', 'model', // linked
-                    coreMetadata.modelId, coreMetadata.model, // linked retrieved
-                    '0', 'None'  // linked expected
-                ));
+                errors.push(
+                    new WrongLinkedAttribute(
+                        'teamId',
+                        'team', // source
+                        coreMetadata.teamId,
+                        coreMetadata.team, // source values
+                        'modelId',
+                        'model', // linked
+                        coreMetadata.modelId,
+                        coreMetadata.model, // linked retrieved
+                        '0',
+                        'None' // linked expected
+                    )
+                );
             }
             if (coreMetadata.teamId === undefined && coreMetadata.modelId === undefined) {
                 errors.push(new MissingAttribute('teamId or modelId', 'team or model'));
@@ -362,13 +375,20 @@ function validateSeasonMetadata(coreMetadata) {
         // console.log(driver);
         const team = seasonMappings.Attributes.Team.ByDriver[driver.driver];
         if (coreMetadata.teamId != team.teamId) {
-            errors.push(new WrongLinkedAttribute(
-                'driverId', 'driver', // source
-                coreMetadata.driverId, coreMetadata.driver, // source values
-                'teamId', 'team', // linked
-                coreMetadata.teamId, coreMetadata.team, // linked retrieved
-                team.teamId, team.team  // linked expected
-            ));
+            errors.push(
+                new WrongLinkedAttribute(
+                    'driverId',
+                    'driver', // source
+                    coreMetadata.driverId,
+                    coreMetadata.driver, // source values
+                    'teamId',
+                    'team', // linked
+                    coreMetadata.teamId,
+                    coreMetadata.team, // linked retrieved
+                    team.teamId,
+                    team.team // linked expected
+                )
+            );
         }
     }
 
@@ -382,7 +402,7 @@ function validateCoreMetadata(coreMetadata) {
 
     try {
         validateRacingAttributes(coreMetadata);
-    } catch(errs) {
+    } catch (errs) {
         errors.push(...errs);
     }
 
@@ -390,7 +410,7 @@ function validateCoreMetadata(coreMetadata) {
         validateCommonMetadata(coreMetadata);
         // season metadata will be validated only if season is available
         validateSeasonMetadata(coreMetadata);
-    } catch(errs) {
+    } catch (errs) {
         errors.push(...errs);
     }
 
@@ -401,7 +421,6 @@ function validateCoreMetadata(coreMetadata) {
 
 module.exports = {
     validateCoreMetadata,
-    ValidationError,
     UnsupportedAttributeValue,
     MissingAttribute,
     AttributeNameNotFound,
