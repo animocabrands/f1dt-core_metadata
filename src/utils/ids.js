@@ -18,14 +18,6 @@ function createCollectionId(seasonId, typeId, subTypeId) {
 function createTokenId(coreMetadata) {
     validateCoreMetadata(coreMetadata);
 
-    coreMetadata.stat1 = coreMetadata.stat1 || coreMetadata.racing.stat1;
-    coreMetadata.stat2 = coreMetadata.stat2 || coreMetadata.racing.stat2;
-    coreMetadata.stat3 = coreMetadata.stat3 || coreMetadata.racing.stat3;
-    coreMetadata.luck = coreMetadata.luck || coreMetadata.racing.luck;
-    coreMetadata.effect = coreMetadata.effect || coreMetadata.racing.effect;
-    coreMetadata.special1 = coreMetadata.special1 || coreMetadata.racing.special1;
-    coreMetadata.special2 = coreMetadata.special2 || coreMetadata.racing.special2;
-
     const fieldsToEncode = {
         nfFlag: BigInteger(1),
         padding1: BigInteger(),
@@ -39,13 +31,13 @@ function createTokenId(coreMetadata) {
         trackId: coreMetadata.trackId ? BigInteger(coreMetadata.trackId) : BigInteger(),
         labelId: coreMetadata.labelId ? BigInteger(coreMetadata.labelId) : BigInteger(),
         driverId: coreMetadata.driverId ? BigInteger(coreMetadata.driverId) : BigInteger(),
-        stat1: coreMetadata.stat1 ? BigInteger(coreMetadata.stat1) : BigInteger(),
-        stat2: coreMetadata.stat2 ? BigInteger(coreMetadata.stat2) : BigInteger(),
-        stat3: coreMetadata.stat3 ? BigInteger(coreMetadata.stat3) : BigInteger(),
-        luck: coreMetadata.luck ? BigInteger(coreMetadata.luck) : BigInteger(),
-        effect: coreMetadata.effect ? BigInteger(coreMetadata.effect) : BigInteger(),
-        special1: coreMetadata.special1 ? BigInteger(coreMetadata.special1) : BigInteger(),
-        special2: coreMetadata.special2 ? BigInteger(coreMetadata.special2) : BigInteger(),
+        'racing.stat1': coreMetadata.racing && coreMetadata.racing.stat1 ? BigInteger(coreMetadata.racing.stat1) : BigInteger(),
+        'racing.stat2': coreMetadata.racing && coreMetadata.racing.stat2 ? BigInteger(coreMetadata.racing.stat2) : BigInteger(),
+        'racing.stat3': coreMetadata.racing && coreMetadata.racing.stat3 ? BigInteger(coreMetadata.racing.stat3) : BigInteger(),
+        'racing.luck': coreMetadata.racing && coreMetadata.racing.luck ? BigInteger(coreMetadata.racing.luck) : BigInteger(),
+        'racing.effect': coreMetadata.racing && coreMetadata.racing.effect ? BigInteger(coreMetadata.racing.effect) : BigInteger(),
+        'racing.special1': coreMetadata.racing && coreMetadata.racing.special1 ? BigInteger(coreMetadata.racing.special1) : BigInteger(),
+        'racing.special2': coreMetadata.racing && coreMetadata.racing.special2 ? BigInteger(coreMetadata.racing.special2) : BigInteger(),
         counter: coreMetadata.counter ? BigInteger(coreMetadata.counter) : BigInteger(),
     };
 

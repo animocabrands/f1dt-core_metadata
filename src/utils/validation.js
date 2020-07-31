@@ -1,4 +1,5 @@
 const ValidationErrors = {
+    AttributeOutOfRange: { type: 'AttributeOutOfRange', errorMessage: (attribute, attributeValue, maxValue) => `${attribute} out of range: ${attributeValue} (max ${maxValue})`},
     UnsupportedAttributeValue: { type: 'UnsupportedAttributeValue', errorMessage: (id, idValue) => `Unsupported ${id}: ${idValue}`},
     MissingAttribute: {type:'MissingAttribute',errorMessage: (id, name) => `Missing attribute ${id}/${name}`},
     AttributeNameNotFound: {type:'AttributeNameNotFound',errorMessage: (name, id, idValue) => `'${name}' not found for '${id}'='${idValue}'`},
@@ -21,6 +22,13 @@ class ValidationError extends Error {
     constructor(message, errorType) {
         super(message)
         this.errorType = errorType;
+    }
+};
+
+class AttributeOutOfRange extends ValidationError {
+    constructor(attribute, attributeValue, maxValue) {
+        const message = ValidationErrors.AttributeOutOfRange.errorMessage(attribute, attributeValue, maxValue);
+        super(message, ValidationErrors.AttributeOutOfRange.type);
     }
 };
 
@@ -85,31 +93,31 @@ class WrongLinkedAttribute extends ValidationError {
     }
 };
 
-function validateAndMapCoreAttribute(mapping, metadata, attributeName, required) {
+function validateAndMapCoreAttribute(mapping, coreMetadata, attributeName, required) {
     const attributeId = attributeName + 'Id';
-    if (metadata[attributeName] !== undefined) {
-        if (metadata[attributeId] !== undefined) {
-            const coreAttribute = mapping.ById[metadata[attributeId]];
+    if (coreMetadata[attributeName] !== undefined) {
+        if (coreMetadata[attributeId] !== undefined) {
+            const coreAttribute = mapping.ById[coreMetadata[attributeId]];
             if (coreAttribute === undefined) {
-                throw new AttributeNameNotFound(attributeName, attributeId, metadata[attributeId]);
-            } else if (metadata[attributeName] != coreAttribute[attributeName]) {
-                throw new WrongIdMapping(attributeName, coreAttribute[attributeName], attributeId, metadata[attributeId], coreAttribute[attributeId]);
+                throw new AttributeNameNotFound(attributeName, attributeId, coreMetadata[attributeId]);
+            } else if (coreMetadata[attributeName] != coreAttribute[attributeName]) {
+                throw new WrongIdMapping(attributeName, coreAttribute[attributeName], attributeId, coreMetadata[attributeId], coreAttribute[attributeId]);
             }
         } else {
-            const coreAttribute = mapping.ByName[metadata[attributeName]];
+            const coreAttribute = mapping.ByName[coreMetadata[attributeName]];
             if (coreAttribute !== undefined) {
-                metadata[attributeId] = coreAttribute[attributeId];
+                coreMetadata[attributeId] = coreAttribute[attributeId];
             } else {
-                throw new AttributeIdNotFound(attributeId, attributeName, metadata[attributeName]);
+                throw new AttributeIdNotFound(attributeId, attributeName, coreMetadata[attributeName]);
             }
         }
     } else {
-        if (metadata[attributeId] !== undefined) {
-            const coreAttribute = mapping.ById[metadata[attributeId]];
+        if (coreMetadata[attributeId] !== undefined) {
+            const coreAttribute = mapping.ById[coreMetadata[attributeId]];
             if (coreAttribute === undefined) {
-                throw new AttributeNameNotFound(attributeName, attributeId, metadata[attributeId]);
+                throw new AttributeNameNotFound(attributeName, attributeId, coreMetadata[attributeId]);
             } else {
-                metadata[attributeName] = coreAttribute[attributeName];
+                coreMetadata[attributeName] = coreAttribute[attributeName];
             }
         } else if (required) {
             throw new MissingAttribute(attributeId, attributeName);
@@ -117,37 +125,37 @@ function validateAndMapCoreAttribute(mapping, metadata, attributeName, required)
     }
 }
 
-function validateCommonMetadata(metadata) {
+function validateCommonMetadata(coreMetadata) {
     const commonMappings = require('../mappings/CommonAttributes');
 
     const errors = [];
 
     try {
-        validateAndMapCoreAttribute(commonMappings.Season, metadata, 'season', true);
+        validateAndMapCoreAttribute(commonMappings.Season, coreMetadata, 'season', true);
     } catch (error) {
         errors.push(error);
     }
     try {
-        validateAndMapCoreAttribute(commonMappings.Type, metadata, 'type', true);
+        validateAndMapCoreAttribute(commonMappings.Type, coreMetadata, 'type', true);
     } catch (error) {
         errors.push(error);
     }
     try {
-        validateAndMapCoreAttribute(commonMappings.Label, metadata, 'label', false);
+        validateAndMapCoreAttribute(commonMappings.Label, coreMetadata, 'label', false);
     } catch (error) {
         errors.push(error);
     }
 
-    if (metadata.rarity !== undefined) {
-        const rarityTier = commonMappings.Rarity.ByRarity[metadata.rarity].rarityTier;
+    if (coreMetadata.rarity !== undefined) {
+        const rarityTier = commonMappings.Rarity.ByRarity[coreMetadata.rarity].rarityTier;
         if (rarityTier !== undefined) {
-            if (metadata.rarityTier !== undefined && metadata.rarityTier != rarityTier) {
-                errors.push(new WrongNameMapping('rarity', metadata.rarity, 'rarityTier', metadata.rarityTier, rarityTier));
+            if (coreMetadata.rarityTier !== undefined && coreMetadata.rarityTier != rarityTier) {
+                errors.push(new WrongNameMapping('rarity', coreMetadata.rarity, 'rarityTier', coreMetadata.rarityTier, rarityTier));
             } else {
-                metadata.rarityTier = commonMappings.Rarity.ByRarity[metadata.rarity].rarityTier;
+                coreMetadata.rarityTier = commonMappings.Rarity.ByRarity[coreMetadata.rarity].rarityTier;
             }
         } else {
-            errors.push(new AttributeNameNotFound('rarityTier', 'rarity', metadata.rarity));
+            errors.push(new AttributeNameNotFound('rarityTier', 'rarity', coreMetadata.rarity));
         }
     } else {
         errors.push(new MissingAttribute('rarity', ''));
@@ -158,42 +166,98 @@ function validateCommonMetadata(metadata) {
     }
 }
 
-function validateSeasonMetadata(metadata) {
-    const seasonMappings = require(`../mappings/Season${metadata.season}`);
+
+function validateRacingAttribute(coreMetadata, attribute, maxValue) {
+    if (coreMetadata.racing && coreMetadata.racing[attribute] > maxValue) {
+        throw new AttributeOutOfRange(attribute, coreMetadata[attribute], maxValue);
+    }
+}
+function validateRacingAttributes(coreMetadata) {
+    const errors = [];
+
+    try {
+        validateRacingAttribute(coreMetadata, 'stat1', 1001);
+    } catch(e) {
+        errors.push(e);
+    }
+
+    try {
+        validateRacingAttribute(coreMetadata, 'stat2', 1001);
+    } catch(e) {
+        errors.push(e);
+    }
+
+    try {
+        validateRacingAttribute(coreMetadata, 'stat3', 1001);
+    } catch(e) {
+        errors.push(e);
+    }
+
+    try {
+        validateRacingAttribute(coreMetadata, 'luck', 1001);
+    } catch(e) {
+        errors.push(e);
+    }
+
+    try {
+        validateRacingAttribute(coreMetadata, 'effect', 255);
+    } catch(e) {
+        errors.push(e);
+    }
+
+    try {
+        validateRacingAttribute(coreMetadata, 'special1', 255);
+    } catch(e) {
+        errors.push(e);
+    }
+
+    try {
+        validateRacingAttribute(coreMetadata, 'special2', 255);
+    } catch(e) {
+        errors.push(e);
+    }
+
+    if (errors.length > 0) {
+        throw errors;
+    }
+}
+
+function validateSeasonMetadata(coreMetadata) {
+    const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
 
     const errors = [];
 
-    switch (metadata.type) {
+    switch (coreMetadata.type) {
         case 'Part':
         case 'Gear':
         case 'Tyres':
-            if (metadata.subType !== undefined) {
-                if (metadata.subTypeId !== undefined) {
-                    const fullTypeId = `${metadata.typeId},${metadata.subTypeId}`;
+            if (coreMetadata.subType !== undefined) {
+                if (coreMetadata.subTypeId !== undefined) {
+                    const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
                     const expected = seasonMappings.SubType.ByFullTypeId[fullTypeId];
                     if (expected === undefined) {
                         errors.push(new AttributeNameNotFound('fullType', 'fullTypeId', fullTypeId));
                     }
-                    if (metadata.subType != expected.extendedMeta.name) {
-                        errors.push(new WrongNameMapping('fullTypeId', fullTypeId, 'fullType', metadata.subType, expected.part || expected.gear || expected.tyres));
+                    if (coreMetadata.subType != expected.subType) {
+                        errors.push(new WrongNameMapping('fullTypeId', fullTypeId, 'fullType', coreMetadata.subType, expected.subType));
                     }
                 } else {
-                    const subType = seasonMappings.SubType.ByName[metadata.subType];
+                    const subType = seasonMappings.SubType.ByName[coreMetadata.subType];
                     if (subType !== undefined) {
-                        metadata.subTypeId = subType.subTypeId;
+                        coreMetadata.subTypeId = subType.subTypeId;
                     } else {
-                        errors.push(new AttributeIdNotFound('subTypeId', 'subType', metadata.subType));
+                        errors.push(new AttributeIdNotFound('subTypeId', 'subType', coreMetadata.subType));
                     }
                 }
             } else {
-                if (metadata.subTypeId !== undefined) {
-                    const fullTypeId = `${metadata.typeId},${metadata.subTypeId}`;
+                if (coreMetadata.subTypeId !== undefined) {
+                    const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
                     const subType = seasonMappings.SubType.ByFullTypeId[fullTypeId];
                     if (subType === undefined) {
                         errors.push(new AttributeNameNotFound('fullType', 'fullTypeId', fullTypeId));
                     } else {
                         const name = subType.gear || subType.part || subType.tyres;
-                        metadata.subType = name;
+                        coreMetadata.subType = name;
                     }
                 } else {
                     errors.push(new MissingAttribute('subTypeId', 'subType'));
@@ -202,98 +266,107 @@ function validateSeasonMetadata(metadata) {
             break;
         default:
             if (
-                (metadata.subType !== undefined && metadata.subType != 'None') ||
-                (metadata.subTypeId !== undefined && Number(metadata.subTypeId) != 0)
+                (coreMetadata.subType !== undefined && coreMetadata.subType != 'None') ||
+                (coreMetadata.subTypeId !== undefined && Number(coreMetadata.subTypeId) != 0)
             ) {
-                errors.push(new UnsupportedAttributeValue('typeId', metadata.typeId));
+                errors.push(new UnsupportedAttributeValue('typeId', coreMetadata.typeId));
             }
-        if (errors.length > 0) {
-            throw errors;
-        }
     }
 
-    validateAndMapCoreAttribute(seasonMappings.Attributes.Track, metadata, 'track', false);
+    try {
+        validateAndMapCoreAttribute(seasonMappings.Attributes.Track, coreMetadata, 'track', false);
+    } catch(e) {
+        errors.push(e);
+    }
 
-    switch (metadata.type) {
+    switch (coreMetadata.type) {
         case 'Car':
         case 'Driver':
-            validateAndMapCoreAttribute(seasonMappings.Attributes.Team, metadata, 'team', false);
+            try {
+                validateAndMapCoreAttribute(seasonMappings.Attributes.Team, coreMetadata, 'team', false);
+            } catch(e) {
+                errors.push(e);
+            }
             break;
         default:
             if (
-                (metadata.team !== undefined && metadata.team != 'None') ||
-                (metadata.teamId !== undefined && Number(metadata.teamId) != 0)
+                (coreMetadata.team !== undefined && coreMetadata.team != 'None') ||
+                (coreMetadata.teamId !== undefined && Number(coreMetadata.teamId) != 0)
             ) {
                 errors.push(new WrongLinkedAttribute(
                     'typeId', 'type', // source
-                    metadata.typeId, metadata.type, // source values
+                    coreMetadata.typeId, coreMetadata.type, // source values
                     'teamId', 'team', // linked
-                    metadata.teamId, metadata.team, // linked retrieved
+                    coreMetadata.teamId, coreMetadata.team, // linked retrieved
                     '0', 'None'  // linked expected
                 ));
             }
     }
 
-    switch (metadata.type) {
+    switch (coreMetadata.type) {
         case 'Car':
         case 'Driver':
-            validateAndMapCoreAttribute(seasonMappings.Attributes.Model, metadata, 'model', false);
+            try {
+                validateAndMapCoreAttribute(seasonMappings.Attributes.Model, coreMetadata, 'model', false);
+            } catch(e) {
+                errors.push(e);
+            }
             break;
         default:
             if (
-                (metadata.model !== undefined && metadata.model != 'None') ||
-                (metadata.modelId !== undefined && Number(metadata.modelId) != 0)
+                (coreMetadata.model !== undefined && coreMetadata.model != 'None') ||
+                (coreMetadata.modelId !== undefined && Number(coreMetadata.modelId) != 0)
             ) {
                 errors.push(new WrongLinkedAttribute(
                     'typeId', 'type', // source
-                    metadata.typeId, metadata.type, // source values
+                    coreMetadata.typeId, coreMetadata.type, // source values
                     'modelId', 'model', // linked
-                    metadata.modelId, metadata.model, // linked retrieved
+                    coreMetadata.modelId, coreMetadata.model, // linked retrieved
                     '0', 'None'  // linked expected
                 ));
             }
     }
 
-    switch (metadata.type) {
+    switch (coreMetadata.type) {
         case 'Car':
         case 'Driver':
             if (
-                metadata.teamId !== undefined &&
-                Number(metadata.teamId) != 0 &&
-                metadata.modelId !== undefined &&
-                Number(metadata.modelId) != 0
+                coreMetadata.teamId !== undefined &&
+                Number(coreMetadata.teamId) != 0 &&
+                coreMetadata.modelId !== undefined &&
+                Number(coreMetadata.modelId) != 0
             ) {
                 errors.push(new WrongLinkedAttribute(
                     'teamId', 'team', // source
-                    metadata.teamId, metadata.team, // source values
+                    coreMetadata.teamId, coreMetadata.team, // source values
                     'modelId', 'model', // linked
-                    metadata.modelId, metadata.model, // linked retrieved
+                    coreMetadata.modelId, coreMetadata.model, // linked retrieved
                     '0', 'None'  // linked expected
                 ));
             }
-            if (metadata.teamId === undefined && metadata.modelId === undefined) {
-            errors.push(new MissingAttribute('teamId or modelId', 'team or model'));
+            if (coreMetadata.teamId === undefined && coreMetadata.modelId === undefined) {
+                errors.push(new MissingAttribute('teamId or modelId', 'team or model'));
             }
             break;
     }
 
-    if (metadata.type == 'Driver' && metadata.driverId !== undefined && Number(metadata.driverId) != 0) {
-        if (metadata.teamId === undefined || Number(metadata.teamId) == 0) {
+    if (coreMetadata.type == 'Driver' && coreMetadata.driverId !== undefined && Number(coreMetadata.driverId) != 0) {
+        if (coreMetadata.teamId === undefined || Number(coreMetadata.teamId) == 0) {
             errors.push(new MissingAttribute('teamId', 'team'));
         }
-        const driver = seasonMappings.TokenTypes.Driver.ById[metadata.driverId];
+        const driver = seasonMappings.TokenTypes.Driver.ById[coreMetadata.driverId];
         if (driver === undefined) {
-            errors.push(new AttributeNameNotFound('driver', 'driverId', metadata.driverId));
+            errors.push(new AttributeNameNotFound('driver', 'driverId', coreMetadata.driverId));
         }
         // console.log(seasonMappings.Attributes.Team.ByDriver);
         // console.log(driver);
         const team = seasonMappings.Attributes.Team.ByDriver[driver.driver];
-        if (metadata.teamId != team.teamId) {
+        if (coreMetadata.teamId != team.teamId) {
             errors.push(new WrongLinkedAttribute(
                 'driverId', 'driver', // source
-                metadata.driverId, metadata.driver, // source values
+                coreMetadata.driverId, coreMetadata.driver, // source values
                 'teamId', 'team', // linked
-                metadata.teamId, metadata.team, // linked retrieved
+                coreMetadata.teamId, coreMetadata.team, // linked retrieved
                 team.teamId, team.team  // linked expected
             ));
         }
@@ -304,16 +377,19 @@ function validateSeasonMetadata(metadata) {
     }
 }
 
-function validateCoreMetadata(metadata) {
+function validateCoreMetadata(coreMetadata) {
     const errors = [];
+
     try {
-        validateCommonMetadata(metadata);
+        validateRacingAttributes(coreMetadata);
     } catch(errs) {
         errors.push(...errs);
     }
 
     try {
-        validateSeasonMetadata(metadata);
+        validateCommonMetadata(coreMetadata);
+        // season metadata will be validated only if season is available
+        validateSeasonMetadata(coreMetadata);
     } catch(errs) {
         errors.push(...errs);
     }

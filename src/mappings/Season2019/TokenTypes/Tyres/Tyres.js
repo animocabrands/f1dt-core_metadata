@@ -2,7 +2,7 @@ const Season = require('../../Season');
 const { createCollectionId } = require('../../../../utils/ids');
 
 const SoftTyres = {
-    subType: 'Soft Tyres',
+    subType: 'Soft',
     subTypeId: '1',
     fullTypeId: '5,1',
     collection: `Soft Tyres ${Season.season}`,
@@ -14,7 +14,7 @@ const SoftTyres = {
     },
 };
 const MediumTyres = {
-    subType: 'Medium Tyres',
+    subType: 'Medium',
     subTypeId: '2',
     fullTypeId: '5,2',
     collection: `Medium Tyres ${Season.season}`,
@@ -26,7 +26,7 @@ const MediumTyres = {
     },
 };
 const HardTyres = {
-    subType: 'Hard Tyres',
+    subType: 'Hard',
     subTypeId: '3',
     fullTypeId: '5,3',
     collection: `Hard Tyres ${Season.season}`,
@@ -38,7 +38,7 @@ const HardTyres = {
     },
 };
 const IntermediateTyres = {
-    subType: 'Intermediate Tyres',
+    subType: 'Intermediate',
     subTypeId: '4',
     fullTypeId: '5,4',
     collection: `Intermediate Tyres ${Season.season}`,
@@ -50,7 +50,7 @@ const IntermediateTyres = {
     },
 };
 const WetTyres = {
-    subType: 'Wet Tyres',
+    subType: 'Wet',
     subTypeId: '5',
     fullTypeId: '5,5',
     collection: `Wet Tyres ${Season.season}`,

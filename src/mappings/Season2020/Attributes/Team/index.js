@@ -2,6 +2,7 @@ const Teams = require('./Teams');
 
 const ById = {};
 const ByName = {};
+const ByCar = {};
 const ByDriver = {};
 
 for (const team of Teams) {
@@ -10,11 +11,13 @@ for (const team of Teams) {
     for (const driver of team.drivers) {
         ByDriver[driver] = team;
     }
+    ByCar[team.car] = team;
 }
 
 module.exports = {
     All: Teams,
     ById,
     ByName,
+    ByCar,
     ByDriver,
 };

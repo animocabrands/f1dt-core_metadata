@@ -6,7 +6,12 @@ const { getExternalUrl, getImageUrl, getMetadataUrl } = require('./urls');
 const constants = require('../constants');
 const commonMappings = require('../mappings/CommonAttributes');
 
+const RepairList = require('../mappings/RepairList');
+
 function getCoreMetadata(id) {
+
+    id = RepairList[id] || id;
+
     const encoded = BigInteger(id);
     let decoded = decode(constants.TokenBitsLayout, encoded);
     for (const key in decoded) {
@@ -48,13 +53,13 @@ function getCoreMetadata(id) {
         label,
         counter: decoded.counter,
         racing: {
-            stat1: decoded.stat1,
-            stat2: decoded.stat2,
-            stat3: decoded.stat3,
-            luck: decoded.luck,
-            special1: decoded.special1,
-            special2: decoded.special2,
-            effect: decoded.effect,
+            stat1: decoded['racing.stat1'],
+            stat2: decoded['racing.stat2'],
+            stat3: decoded['racing.stat3'],
+            luck: decoded['racing.luck'],
+            special1: decoded['racing.special1'],
+            special2: decoded['racing.special2'],
+            effect: decoded['racing.effect'],
         },
     };
 
@@ -185,19 +190,19 @@ function getOpenseaMetadata(coreMetadata) {
             case 'Gear':
                 attributes.push({
                     trait_type: 'gear_type',
-                    value: coreMetadata.subType.category_name,
+                    value: coreMetadata.subType,
                 });
                 break;
             case 'Part':
                 attributes.push({
                     trait_type: 'part_type',
-                    value: coreMetadata.subType.category_name,
+                    value: coreMetadata.subType,
                 });
                 break;
             case 'Tyres':
                 attributes.push({
                     trait_type: 'tyres_type',
-                    value: coreMetadata.subType.category_name,
+                    value: coreMetadata.subType,
                 });
                 break;
         }
@@ -210,7 +215,7 @@ function getOpenseaMetadata(coreMetadata) {
 
 function getFullMetadata(id, network = 'mainnet') {
     const coreMetadata = getCoreMetadata(id);
-    const openseaMetadata = getOpenseaMetadata(coreMetadata);
+    let openseaMetadata = getOpenseaMetadata(coreMetadata);
 
     let extendedMetadata = {};
     const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
@@ -254,6 +259,34 @@ function getFullMetadata(id, network = 'mainnet') {
         extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
     }
     extendedMetadata.external_url = getExternalUrl(id, network);
+
+    const isBGC2019 = require('../mappings/Season2019/BGC2019Tokens').indexOf(id) != -1;
+
+    if (isBGC2019) {
+        extendedMetadata.name = `${extendedMetadata.name} (BGC 2019)`;
+    }
+
+    if (
+        isBGC2019 ||
+        coreMetadata.label == 'Meow' ||
+        coreMetadata.label == 'Infinity' ||
+        id == '57901359017265019780203575760548458000656522658244413105892691622458053129621' // lost Infinity token
+    ) {
+        const oldRaritiesCoreMetadata = {...coreMetadata};
+        switch(coreMetadata.rarity) {
+            case 2:
+            case 3:
+                oldRaritiesCoreMetadata.rarityTier = 'Legendary';
+                break;
+            case 4:
+            case 5:
+            case 6:
+                oldRaritiesCoreMetadata.rarityTier = 'Epic';
+                break;
+        }
+        openseaMetadata = getOpenseaMetadata(oldRaritiesCoreMetadata);
+        extendedMetadata.image = getImageUrl(extendedMetadata.name, oldRaritiesCoreMetadata, network);
+    }
 
     const fullMetadata = {
         id,
