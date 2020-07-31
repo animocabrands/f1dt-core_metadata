@@ -1,97 +1,160 @@
 const ValidationErrors = {
-    AttributeOutOfRange: { type: 'AttributeOutOfRange', errorMessage: (attribute, attributeValue, maxValue) => `${attribute} out of range: ${attributeValue} (max ${maxValue})`},
-    UnsupportedAttributeValue: { type: 'UnsupportedAttributeValue', errorMessage: (id, idValue) => `Unsupported ${id}: ${idValue}`},
-    MissingAttribute: {type:'MissingAttribute',errorMessage: (id, name) => `Missing attribute ${id}/${name}`},
-    AttributeNameNotFound: {type:'AttributeNameNotFound',errorMessage: (name, id, idValue) => `'${name}' not found for '${id}'='${idValue}'`},
-    AttributeIdNotFound: {type:'AttributeIdNotFound',errorMessage: (id, name, nameValue) => `'${id}' not found for '${name}'='${nameValue}'`},
-    WrongIdMapping: {type:'WrongIdMapping',errorMessage: (name, nameValue, id, idFoundValue, idExpectedValue) => {
-    return `Retrieved value for {'${name}'='${nameValue}'}: '${id}'='${idFoundValue}' instead of expected '${idExpectedValue}'`;
-    }
-},
-    WrongNameMapping: {type:'WrongNameMapping',errorMessage: (name, nameValue, id, idFoundValue, idExpectedValue) => {
-        return `Retrieved value for {'${name}'='${nameValue}'}: '${id}'='${idFoundValue}' instead of expected '${idExpectedValue}'`;
-    }
-    },
-    WrongLinkedAttribute: {type:'WrongLinkedAttribute',errorMessage: (id, name, idValue, nameValue, linkedId, linkedName, linkedIdFoundValue, linkedNameFoundValue, linkedIdExpectedValue, linkedNameExpectedValue) => {
-        return `Retrieved linked value for {'${id}|${name}'='${idValue}|${nameValue}'}: '${linkedId}|${linkedName}'='${linkedIdFoundValue}|${linkedNameFoundValue}' instead of expected '${linkedIdExpectedValue}|${linkedNameExpectedValue}'`;
-    }},
+    // AttributeOutOfRange: { type: 'AttributeOutOfRange', errorMessage: (attribute, attributeValue, maxValue) => `${attribute} out of range: ${attributeValue} (max ${maxValue})`},
+    // UnsupportedAttributeValue: { type: 'UnsupportedAttributeValue', errorMessage: (id, idValue) => `Unsupported ${id}: ${idValue}`},
+    // MissingAttribute: {type:'MissingAttribute',errorMessage: (id, name) => `Missing attribute ${id}/${name}`},
+    // AttributeNameNotFound: {type:'AttributeNameNotFound',errorMessage: (name, id, idValue) => `'${name}' not found for '${id}'='${idValue}'`},
+    // AttributeIdNotFound: {type:'AttributeIdNotFound',errorMessage: (id, name, nameValue) => `'${id}' not found for '${name}'='${nameValue}'`},
+//     WrongIdMapping: {type:'WrongIdMapping',errorMessage: (name, nameValue, id, idFoundValue, idExpectedValue) => {
+//     return `Retrieved value for {'${name}'='${nameValue}'}: '${id}'='${idFoundValue}' instead of expected '${idExpectedValue}'`;
+//     }
+// },
+    // WrongNameMapping: {type:'WrongNameMapping',errorMessage: (name, nameValue, id, idFoundValue, idExpectedValue) => {
+    //     return `Retrieved id for {'${id}'='${idValue}'}: '${name}'='${nameFoundValue}' instead of expected '${nameExpectedValue}'`;
+    // }
+    // },
+    // WrongLinkedAttribute: {type:'WrongLinkedAttribute',errorMessage: (id, name, idValue, nameValue, linkedId, linkedName, linkedIdFoundValue, linkedNameFoundValue, linkedIdExpectedValue, linkedNameExpectedValue) => {
+    //     return `Retrieved linked value for {'${id}|${name}'='${idValue}|${nameValue}'}: '${linkedId}|${linkedName}'='${linkedIdFoundValue}|${linkedNameFoundValue}' instead of expected '${linkedIdExpectedValue}|${linkedNameExpectedValue}'`;
+    // }},
 };
 
-class ValidationError extends Error {
-    errorType;
-    constructor(message, errorType) {
-        super(message)
-        this.errorType = errorType;
-    }
-};
+// function ValidationError(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.stack = (new Error()).stack;
+// };
+// ValidationError.prototype = new Error;
 
-class AttributeOutOfRange extends ValidationError {
-    constructor(attribute, attributeValue, maxValue) {
-        const message = ValidationErrors.AttributeOutOfRange.errorMessage(attribute, attributeValue, maxValue);
-        super(message, ValidationErrors.AttributeOutOfRange.type);
-    }
-};
+// class ValidationError extends Error {
+//     errorType;
+//     constructor(message, errorType) {
+//         super(message);
+//         this.errorType = errorType;
+//     }
+// };
 
-class UnsupportedAttributeValue extends ValidationError {
-    constructor(attributeId, attributeIdValue) {
-        const message = ValidationErrors.UnsupportedAttributeValue.errorMessage(attributeId, attributeIdValue);
-        super(message, ValidationErrors.UnsupportedAttributeValue.type);
-    }
-};
+// class AttributeOutOfRange extends ValidationError {
+//     constructor(attribute, attributeValue, maxValue) {
+//         const message = ValidationErrors.AttributeOutOfRange.errorMessage(attribute, attributeValue, maxValue);
+//         super(message, ValidationErrors.AttributeOutOfRange.type);
+//     }
+// };
 
-class MissingAttribute extends ValidationError {
-    constructor(attributeId, attributeName) {
-        const message = ValidationErrors.MissingAttribute.errorMessage(attributeId, attributeName);
-        super(message, ValidationErrors.MissingAttribute.type);
-    }
+function AttributeOutOfRange(attribute, attributeValue, attributeMaxValue) {
+    this.name = this.errorType = 'AttributeOutOfRange';
+    this.message = `${attribute} out of range: ${attributeValue} (max ${attributeMaxValue})`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
 };
+AttributeOutOfRange.prototype = new Error;
 
-class AttributeNameNotFound extends ValidationError {
-    constructor(attributeName, attributeId, attributeIdValue) {
-        const message = ValidationErrors.AttributeNameNotFound.errorMessage(attributeName, attributeId, attributeIdValue);
-        super(message, ValidationErrors.AttributeNameNotFound.type);
-    }
-};
+// class UnsupportedAttributeValue extends ValidationError {
+//     constructor(attributeId, attributeIdValue) {
+//         const message = ValidationErrors.UnsupportedAttributeValue.errorMessage(attributeId, attributeIdValue);
+//         super(message, ValidationErrors.UnsupportedAttributeValue.type);
+//     }
+// };
 
-class AttributeIdNotFound extends ValidationError {
-    constructor(attributeId, attributeName, attributeNameValue) {
-        const message = ValidationErrors.AttributeIdNotFound.errorMessage(attributeId, attributeName, attributeNameValue);
-        super(message, ValidationErrors.AttributeIdNotFound.type);
-    }
+function UnsupportedAttributeValue(id, idValue) {
+    this.name = this.errorType = 'UnsupportedAttributeValue';
+    this.message = `Unsupported ${id}: ${idValue}`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
 };
+UnsupportedAttributeValue.prototype = new Error;
 
-class WrongIdMapping extends ValidationError {
-    constructor(attributeName, attributeNameValue, attributeId, attributeIdFoundValue, attributeIdExpectedValue) {
-        const message = ValidationErrors.WrongIdMapping.errorMessage(attributeName, attributeNameValue, attributeId, attributeIdFoundValue, attributeIdExpectedValue);
-        super(message, ValidationErrors.WrongIdMapping.type);
-    }
-};
+// class MissingAttribute extends ValidationError {
+//     constructor(attributeId, attributeName) {
+//         const message = ValidationErrors.MissingAttribute.errorMessage(attributeId, attributeName);
+//         super(message, ValidationErrors.MissingAttribute.type);
+//     }
+// };
 
-class WrongNameMapping extends ValidationError {
-    constructor(attributeId, attributeIdValue, attributeName, attributeNameFoundValue, attributeNameExpectedValue) {
-        const message = ValidationErrors.WrongNameMapping.errorMessage(attributeId, attributeIdValue, attributeName, attributeNameFoundValue, attributeNameExpectedValue);
-        super(message, ValidationErrors.WrongNameMapping.type);
-    }
+function MissingAttribute(id, name) {
+    this.name = this.errorType = 'MissingAttribute';
+    this.message = `Missing attribute ${id}/${name}`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
 };
+MissingAttribute.prototype = new Error;
 
-class WrongLinkedAttribute extends ValidationError {
-    constructor(
-        attributeId, attributeName, // source
-        attributeIdValue, attributeNameValue, // source values
-        linkedAttributeId, linkedAttributeName, // linked
-        linkedAttributeIdFoundValue, linkedAttributeNameFoundValue, // linked found values
-        linkedAttributeIdExpectedValue, linkedAttributeNameExpectedValue // linked expected values
-    ) {
-        const message = ValidationErrors.WrongLinkedAttribute.errorMessage(
-            attributeId, attributeName, // source
-            attributeIdValue, attributeNameValue, // source values
-            linkedAttributeId, linkedAttributeName, // linked
-            linkedAttributeIdFoundValue, linkedAttributeNameFoundValue, // linked found values
-            linkedAttributeIdExpectedValue, linkedAttributeNameExpectedValue// linked expected values
-        );
-        super(message, ValidationErrors.WrongLinkedAttribute.type);
-    }
+// class AttributeNameNotFound extends ValidationError {
+//     constructor(attributeName, attributeId, attributeIdValue) {
+//         const message = ValidationErrors.AttributeNameNotFound.errorMessage(attributeName, attributeId, attributeIdValue);
+//         super(message, ValidationErrors.AttributeNameNotFound.type);
+//     }
+// };
+
+function AttributeNameNotFound(name, id, idValue) {
+    this.name = this.errorType = 'AttributeNameNotFound';
+    this.message = `'${name}' not found for '${id}'='${idValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
 };
+AttributeNameNotFound.prototype = new Error;
+
+// class AttributeIdNotFound extends ValidationError {
+//     constructor(attributeId, attributeName, attributeNameValue) {
+//         const message = ValidationErrors.AttributeIdNotFound.errorMessage(attributeId, attributeName, attributeNameValue);
+//         super(message, ValidationErrors.AttributeIdNotFound.type);
+//     }
+// };
+
+function AttributeIdNotFound(id, name, nameValue) {
+    this.name = this.errorType = 'AttributeIdNotFound';
+    this.message = `'${id}' not found for '${name}'='${nameValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+};
+AttributeIdNotFound.prototype = new Error;
+
+// class WrongIdMapping extends ValidationError {
+//     constructor(attributeName, attributeNameValue, attributeId, attributeIdFoundValue, attributeIdExpectedValue) {
+//         const message = ValidationErrors.WrongIdMapping.errorMessage(attributeName, attributeNameValue, attributeId, attributeIdFoundValue, attributeIdExpectedValue);
+//         super(message, ValidationErrors.WrongIdMapping.type);
+//     }
+// };
+
+function WrongIdMapping(name, nameValue, id, idFoundValue, idExpectedValue) {
+    this.name = this.errorType = 'WrongIdMapping';
+    this.message = `Retrieved value for {'${name}'='${nameValue}'}: '${id}'='${idFoundValue}' instead of expected '${idExpectedValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+};
+WrongIdMapping.prototype = new Error;
+
+// class WrongNameMapping extends ValidationError {
+//     constructor(id, idValue, name, nameFoundValue, nameExpectedValue) {
+//         const message = ValidationErrors.WrongNameMapping.errorMessage(id, idValue, name, nameFoundValue, nameExpectedValue);
+//         super(message, ValidationErrors.WrongNameMapping.type);
+//     }
+// };
+
+function WrongNameMapping(id, idValue, name, nameFoundValue, nameExpectedValue) {
+    this.name = this.errorType = 'WrongNameMapping';
+    this.message = `Retrieved id for {'${id}'='${idValue}'}: '${name}'='${nameFoundValue}' instead of expected '${nameExpectedValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+};
+WrongNameMapping.prototype = new Error;
+
+// class WrongLinkedAttribute extends ValidationError {
+//     constructor(
+//         attributeId, attributeName, // source
+//         attributeIdValue, attributeNameValue, // source values
+//         linkedAttributeId, linkedAttributeName, // linked
+//         linkedAttributeIdFoundValue, linkedAttributeNameFoundValue, // linked found values
+//         linkedAttributeIdExpectedValue, linkedAttributeNameExpectedValue // linked expected values
+//     ) {
+//         const message = ValidationErrors.WrongLinkedAttribute.errorMessage(
+//             attributeId, attributeName, // source
+//             attributeIdValue, attributeNameValue, // source values
+//             linkedAttributeId, linkedAttributeName, // linked
+//             linkedAttributeIdFoundValue, linkedAttributeNameFoundValue, // linked found values
+//             linkedAttributeIdExpectedValue, linkedAttributeNameExpectedValue// linked expected values
+//         );
+//         super(message, ValidationErrors.WrongLinkedAttribute.type);
+//     }
+// };
+
+function WrongLinkedAttribute(id, name, idValue, nameValue, linkedName, linkedIdFoundValue, linkedNameFoundValue, linkedIdExpectedValue, linkedNameExpectedValue) {
+    this.name = this.errorType = 'WrongLinkedAttribute';
+    this.message = `Retrieved linked value for {'${id}|${name}'='${idValue}|${nameValue}'}: '${linkedId}|${linkedName}'='${linkedIdFoundValue}|${linkedNameFoundValue}' instead of expected '${linkedIdExpectedValue}|${linkedNameExpectedValue}'`;
+    this.stack = new Error(`${this.name} ${this.message}`).stack;
+};
+WrongLinkedAttribute.prototype = new Error;
 
 function validateAndMapCoreAttribute(mapping, coreMetadata, attributeName, required) {
     const attributeId = attributeName + 'Id';
@@ -169,7 +232,7 @@ function validateCommonMetadata(coreMetadata) {
 
 function validateRacingAttribute(coreMetadata, attribute, maxValue) {
     if (coreMetadata.racing && coreMetadata.racing[attribute] > maxValue) {
-        throw new AttributeOutOfRange(attribute, coreMetadata[attribute], maxValue);
+        throw new AttributeOutOfRange(attribute, coreMetadata.racing[attribute], maxValue);
     }
 }
 function validateRacingAttributes(coreMetadata) {
@@ -401,7 +464,7 @@ function validateCoreMetadata(coreMetadata) {
 
 module.exports = {
     validateCoreMetadata,
-    ValidationError,
+    // ValidationError,
     UnsupportedAttributeValue,
     MissingAttribute,
     AttributeNameNotFound,
