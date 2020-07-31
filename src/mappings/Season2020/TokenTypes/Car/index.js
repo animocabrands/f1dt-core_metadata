@@ -3,7 +3,6 @@ const Season = require('../../Season');
 const TeamCars = require('./TeamCars');
 const GenericCars = require('./GenericCars');
 const UniqueCars = require('./UniqueCars');
-const RacingAttributes = require('./RacingAttributes');
 
 const Type = 'Car';
 const TypeId = '1';
@@ -42,7 +41,6 @@ module.exports = {
     ByTeam,
     ByModel,
     ByTokenId,
-    RacingAttributes,
     collection: Collection,
     collectionId: CollectionId,
     type: Type,
