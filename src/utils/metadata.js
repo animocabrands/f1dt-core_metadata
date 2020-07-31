@@ -48,13 +48,13 @@ function getCoreMetadata(id) {
         label,
         counter: decoded.counter,
         racing: {
-            stat1: decoded.stat1,
-            stat2: decoded.stat2,
-            stat3: decoded.stat3,
-            luck: decoded.luck,
-            special1: decoded.special1,
-            special2: decoded.special2,
-            effect: decoded.effect,
+            stat1: decoded['racing.stat1'],
+            stat2: decoded['racing.stat2'],
+            stat3: decoded['racing.stat3'],
+            luck: decoded['racing.luck'],
+            special1: decoded['racing.special1'],
+            special2: decoded['racing.special2'],
+            effect: decoded['racing.effect'],
         },
     };
 
