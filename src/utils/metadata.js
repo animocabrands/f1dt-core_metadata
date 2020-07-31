@@ -5,9 +5,13 @@ const { getExternalUrl, getImageUrl, getMetadataUrl } = require('./urls');
 
 const constants = require('../constants');
 const commonMappings = require('../mappings/CommonAttributes');
-const { core } = require('../mappings/Season2019/TokenTypes/Car/RacingAttributes');
+
+const RepairList = require('../mappings/RepairList');
 
 function getCoreMetadata(id) {
+
+    id = RepairList[id] || id;
+
     const encoded = BigInteger(id);
     let decoded = decode(constants.TokenBitsLayout, encoded);
     for (const key in decoded) {
