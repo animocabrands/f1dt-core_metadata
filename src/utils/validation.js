@@ -238,8 +238,8 @@ function validateSeasonMetadata(coreMetadata) {
                     if (expected === undefined) {
                         errors.push(new AttributeNameNotFound('fullType', 'fullTypeId', fullTypeId));
                     }
-                    if (coreMetadata.subType != expected.extendedMeta.name) {
-                        errors.push(new WrongNameMapping('fullTypeId', fullTypeId, 'fullType', coreMetadata.subType, expected.part || expected.gear || expected.tyres));
+                    if (coreMetadata.subType != expected.subType) {
+                        errors.push(new WrongNameMapping('fullTypeId', fullTypeId, 'fullType', coreMetadata.subType, expected.subType));
                     }
                 } else {
                     const subType = seasonMappings.SubType.ByName[coreMetadata.subType];
