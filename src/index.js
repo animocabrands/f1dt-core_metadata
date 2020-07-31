@@ -1,11 +1,9 @@
 const constants = require('./constants');
 const mappings = require('./mappings');
-const metadata = require('./metadata');
-const collections = require('./collections');
+const utils = require('./utils');
 
 module.exports = {
     constants,
     mappings,
-    metadata,
-    collections
-}
+    utils,
+};
