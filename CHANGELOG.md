@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.0 (31/07/2020)
+
+### Breaking changes
+ * Major code refactor.
+
+### New features
+ * Token id creation from metadata.
+ * Metadata validation.
+
+### Improvements
+ * Improved documentation.
+ * Integrated `prettier`.
+
+### Bugfixes
+* Several bugfixes.
+
 ## 0.1.2 (08/07/2020)
 
 ### Bugfixes

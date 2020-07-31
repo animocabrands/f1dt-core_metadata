@@ -1,23 +1,13 @@
-const Cars = require('./Cars');
-const Drivers = require('./Drivers');
-const Parts = require('./Parts');
-const Gears = require('./Gears');
-const Tyres = require('./Tyres');
-const Teams = require('./Teams');
-const Tracks = require('./Tracks');
-const Models = require('./Models');
-const SubTypes = require('./SubTypes');
+const Season = require('./Season');
+const Collection = require('./Collection');
+const SubType = require('./SubType');
+const Attributes = require('./Attributes');
+const TokenTypes = require('./TokenTypes');
 
 module.exports = {
-    Cars,
-    Drivers,
-    Parts,
-    Gears,
-    Tyres,
-    Teams,
-    Tracks,
-    Models,
-    SubTypes
-}
-
-// console.dir(module.exports);
+    Season,
+    Collection,
+    SubType,
+    Attributes,
+    TokenTypes,
+};
