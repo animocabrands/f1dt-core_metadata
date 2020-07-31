@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (31/07/2020)
+## 1.0.1 (31/07/2020)
 
 ### Breaking changes
  * Major code refactor.
