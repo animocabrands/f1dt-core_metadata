@@ -36,6 +36,20 @@ function getCoreMetadata(id) {
             racingAttributes = ['Stat 1', 'Stat 2', 'Stat 3'];
     }
 
+    const racing = {
+        stat1: decoded['racing.stat1'],
+        stat2: decoded['racing.stat2'],
+        stat3: decoded['racing.stat3'],
+        luck: decoded['racing.luck'],
+        special1: decoded['racing.special1'],
+        special2: decoded['racing.special2'],
+        effect: decoded['racing.effect'],
+    }
+
+    racing[racingAttributes[0]] = decoded['racing.stat1']
+    racing[racingAttributes[1]] = decoded['racing.stat2']
+    racing[racingAttributes[2]] = decoded['racing.stat3']
+
     const seasonMappings = require(`../mappings/Season${season}`);
     const fullTypeId = `${decoded.typeId},${decoded.subTypeId}`;
     const subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;
@@ -65,18 +79,7 @@ function getCoreMetadata(id) {
         labelId: decoded.labelId,
         label,
         counter: decoded.counter,
-        racing: {
-            stat1: decoded['racing.stat1'],
-            stat1Name: racingAttributes[0],
-            stat2: decoded['racing.stat2'],
-            stat2Name: racingAttributes[1],
-            stat3: decoded['racing.stat3'],
-            stat3Name: racingAttributes[2],
-            luck: decoded['racing.luck'],
-            special1: decoded['racing.special1'],
-            special2: decoded['racing.special2'],
-            effect: decoded['racing.effect'],
-        },
+        racing,
     };
 
     return coreMetadata;
