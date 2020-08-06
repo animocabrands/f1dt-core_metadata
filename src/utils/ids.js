@@ -15,8 +15,10 @@ function createCollectionId(seasonId, typeId, subTypeId) {
     }).toString(10);
 }
 
-function createTokenId(coreMetadata) {
-    validateCoreMetadata(coreMetadata);
+function createTokenId(coreMetadata, validate = true) {
+    if (validate) {
+        validateCoreMetadata(coreMetadata);
+    }
 
     const fieldsToEncode = {
         nfFlag: BigInteger(1),
