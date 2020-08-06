@@ -14,7 +14,7 @@ const Collections = [
 ];
 
 Collections.push(
-    [...TokenTypes.Part.All, ...TokenTypes.Gear.All, ...TokenTypes.Tyres.All].map((subType) => {
+    ...[...TokenTypes.Part.All, ...TokenTypes.Gear.All, ...TokenTypes.Tyres.All].map((subType) => {
         return {
             collection: subType.collection,
             collectionId: subType.collectionId,
