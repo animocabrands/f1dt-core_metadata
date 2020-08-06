@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 (07/08/2020)
+
+### Bugfix
+ * Fix the collections flattening.
+
 ## 1.0.2 (06/08/2020)
 
 ### New features
