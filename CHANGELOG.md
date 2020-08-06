@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 (06/08/2020)
+
+### New features
+ * Optional validation step for token id creation.
+
 ## 1.0.1 (31/07/2020)
 
 ### Breaking changes
