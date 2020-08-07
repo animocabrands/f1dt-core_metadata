@@ -55,7 +55,7 @@ A set of functions which help with the manipulation of token identifiers and met
 Build metadata objects from token identifiers.
 
 ```javascript
-const { coreMetadataFromId, fullMetadataFromId } = require('@animoca/f1dt-core_metadata').metadata;
+const { coreMetadataFromId, fullMetadataFromId } = require('@animoca/f1dt-core_metadata').utils;
 
 const tokenId = '57897811519642769433138067471762254623735906850517137802921006713614358282351'; // the 1-1-1
 const coreMetadata = coreMetadataFromId(tokenId);
@@ -69,7 +69,7 @@ console.log(fullMetadata);
 Build token identifiers from core attributes (mapped and/or unmapped).
 
 ```javascript
-const { idFromCoreMetadata } = require('@animoca/f1dt-core_metadata').metadata;
+const { idFromCoreMetadata } = require('@animoca/f1dt-core_metadata').utils;
 const tokenId1 = idFromCoreMetadata({
     typeId: '1', // Car
     subTypeId: '0',

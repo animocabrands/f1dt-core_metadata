@@ -2,7 +2,6 @@ const { createCollectionId } = require('../../../../utils/ids');
 const Season = require('../../Season');
 const TeamDrivers = require('./TeamDrivers');
 const GenericDrivers = require('./GenericDrivers');
-const RacingAttributes = require('./RacingAttributes');
 
 const Type = 'Driver';
 const TypeId = '2';
@@ -35,7 +34,6 @@ module.exports = {
     ById,
     ByName,
     ByTokenId,
-    RacingAttributes,
     collection: Collection,
     collectionId: CollectionId,
     typeId: TypeId,
