@@ -229,6 +229,41 @@ function getOpenseaMetadata(coreMetadata) {
     return attributes;
 }
 
+// if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
+//     extendedMetadata = {
+//         ...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta,
+//         collection: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].collection
+//     };
+// } else if (coreMetadata.model != 'None') {
+//     extendedMetadata = {
+//         ...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta,
+//         collection: seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].collection,
+//     };
+// }
+// break;
+// case 'Driver':
+// if (coreMetadata.driver != 'None') {
+//     extendedMetadata = {
+//         ...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta,
+//         collection: seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].collection,
+//     };
+// } else if (coreMetadata.model) {
+//     extendedMetadata = {
+//         ...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta,
+//         collection: seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].collection,
+//     };
+// }
+// break;
+// case 'Part':
+// case 'Gear':
+// case 'Tyres':
+// extendedMetadata = {
+//     ...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta,
+//     collection: seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].collection,
+// };
+// break;
+// }
+
 function getFullMetadata(id, network = 'mainnet') {
     const coreMetadata = getCoreMetadata(id);
     let openseaMetadata = getOpenseaMetadata(coreMetadata);
@@ -265,6 +300,8 @@ function getFullMetadata(id, network = 'mainnet') {
     if (uniqueTokenOverride !== undefined) {
         extendedMetadata = Object.assign(extendedMetadata, uniqueTokenOverride.extendedMeta);
     }
+
+    extendedMetadata.collection = seasonMappings.SubType.ByFullTypeId[fullTypeId].collection;
 
     if (extendedMetadata.collection_id === undefined) {
         extendedMetadata.collection_id = inventoryIds.NonFungible.getCollectionId(
