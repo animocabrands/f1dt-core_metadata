@@ -3,65 +3,65 @@ const NoTeam = {
     team: 'None',
     drivers: [],
 };
-const AlfaRomeoRacing = {
+const AlfaRomeoRacingOrlen = {
     teamId: '1',
-    team: 'Alfa Romeo Racing',
-    car: 'C38',
+    team: 'Alfa Romeo Racing ORLEN',
+    car: 'C39',
     drivers: ['Kimi Räikkönen', 'Antonio Giovinazzi'],
 };
 const ScuderiaFerrari = {
     teamId: '2',
     team: 'Scuderia Ferrari',
-    car: 'SF90',
+    car: 'SF1000',
     drivers: ['Sebastian Vettel', 'Charles Leclerc'],
 };
 const HaasF1Team = {
     teamId: '3',
     team: 'Haas F1® Team',
-    car: 'VF-19',
+    car: 'VF-20',
     drivers: ['Romain Grosjean', 'Kevin Magnussen'],
 };
 const McLarenF1Team = {
     teamId: '4',
     team: 'McLaren F1® Team',
-    car: 'MCL34',
+    car: 'MCL35',
     drivers: ['Lando Norris', 'Carlos Sainz'],
 };
-const MercedesAMGPetronasMotorsport = {
+const MercedesAMGPetronasF1Team = {
     teamId: '5',
-    team: 'Mercedes-AMG Petronas Motorsport',
-    car: 'W10',
+    team: 'Mercedes-AMG Petronas Formula One Team',
+    car: 'W11',
     drivers: ['Lewis Hamilton', 'Valtteri Bottas'],
 };
-const SpScoreRacingPointF1Team = {
+const BWTRacingPointF1Team = {
     teamId: '6',
-    team: 'SpScore Racing Point F1® Team',
-    car: 'RP19',
-    drivers: ['Sergio Pérez', 'Lance Stroll'],
+    team: 'BWT Racing Point F1® Team',
+    car: 'RP20',
+    drivers: ['Sergio Pérez', 'Lance Stroll', 'Nico Hülkenberg'],
 };
 const AstonMartinRedBullRacing = {
     teamId: '7',
     team: 'Aston Martin Red Bull Racing',
-    car: 'RB15',
-    drivers: ['Pierre Gasly', 'Max Verstappen'],
+    car: 'RB16',
+    drivers: ['Alexander Albon', 'Max Verstappen'],
 };
-const RenaultF1Team = {
+const RenaultDPWorldF1Team = {
     teamId: '8',
-    team: 'Renault F1® Team',
-    car: 'R.S.19',
-    drivers: ['Daniel Ricciardo', 'Nico Hülkenberg'],
+    team: 'Renault DP World F1® Team',
+    car: 'R.S.20',
+    drivers: ['Daniel Ricciardo', 'Esteban Ocon'],
 };
-const RedBullToroRossoHonda = {
+const ScuderiaAlphaTauriHonda = {
     teamId: '9',
-    team: 'Red Bull Toro Rosso Honda',
-    car: 'STR14',
-    drivers: ['Alexander Albon', 'Daniil Kvyat'],
+    team: 'Scuderia AlphaTauri Honda',
+    car: 'AT01',
+    drivers: ['Pierre Gasly', 'Daniil Kvyat'],
 };
-const ROKiTWilliamsRacing = {
+const WilliamsRacing = {
     teamId: '10',
-    team: 'ROKiT Williams Racing',
-    car: 'FW42',
-    drivers: ['George Russell', 'Robert Kubica'],
+    team: 'Williams Racing',
+    car: 'FW43',
+    drivers: ['George Russell', 'Nicholas Latifi'],
 };
 const F1DeltaTimeTeam = {
     teamId: '111',
@@ -71,15 +71,15 @@ const F1DeltaTimeTeam = {
 
 module.exports = [
     NoTeam,
-    AlfaRomeoRacing,
+    AlfaRomeoRacingOrlen,
     ScuderiaFerrari,
     HaasF1Team,
     McLarenF1Team,
-    MercedesAMGPetronasMotorsport,
-    SpScoreRacingPointF1Team,
+    MercedesAMGPetronasF1Team,
+    BWTRacingPointF1Team,
     AstonMartinRedBullRacing,
-    RenaultF1Team,
-    RedBullToroRossoHonda,
-    ROKiTWilliamsRacing,
+    RenaultDPWorldF1Team,
+    ScuderiaAlphaTauriHonda,
+    WilliamsRacing,
     F1DeltaTimeTeam,
 ];
