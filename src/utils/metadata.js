@@ -266,6 +266,8 @@ function getFullMetadata(id, network = 'mainnet') {
         extendedMetadata = Object.assign(extendedMetadata, uniqueTokenOverride.extendedMeta);
     }
 
+    extendedMetadata.collection = seasonMappings.SubType.ByFullTypeId[fullTypeId].collection;
+
     if (extendedMetadata.collection_id === undefined) {
         extendedMetadata.collection_id = inventoryIds.NonFungible.getCollectionId(
             BigInteger(id),
