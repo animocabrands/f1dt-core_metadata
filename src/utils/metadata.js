@@ -293,17 +293,14 @@ function getFullMetadata(id, network = 'mainnet') {
         coreMetadata.label == 'Infinity' ||
         id == '57901359017265019780203575760548458000656522658244413105892691622458053129621' // lost Infinity token
     ) {
-        // const oldRaritiesCoreMetadata = { ...coreMetadata };
         switch (coreMetadata.rarity) {
             case 2:
             case 3:
-                // oldRaritiesCoreMetadata.rarityTier = 'Legendary';
                 coreMetadata.rarityTier = 'Legendary';
                 break;
             case 4:
             case 5:
             case 6:
-                // oldRaritiesCoreMetadata.rarityTier = 'Epic';
                 coreMetadata.rarityTier = 'Epic';
                 break;
         }
