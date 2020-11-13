@@ -10,6 +10,7 @@ const RepairList = require('../mappings/RepairList');
 
 function getCoreMetadata(id) {
     id = RepairList[id] || id;
+    id = RepairList[id] || id; //For doubly wrong tokens
 
     const encoded = BigInteger(id);
     let decoded = decode(constants.TokenBitsLayout, encoded);
