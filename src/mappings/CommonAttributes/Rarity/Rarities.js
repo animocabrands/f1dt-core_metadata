@@ -39,4 +39,4 @@ const Common3 = {
     rarityTier: 'Common',
 };
 
-module.exports = [Apex, Legendary, Epic1, Epic2, Rare1, Rare2, Rare3, Common1, Common2, Common3];
+module.exports = {Apex, Legendary, Epic1, Epic2, Rare1, Rare2, Rare3, Common1, Common2, Common3};

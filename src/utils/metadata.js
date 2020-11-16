@@ -7,9 +7,11 @@ const constants = require('../constants');
 const commonMappings = require('../mappings/CommonAttributes');
 
 const RepairList = require('../mappings/RepairList');
+const Rarities = require('../mappings/CommonAttributes/Rarity/Rarities');
 
 function getCoreMetadata(id) {
     id = RepairList[id] || id;
+    id = RepairList[id] || id; //For doubly wrong tokens
 
     const encoded = BigInteger(id);
     let decoded = decode(constants.TokenBitsLayout, encoded);
@@ -292,20 +294,19 @@ function getFullMetadata(id, network = 'mainnet') {
         coreMetadata.label == 'Infinity' ||
         id == '57901359017265019780203575760548458000656522658244413105892691622458053129621' // lost Infinity token
     ) {
-        const oldRaritiesCoreMetadata = { ...coreMetadata };
         switch (coreMetadata.rarity) {
             case 2:
             case 3:
-                oldRaritiesCoreMetadata.rarityTier = 'Legendary';
+                coreMetadata.rarityTier = Rarities.Legendary.rarityTier; //Legendary
                 break;
             case 4:
             case 5:
             case 6:
-                oldRaritiesCoreMetadata.rarityTier = 'Epic';
+                coreMetadata.rarityTier = Rarities.Epic1.rarityTier; //Rare
                 break;
         }
-        openseaMetadata = getOpenseaMetadata(oldRaritiesCoreMetadata);
-        extendedMetadata.image = getImageUrl(extendedMetadata.name, oldRaritiesCoreMetadata, network);
+        openseaMetadata = getOpenseaMetadata(coreMetadata);
+        extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
     }
 
     const fullMetadata = {

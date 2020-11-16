@@ -55,11 +55,11 @@ const RomainGrosjean = {
 const PierreGasly = {
     driverId: '10',
     driver: 'Pierre Gasly',
-    team: 'Aston Martin Red Bull Racing',
+    team: 'Red Bull Toro Rosso Honda',
     extendedMeta: {
         name: 'Pierre Gasly',
         description:
-            'Pierre Gasly is a French driver competing for Red Bull Racing. This is only his third season in Formula 1 and his first with Red Bull Racing.',
+            'Pierre Gasly is a French driver competing for Toro Rosso. This is only his third season in Formula 1.',
     },
 };
 const SergioPerez = {
@@ -105,11 +105,11 @@ const KevinMagnussen = {
 const AlexanderAlbon = {
     driverId: '23',
     driver: 'Alexander Albon',
-    team: 'Red Bull Toro Rosso Honda',
+    team: 'Aston Martin Red Bull Racing',
     extendedMeta: {
         name: 'Alexander Albon',
         description:
-            'Alexander Albon is a British-Thai driver competing for Toro Rosso. A confident overtaker, 2019 marks his first season in Formula 1.',
+            'Alexander Albon is a British-Thai driver competing for Red Bull Racing. A confident overtaker, 2019 marks his first season in Formula 1.',
     },
 };
 const DaniilKvyat = {
