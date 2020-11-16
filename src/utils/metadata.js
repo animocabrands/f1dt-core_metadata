@@ -7,6 +7,7 @@ const constants = require('../constants');
 const commonMappings = require('../mappings/CommonAttributes');
 
 const RepairList = require('../mappings/RepairList');
+const Rarities = require('../mappings/CommonAttributes/Rarity/Rarities');
 
 function getCoreMetadata(id) {
     id = RepairList[id] || id;
@@ -296,12 +297,12 @@ function getFullMetadata(id, network = 'mainnet') {
         switch (coreMetadata.rarity) {
             case 2:
             case 3:
-                coreMetadata.rarityTier = 'Legendary';
+                coreMetadata.rarityTier = Rarities.Legendary.rarityTier; //Legendary
                 break;
             case 4:
             case 5:
             case 6:
-                coreMetadata.rarityTier = 'Epic';
+                coreMetadata.rarityTier = Rarities.Epic1.rarityTier; //Rare
                 break;
         }
         openseaMetadata = getOpenseaMetadata(coreMetadata);
