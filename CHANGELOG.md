@@ -1,6 +1,8 @@
 # Changelog
 
 ## 1.0.4
+* Fixed some defunt driver/non-driver tokens
+* Swap two driver's team
 
 ### Improvements
  * Add `collection` field in full metadata.
