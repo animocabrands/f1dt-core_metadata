@@ -1,8 +1,10 @@
 # Changelog
 
 ## 1.0.4
-* Fixed some defunt driver/non-driver tokens
-* Swap two driver's team
+
+### Bugfix
+* Fixed a bug showing a wrong rarity for pre-crates tokens.
+* Swap two driver's team and add new entries in the repair list.
 
 ### Improvements
  * Add `collection` field in full metadata.
