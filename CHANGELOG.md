@@ -2,6 +2,10 @@
 
 ## 1.0.4
 
+### Bugfix
+* Fixed a bug showing a wrong rarity for pre-crates tokens.
+* Swap two driver's team and add new entries in the repair list.
+
 ### Improvements
  * Add `collection` field in full metadata.
 
