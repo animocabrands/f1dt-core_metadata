@@ -103,7 +103,7 @@ function validateAndMapCoreAttribute(mapping, coreMetadata, attributeName, requi
 }
 
 function validateCommonMetadata(coreMetadata) {
-    const commonMappings = require('../mappings/CommonAttributes');
+    const commonMappings = require('../mappings/Common/Attributes');
 
     const errors = [];
 
@@ -121,6 +121,11 @@ function validateCommonMetadata(coreMetadata) {
         validateAndMapCoreAttribute(commonMappings.Label, coreMetadata, 'label', false);
     } catch (error) {
         errors.push(error);
+    }
+    try {
+        validateAndMapCoreAttribute(commonMappings.Track, coreMetadata, 'track', false);
+    } catch (e) {
+        errors.push(e);
     }
 
     if (coreMetadata.rarity !== undefined) {
@@ -207,6 +212,9 @@ function validateRacingAttributes(coreMetadata) {
 }
 
 function validateSeasonMetadata(coreMetadata) {
+    if (coreMetadata.season === '0')
+        return;
+    
     const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
 
     const errors = [];
@@ -263,12 +271,6 @@ function validateSeasonMetadata(coreMetadata) {
             ) {
                 errors.push(new UnsupportedAttributeValue('typeId', coreMetadata.typeId));
             }
-    }
-
-    try {
-        validateAndMapCoreAttribute(seasonMappings.Attributes.Track, coreMetadata, 'track', false);
-    } catch (e) {
-        errors.push(e);
     }
 
     switch (coreMetadata.type) {
@@ -398,12 +400,12 @@ function validateSeasonMetadata(coreMetadata) {
 }
 
 function validateCoreMetadata(coreMetadata) {
-    const errors = [];
+    let errors = [];
 
     try {
         validateRacingAttributes(coreMetadata);
     } catch (errs) {
-        errors.push(...errs);
+        errors.push(errs);
     }
 
     try {
@@ -411,7 +413,7 @@ function validateCoreMetadata(coreMetadata) {
         // season metadata will be validated only if season is available
         validateSeasonMetadata(coreMetadata);
     } catch (errs) {
-        errors.push(...errs);
+        errors.push(errs);
     }
 
     if (errors.length > 0) {

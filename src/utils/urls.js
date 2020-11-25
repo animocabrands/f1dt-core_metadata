@@ -5,12 +5,13 @@ function getImageKey(name, coreMetadata) {
 
     let imageKey = '';
     switch (coreMetadata.type) {
+        case 'Track':
         case 'Car':
         case 'Driver':
-            imageKey = `${coreMetadata.season}_${name.replace(/\s+/, '')}_${tier}.png`;
+            imageKey = `${coreMetadata.season}_${name.replace(/\s+/g, '')}_${tier}.png`;
             break;
         case 'Tyres':
-            imageKey = `${coreMetadata.season}_${name.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+            imageKey = `${coreMetadata.season}_${name.toLowerCase().replace(/\s+/g, '')}_${tier}.png`;
             break;
         default:
             imageKey = `${coreMetadata.season}_${coreMetadata.subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;

@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.5
+
+### New Features
+* Add Track Segment layout for track NFTs
+* Add Bahrain Edition Apex Car NFT
+* Add Monaco Track Segments NFT
+
+### Bugfix
+* Fix a crash during validation of the Core Metadata
+* Should skip validating season metadata when `season` field is 0
+
+### Improvements
+* House keeping on the folder structure
+
 ## 1.0.4
 
 ### Bugfix

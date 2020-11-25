@@ -23,6 +23,7 @@ const Spain = {
     trackId: '5',
 };
 const Monaco = {
+    circuit: 'Circuit de Monaco',
     track: 'Monaco',
     trackId: '6',
 };

@@ -15,11 +15,31 @@ function createCollectionId(seasonId, typeId, subTypeId) {
     }).toString(10);
 }
 
-function createTokenId(coreMetadata, validate = true) {
-    if (validate) {
-        validateCoreMetadata(coreMetadata);
-    }
+function createTrackTokenId(coreMetadata) {
+    const fieldsToEncode = {
+        nfFlag: BigInteger(1),
+        padding1: BigInteger(),
+        typeId: coreMetadata.typeId ? BigInteger(coreMetadata.typeId) : BigInteger(),
+        subTypeId: coreMetadata.subTypeId ? BigInteger(coreMetadata.subTypeId) : BigInteger(),
+        seasonId: coreMetadata.seasonId ? BigInteger(coreMetadata.seasonId) : BigInteger(),
+        padding2: BigInteger(),
+        modelId: coreMetadata.modelId ? BigInteger(coreMetadata.modelId) : BigInteger(),
+        teamId: coreMetadata.teamId ? BigInteger(coreMetadata.teamId) : BigInteger(),
+        rarity: coreMetadata.rarity ? BigInteger(coreMetadata.rarity) : BigInteger(),
+        trackId: coreMetadata.trackId ? BigInteger(coreMetadata.trackId) : BigInteger(),
+        labelId: coreMetadata.labelId ? BigInteger(coreMetadata.labelId) : BigInteger(),
+        driverId: coreMetadata.driverId ? BigInteger(coreMetadata.driverId) : BigInteger(),
+        'track.zoneId': coreMetadata.trackSegment && coreMetadata.trackSegment.zoneId ? BigInteger(coreMetadata.trackSegment.zoneId) : BigInteger(),
+        'track.segmentId': coreMetadata.trackSegment && coreMetadata.trackSegment.segmentId ? BigInteger(coreMetadata.trackSegment.segmentId): BigInteger(),
+        'track.earnings': coreMetadata.trackSegment && coreMetadata.trackSegment.earnings? BigInteger(coreMetadata.trackSegment.earnings) : BigInteger(),
+        padding3: BigInteger(),
+        counter: coreMetadata.counter ? BigInteger(coreMetadata.counter) : BigInteger(),
+    };
 
+    return encode(constants.TrackSegmentTokenBitsLayout, fieldsToEncode).toString(10);
+}
+
+function createNonTrackTokenId(coreMetadata) {
     const fieldsToEncode = {
         nfFlag: BigInteger(1),
         padding1: BigInteger(),
@@ -44,6 +64,21 @@ function createTokenId(coreMetadata, validate = true) {
     };
 
     return encode(constants.TokenBitsLayout, fieldsToEncode).toString(10);
+}
+
+function createTokenId(coreMetadata, validate = true) {
+    if (validate) {
+        validateCoreMetadata(coreMetadata);
+    }
+
+    switch(coreMetadata.typeId)
+    {
+        //Check type is track
+        case '6':
+            return createTrackTokenId(coreMetadata);
+        default:
+            return createNonTrackTokenId(coreMetadata);
+    }
 }
 
 module.exports = {
