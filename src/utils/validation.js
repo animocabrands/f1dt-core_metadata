@@ -212,11 +212,11 @@ function validateRacingAttributes(coreMetadata) {
 }
 
 function validateSeasonMetadata(coreMetadata) {
-    if (coreMetadata.season === '0')
+    const Seasons = require("../mappings/Common/Attributes/Season/Seasons");
+    if (coreMetadata.season === Seasons.NoSeason.season)
         return;
     
     const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
-
     const errors = [];
 
     switch (coreMetadata.type) {
@@ -400,7 +400,7 @@ function validateSeasonMetadata(coreMetadata) {
 }
 
 function validateCoreMetadata(coreMetadata) {
-    let errors = [];
+    const errors = [];
 
     try {
         validateRacingAttributes(coreMetadata);

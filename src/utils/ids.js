@@ -72,10 +72,11 @@ function createTokenId(coreMetadata, validate = true) {
         validateCoreMetadata(coreMetadata);
     }
 
+    const Types = require("../mappings/Common/Attributes/Type/Types");
     switch(coreMetadata.typeId)
     {
         //Check type is track
-        case '6':
+        case Types.Track.trackId:
             return createTrackTokenId(coreMetadata);
         default:
             return createNonTrackTokenId(coreMetadata);

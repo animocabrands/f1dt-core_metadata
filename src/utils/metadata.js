@@ -244,7 +244,7 @@ function getOpenseaMetadata(coreMetadata) {
 
     if (coreMetadata.type === Types.Track.type) {
         attributes.push({
-            trait_type: 'segment_id',
+            trait_type: 'segment',
             value: coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId)
         });
 
@@ -358,12 +358,13 @@ function getFullMetadata(id, network = 'mainnet') {
         //No Seasons Token
         switch (coreMetadata.type) {
             case Types.Track.type:
-                const trackSegmentId = coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId); 
+                //segment e.g. 1A
+                const segment = coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId); 
                 let eMeta = {
-                    name: commonMappings.TokenTypes.TrackSegment.getName(coreMetadata.trackId, coreMetadata.rarity, trackSegmentId),
-                    description: commonMappings.TokenTypes.TrackSegment.getDescription(coreMetadata.trackId, coreMetadata.rarity, trackSegmentId)
+                    name: commonMappings.TokenTypes.TrackSegment.getName(coreMetadata.trackId, coreMetadata.rarity, segment),
+                    description: commonMappings.TokenTypes.TrackSegment.getDescription(coreMetadata.trackId, coreMetadata.rarity, segment)
                 };
-                eMeta.name = eMeta.name + ' ' + trackSegmentId;
+                eMeta.name = eMeta.name + ' ' + segment;
                 extendedMetadata = { ...eMeta };
                 break;
         }

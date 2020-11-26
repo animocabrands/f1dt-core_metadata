@@ -15,7 +15,7 @@ const fullTypeId = '6,0';
 const collection = `${type} ${NoSeason.seasonId}`;
 const collectionId = createCollectionId(NoSeason.seasonId, typeId, subTypeId);
 
-const getName = (trackId, rarity, trackSegmentId) => {
+const getName = (trackId, rarity, segment) => {
     let trackSegment = {};
     switch (trackId.toString())
     {
@@ -25,8 +25,8 @@ const getName = (trackId, rarity, trackSegmentId) => {
     }
 
     //First Segment Id then fallback to rarity
-    if (trackSegmentId in trackSegment) {
-        return trackSegment[trackSegmentId].name;
+    if (segment in trackSegment) {
+        return trackSegment[segment].name;
     }
     else if(rarity in trackSegment) {
         return trackSegment[rarity].name;
@@ -35,7 +35,7 @@ const getName = (trackId, rarity, trackSegmentId) => {
     return '';
 }
 
-const getDescription = (trackId, rarity, trackSegmentId) => {
+const getDescription = (trackId, rarity, segment) => {
     let trackSegment = {};
     switch (trackId.toString())
     {
@@ -45,8 +45,8 @@ const getDescription = (trackId, rarity, trackSegmentId) => {
     }
 
     //First Segment Id then fallback to rarity
-    if (trackSegmentId in trackSegment) {
-        return trackSegment[trackSegmentId].description;
+    if (segment in trackSegment) {
+        return trackSegment[segment].description;
     }
     else if (rarity in trackSegment) {
         return trackSegment[rarity].description;
