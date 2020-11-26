@@ -9,10 +9,11 @@
 
 ### Bugfix
 * Fix a crash during validation of the Core Metadata
+* Fix the original trackId using is actually countryId
 * Should skip validating season metadata when `season` field is 0
 
 ### Improvements
-* House keeping on the folder structure
+* House keeping on the folder structure and some code cleanup
 
 ## 1.0.4
 
