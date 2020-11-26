@@ -10,4 +10,17 @@ const AustraliaEdition2020 = {
     },
 };
 
-module.exports = [AustraliaEdition2020];
+
+const BahrainEdition2020 = {
+    car: 'Bahrain Edition 2020',
+    extendedMeta: {
+        id: '57897811546602716100288708014752361968688459106541463509520898166032185688064',
+        name: 'Bahrain Edition 2020',
+        description: 'The Bahrain Edition 2020 car features glittering, circular ripples, on its livery with a pearlescent colour profile, together with sinuous lines representing the waters of Bahrain\'s shoreline.',
+        image: 'https://nft.f1deltatime.com/image/BahrainEdition2020.png',
+        youtube_url: 'https://www.youtube.com/watch?v=CL3cIM_KQlc'
+
+    }
+}
+
+module.exports = [AustraliaEdition2020, BahrainEdition2020];
