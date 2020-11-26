@@ -23,4 +23,4 @@ const Track = {
     typeId: '6',
 };
 
-module.exports = {Car, Driver, Part, Gear, Tyres, Track};
+module.exports = [Car, Driver, Part, Gear, Tyres, Track];

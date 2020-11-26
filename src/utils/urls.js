@@ -1,20 +1,23 @@
 const config = require('../../config');
-const Type = require('../mappings/Common/Attributes/Type/Types');
 
 function getImageKey(name, coreMetadata) {
     const tier = coreMetadata.rarityTier.toLowerCase();
 
+    let imageKey = '';
     switch (coreMetadata.type) {
-        case Type.Track.type:
-            return `${name.replace(/\s+/g, '')}.png`;
-        case Type.Car.type:
-        case Type.Driver.type:
-            return `${coreMetadata.season}_${name.replace(/\s+/g, '')}_${tier}.png`;
-        case Type.Tyres.type:
-            return `${coreMetadata.season}_${name.toLowerCase().replace(/\s+/g, '')}_${tier}.png`;
+        case 'Car':
+        case 'Driver':
+            imageKey = `${coreMetadata.season}_${name.replace(/\s+/, '')}_${tier}.png`;
+            break;
+        case 'Tyres':
+            imageKey = `${coreMetadata.season}_${name.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+            break;
         default:
-            return `${coreMetadata.season}_${coreMetadata.subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+            imageKey = `${coreMetadata.season}_${coreMetadata.subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
+            break;
     }
+
+    return imageKey;
 }
 
 function getImageUrl(name, coreMetadata, network = 'mainnet') {

@@ -103,7 +103,7 @@ function validateAndMapCoreAttribute(mapping, coreMetadata, attributeName, requi
 }
 
 function validateCommonMetadata(coreMetadata) {
-    const commonMappings = require('../mappings/Common/Attributes');
+    const commonMappings = require('../mappings/CommonAttributes');
 
     const errors = [];
 
@@ -121,11 +121,6 @@ function validateCommonMetadata(coreMetadata) {
         validateAndMapCoreAttribute(commonMappings.Label, coreMetadata, 'label', false);
     } catch (error) {
         errors.push(error);
-    }
-    try {
-        validateAndMapCoreAttribute(commonMappings.Country, coreMetadata, 'country', false);
-    } catch (e) {
-        errors.push(e);
     }
 
     if (coreMetadata.rarity !== undefined) {
@@ -212,11 +207,8 @@ function validateRacingAttributes(coreMetadata) {
 }
 
 function validateSeasonMetadata(coreMetadata) {
-    const Seasons = require("../mappings/Common/Attributes/Season/Seasons");
-    if (coreMetadata.season === Seasons.NoSeason.season)
-        return;
-    
     const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
+
     const errors = [];
 
     switch (coreMetadata.type) {
@@ -271,6 +263,12 @@ function validateSeasonMetadata(coreMetadata) {
             ) {
                 errors.push(new UnsupportedAttributeValue('typeId', coreMetadata.typeId));
             }
+    }
+
+    try {
+        validateAndMapCoreAttribute(seasonMappings.Attributes.Track, coreMetadata, 'track', false);
+    } catch (e) {
+        errors.push(e);
     }
 
     switch (coreMetadata.type) {
@@ -405,7 +403,7 @@ function validateCoreMetadata(coreMetadata) {
     try {
         validateRacingAttributes(coreMetadata);
     } catch (errs) {
-        errors.push(errs);
+        errors.push(...errs);
     }
 
     try {
@@ -413,7 +411,7 @@ function validateCoreMetadata(coreMetadata) {
         // season metadata will be validated only if season is available
         validateSeasonMetadata(coreMetadata);
     } catch (errs) {
-        errors.push(errs);
+        errors.push(...errs);
     }
 
     if (errors.length > 0) {

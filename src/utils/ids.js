@@ -15,7 +15,11 @@ function createCollectionId(seasonId, typeId, subTypeId) {
     }).toString(10);
 }
 
-function createTrackTokenId(coreMetadata) {
+function createTokenId(coreMetadata, validate = true) {
+    if (validate) {
+        validateCoreMetadata(coreMetadata);
+    }
+
     const fieldsToEncode = {
         nfFlag: BigInteger(1),
         padding1: BigInteger(),
@@ -23,35 +27,10 @@ function createTrackTokenId(coreMetadata) {
         subTypeId: coreMetadata.subTypeId ? BigInteger(coreMetadata.subTypeId) : BigInteger(),
         seasonId: coreMetadata.seasonId ? BigInteger(coreMetadata.seasonId) : BigInteger(),
         padding2: BigInteger(),
+        modelId: coreMetadata.modelId ? BigInteger(coreMetadata.modelId) : BigInteger(),
+        teamId: coreMetadata.teamId ? BigInteger(coreMetadata.teamId) : BigInteger(),
+        rarity: coreMetadata.rarity ? BigInteger(coreMetadata.rarity) : BigInteger(),
         trackId: coreMetadata.trackId ? BigInteger(coreMetadata.trackId) : BigInteger(),
-        modelId: coreMetadata.modelId ? BigInteger(coreMetadata.modelId) : BigInteger(),
-        teamId: coreMetadata.teamId ? BigInteger(coreMetadata.teamId) : BigInteger(),
-        rarity: coreMetadata.rarity ? BigInteger(coreMetadata.rarity) : BigInteger(),
-        countryId: coreMetadata.countryId ? BigInteger(coreMetadata.countryId) : BigInteger(),
-        labelId: coreMetadata.labelId ? BigInteger(coreMetadata.labelId) : BigInteger(),
-        driverId: coreMetadata.driverId ? BigInteger(coreMetadata.driverId) : BigInteger(),
-        'trackSegment.zoneId': coreMetadata.trackSegment && coreMetadata.trackSegment.zoneId ? BigInteger(coreMetadata.trackSegment.zoneId) : BigInteger(),
-        'trackSegment.segmentId': coreMetadata.trackSegment && coreMetadata.trackSegment.segmentId ? BigInteger(coreMetadata.trackSegment.segmentId): BigInteger(),
-        'trackSegment.earnings': coreMetadata.trackSegment && coreMetadata.trackSegment.earnings? BigInteger(coreMetadata.trackSegment.earnings) : BigInteger(),
-        padding3: BigInteger(),
-        counter: coreMetadata.counter ? BigInteger(coreMetadata.counter) : BigInteger(),
-    };
-
-    return encode(constants.TrackSegmentTokenBitsLayout, fieldsToEncode).toString(10);
-}
-
-function createNonTrackTokenId(coreMetadata) {
-    const fieldsToEncode = {
-        nfFlag: BigInteger(1),
-        padding1: BigInteger(),
-        typeId: coreMetadata.typeId ? BigInteger(coreMetadata.typeId) : BigInteger(),
-        subTypeId: coreMetadata.subTypeId ? BigInteger(coreMetadata.subTypeId) : BigInteger(),
-        seasonId: coreMetadata.seasonId ? BigInteger(coreMetadata.seasonId) : BigInteger(),
-        padding2: BigInteger(),
-        modelId: coreMetadata.modelId ? BigInteger(coreMetadata.modelId) : BigInteger(),
-        teamId: coreMetadata.teamId ? BigInteger(coreMetadata.teamId) : BigInteger(),
-        rarity: coreMetadata.rarity ? BigInteger(coreMetadata.rarity) : BigInteger(),
-        countryId: coreMetadata.countryId ? BigInteger(coreMetadata.countryId) : BigInteger(),
         labelId: coreMetadata.labelId ? BigInteger(coreMetadata.labelId) : BigInteger(),
         driverId: coreMetadata.driverId ? BigInteger(coreMetadata.driverId) : BigInteger(),
         'racing.stat1': coreMetadata.racing && coreMetadata.racing.stat1 ? BigInteger(coreMetadata.racing.stat1) : BigInteger(),
@@ -65,22 +44,6 @@ function createNonTrackTokenId(coreMetadata) {
     };
 
     return encode(constants.TokenBitsLayout, fieldsToEncode).toString(10);
-}
-
-function createTokenId(coreMetadata, validate = true) {
-    if (validate) {
-        validateCoreMetadata(coreMetadata);
-    }
-
-    const Types = require("../mappings/Common/Attributes/Type/Types");
-    switch(coreMetadata.typeId)
-    {
-        //Check type is track
-        case Types.Track.typeId:
-            return createTrackTokenId(coreMetadata);
-        default:
-            return createNonTrackTokenId(coreMetadata);
-    }
 }
 
 module.exports = {

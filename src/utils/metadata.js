@@ -4,13 +4,13 @@ const { decode } = require('bits.js');
 const { getExternalUrl, getImageUrl, getMetadataUrl } = require('./urls');
 
 const constants = require('../constants');
-const commonMappings = require('../mappings/Common');
-const Types = require('../mappings/Common/Attributes/Type/Types');
+const commonMappings = require('../mappings/CommonAttributes');
+
+const RepairList = require('../mappings/RepairList');
 
 function getCoreMetadata(id) {
-    const RepairList = require('../mappings/RepairList');
+
     id = RepairList[id] || id;
-    id = RepairList[id] || id; //For doubly wrong tokens
 
     const encoded = BigInteger(id);
     let decoded = decode(constants.TokenBitsLayout, encoded);
@@ -18,35 +18,21 @@ function getCoreMetadata(id) {
         decoded[key] = Number(decoded[key].toString(10));
     }
 
-    //Common Metadata
-    const type          = commonMappings.Attributes.Type.ById[decoded.typeId].type;
-    const label         = commonMappings.Attributes.Label.ById[decoded.labelId].label;
-    const season        = commonMappings.Attributes.Season.ById[decoded.seasonId].season;
-    const rarityTier    = commonMappings.Attributes.Rarity.ByRarity[decoded.rarity].rarityTier;
-    const country       = commonMappings.Attributes.Country.ById[decoded.countryId].country;
+    const type = commonMappings.Type.ById[decoded.typeId].type;
+    const label = commonMappings.Label.ById[decoded.labelId].label;
+    const season = commonMappings.Season.ById[decoded.seasonId].season;
+    const rarityTier = commonMappings.Rarity.ByRarity[decoded.rarity].rarityTier;
 
-    const fullTypeId    = `${decoded.typeId},${decoded.subTypeId}`;
+    const seasonMappings = require(`../mappings/Season${season}`);
+    const fullTypeId = `${decoded.typeId},${decoded.subTypeId}`;
+    const subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;
+    const track = seasonMappings.Attributes.Track.ById[decoded.trackId].track;
+    const team = seasonMappings.Attributes.Team.ById[decoded.teamId].team;
+    const model = seasonMappings.Attributes.Model.ById[decoded.modelId].model;
 
-    let subType;   
-    let team;
-    let model;
-    let driver;
-    
-    //Non Track
-    if (type === Types.Track.type) {
-        subType = commonMappings.SubType.ByFullTypeId[fullTypeId].subType;
-        team    = commonMappings.Attributes.Team.ById[decoded.teamId].team;
-        model   = commonMappings.Attributes.Model.ById[decoded.modelId].model;
-        driver  = commonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
-    } else {
-        let seasonMappings = require(`../mappings/Season${season}`);
-        subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;        
-        team    = seasonMappings.Attributes.Team.ById[decoded.teamId].team;
-        model   = seasonMappings.Attributes.Model.ById[decoded.modelId].model;
-        driver  = seasonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
-    }    
+    const driver = seasonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
 
-    let coreMetadata = {
+    const coreMetadata = {
         seasonId: decoded.seasonId,
         season,
         typeId: decoded.typeId,
@@ -55,8 +41,8 @@ function getCoreMetadata(id) {
         subType,
         rarity: decoded.rarity,
         rarityTier,
-        countryId: decoded.countryId,
-        country,
+        trackId: decoded.trackId,
+        track,
         teamId: decoded.teamId,
         team,
         modelId: decoded.modelId,
@@ -65,54 +51,8 @@ function getCoreMetadata(id) {
         driver,
         labelId: decoded.labelId,
         label,
-        counter: decoded.counter
-    }
-
-    //For Track Metadata
-    if (type === Types.Track.type)
-    {
-        //Do another decode
-        decoded = decode(constants.TrackSegmentTokenBitsLayout, encoded);
-        for (const key in decoded) {
-            decoded[key] = Number(decoded[key].toString(10));
-        }
-
-        const track = commonMappings.Attributes.Track.ById[decoded.trackId];
-
-        const trackSegment = {
-            segmentId: decoded['trackSegment.segmentId'],
-            zoneId: decoded['trackSegment.zoneId'],
-            earnings: decoded['trackSegment.earnings']
-        }
-
-        coreMetadata = { 
-            ...coreMetadata, 
-            ...{track: track.track},
-            ...{trackId: decoded.trackId},
-            ...{trackSegment: trackSegment } 
-        };
-    }
-    else
-    {
-        //For non track metadata
-
-        //Setting up racing attributes
-        let racingAttributes;
-        switch (type) {
-            case Types.Car.type:
-            case Types.Part.type:
-            case Types.Tyres.type:
-                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Car.type]
-                break;
-            case Types.Driver.type:
-            case Types.Gear.type:
-                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Driver.type]
-                break;
-            default:
-                racingAttributes = ['Stat 1', 'Stat 2', 'Stat 3'];
-        }
-
-        const racing = {
+        counter: decoded.counter,
+        racing: {
             stat1: decoded['racing.stat1'],
             stat2: decoded['racing.stat2'],
             stat3: decoded['racing.stat3'],
@@ -120,21 +60,82 @@ function getCoreMetadata(id) {
             special1: decoded['racing.special1'],
             special2: decoded['racing.special2'],
             effect: decoded['racing.effect'],
-        }
+        },
+    };
 
-        racing[racingAttributes[0]] = decoded['racing.stat1']
-        racing[racingAttributes[1]] = decoded['racing.stat2']
-        racing[racingAttributes[2]] = decoded['racing.stat3']
-
-        coreMetadata = { ...coreMetadata, ...{racing: racing} }
-    }
-    
     return coreMetadata;
 }
 
 function getOpenseaMetadata(coreMetadata) {
+    let racingAttributes = [];
+    if (
+        coreMetadata.type == 'Car' ||
+        coreMetadata.type == 'Driver' ||
+        coreMetadata.type == 'Part' ||
+        coreMetadata.type == 'Gear' ||
+        coreMetadata.type == 'Tyres'
+    ) {
+        switch (coreMetadata.type) {
+            case 'Car':
+            case 'Part':
+            case 'Tyres':
+                racingAttributes = require(`../mappings/Season${coreMetadata.season}/TokenTypes/Car`).RacingAttributes;
+                break;
+            case 'Driver':
+            case 'Gear':
+                racingAttributes = require(`../mappings/Season${coreMetadata.season}/TokenTypes/Driver`)
+                    .RacingAttributes;
+                break;
+        }
 
-    //Define common attributes
+        racingAttributes = [
+            {
+                display_type: 'boost_number',
+                trait_type: racingAttributes.openSea[0],
+                value: coreMetadata.racing.stat1,
+            },
+            {
+                display_type: 'boost_number',
+                trait_type: racingAttributes.openSea[1],
+                value: coreMetadata.racing.stat2,
+            },
+            {
+                display_type: 'boost_number',
+                trait_type: racingAttributes.openSea[2],
+                value: coreMetadata.racing.stat3,
+            },
+        ];
+
+        if (coreMetadata.racing.luck) {
+            racingAttributes.push({
+                display_type: 'boost_number',
+                trait_type: 'luck',
+                value: coreMetadata.racing.luck,
+                max_value: 1001,
+            });
+        }
+
+        // if (coreMetadata.racing.effect) {
+        //     racingAttributes.push({
+        //         trait_type: 'effect',
+        //         value: coreMetadata.racing.effect,
+        //     });
+        // }
+
+        // if (coreMetadata.racing.special1) {
+        //     racingAttributes.push({
+        //         trait_type: 'special_1',
+        //         value: coreMetadata.racing.special1,
+        //     });
+        // }
+        // if (coreMetadata.racing.special2) {
+        //     racingAttributes.push({
+        //         trait_type: 'special_2',
+        //         value: coreMetadata.racing.special2,
+        //     });
+        // }
+    }
+
     let attributes = [
         {
             trait_type: 'type',
@@ -148,52 +149,17 @@ function getOpenseaMetadata(coreMetadata) {
             display_type: 'number',
             trait_type: 'rarity',
             value: coreMetadata.rarity,
-        }
-    ];    
-
-    // if (coreMetadata.racing.effect) {
-    //     racingAttributes.push({
-    //         trait_type: 'effect',
-    //         value: coreMetadata.racing.effect,
-    //     });
-    // }
-
-    // if (coreMetadata.racing.special1) {
-    //     racingAttributes.push({
-    //         trait_type: 'special_1',
-    //         value: coreMetadata.racing.special1,
-    //     });
-    // }
-    // if (coreMetadata.racing.special2) {
-    //     racingAttributes.push({
-    //         trait_type: 'special_2',
-    //         value: coreMetadata.racing.special2,
-    //     });
-    // }
-
-    
-
-    //Put the season flag if it is non track metadata
-    if (coreMetadata.type !== Types.Track.type) {
-        attributes.push({
+        },
+        {
             trait_type: 'season',
             value: coreMetadata.season,
-        });
-    }
+        },
+    ];
 
-    if (coreMetadata.countryId) {
-        attributes.push({
-            trait_type: 'country',
-            value: coreMetadata.country,
-        });
-    }
-
-    if (coreMetadata.type === Types.Track.type)
-    {
-        const track = commonMappings.Attributes.Track.ById[coreMetadata.trackId];
+    if (coreMetadata.trackId) {
         attributes.push({
             trait_type: 'track',
-            value: track.track,
+            value: coreMetadata.track,
         });
     }
 
@@ -221,19 +187,19 @@ function getOpenseaMetadata(coreMetadata) {
 
     if (coreMetadata.subTypeId) {
         switch (coreMetadata.type) {
-            case Types.Gear.type:
+            case 'Gear':
                 attributes.push({
                     trait_type: 'gear_type',
                     value: coreMetadata.subType,
                 });
                 break;
-            case Types.Part.type:
+            case 'Part':
                 attributes.push({
                     trait_type: 'part_type',
                     value: coreMetadata.subType,
                 });
                 break;
-            case Types.Tyres.type:
+            case 'Tyres':
                 attributes.push({
                     trait_type: 'tyres_type',
                     value: coreMetadata.subType,
@@ -242,69 +208,7 @@ function getOpenseaMetadata(coreMetadata) {
         }
     }
 
-    if (coreMetadata.type === Types.Track.type) {
-        attributes.push({
-            trait_type: 'segment',
-            value: coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId)
-        });
-
-        attributes.push({
-            trait_type: 'earning_share',
-            value: coreMetadata.trackSegment.earnings/10**7 + '%'
-        })
-    }
-
-    //Racing attributes
-    if (coreMetadata.racing)
-    {
-        let racingAttributes = [];
-        switch (coreMetadata.type) {
-            case Types.Car.type:
-            case Types.Part.type:
-            case Types.Tyres.type:
-                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Car.type].map((attribute) =>
-                    attribute.toLowerCase().replace(' ', '_')
-                );
-                break;
-            case Types.Driver.type:
-            case Types.Gear.type:
-                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Driver.type].map((attribute) =>
-                    attribute.toLowerCase().replace(' ', '_')
-                );
-                break;
-            default:
-                racingAttributes = ['stat_1', 'stat_2', 'stat_3'];
-        }
-
-        racingAttributes = [
-            {
-                display_type: 'boost_number',
-                trait_type: racingAttributes[0],
-                value: coreMetadata.racing.stat1,
-            },
-            {
-                display_type: 'boost_number',
-                trait_type: racingAttributes[1],
-                value: coreMetadata.racing.stat2,
-            },
-            {
-                display_type: 'boost_number',
-                trait_type: racingAttributes[2],
-                value: coreMetadata.racing.stat3,
-            },
-        ];
-
-        if (coreMetadata.racing.luck) {
-            racingAttributes.push({
-                display_type: 'boost_number',
-                trait_type: 'luck',
-                value: coreMetadata.racing.luck,
-                max_value: 1001,
-            });
-        }
-
-        attributes = [...attributes, ...racingAttributes];
-    }
+    attributes = attributes.concat(racingAttributes);
 
     return attributes;
 }
@@ -314,60 +218,34 @@ function getFullMetadata(id, network = 'mainnet') {
     let openseaMetadata = getOpenseaMetadata(coreMetadata);
 
     let extendedMetadata = {};
+    const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
 
-    const Seasons = require('../mappings/Common/Attributes/Season/Seasons');  
-    if (coreMetadata.season !== Seasons.NoSeason.season)
-    {
-        //For season's token
-        const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
-        const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
-    
-        switch (coreMetadata.type) {
-            case Types.Car.type:
-                if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta };
-                } else if (coreMetadata.model != 'None') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta };
-                }
-                break;
-            case Types.Driver.type:
-                if (coreMetadata.driver != 'None') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta };
-                } else if (coreMetadata.model) {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta };
-                }
-                break;
-            case Types.Part.type:
-            case Types.Gear.type:
-            case Types.Tyres.type:
-                extendedMetadata = {
-                    ...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta,
-                };
-                break;
-        }
-    
-        const uniqueTokenOverride = seasonMappings.TokenTypes[coreMetadata.type].ByTokenId[id];
-        if (uniqueTokenOverride !== undefined) {
-            extendedMetadata = {...extendedMetadata, ...uniqueTokenOverride.extendedMeta};
-        }
-    
-        extendedMetadata.collection = seasonMappings.SubType.ByFullTypeId[fullTypeId].collection;
+    const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
+    switch (coreMetadata.type) {
+        case 'Car':
+            if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
+                extendedMetadata = {...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta};
+            } else if (coreMetadata.model != 'None') {
+                extendedMetadata = {...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta};
+            }
+            break;
+        case 'Driver':
+            if (coreMetadata.driver != 'None') {
+                extendedMetadata = {...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta};
+            } else if (coreMetadata.model) {
+                extendedMetadata = {...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta};
+            }
+            break;
+        case 'Part':
+        case 'Gear':
+        case 'Tyres':
+            extendedMetadata = {...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta};
+            break;
     }
-    else
-    {
-        //No Seasons Token
-        switch (coreMetadata.type) {
-            case Types.Track.type:
-                //segment e.g. 1A
-                const segment = coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId); 
-                let eMeta = {
-                    name: commonMappings.TokenTypes.TrackSegment.getName(coreMetadata.trackId, coreMetadata.rarity, segment),
-                    description: commonMappings.TokenTypes.TrackSegment.getDescription(coreMetadata.trackId, coreMetadata.rarity, segment)
-                };
-                eMeta.name = eMeta.name + ' ' + segment;
-                extendedMetadata = { ...eMeta };
-                break;
-        }
+
+    const uniqueTokenOverride = seasonMappings.TokenTypes[coreMetadata.type].ByTokenId[id];
+    if (uniqueTokenOverride !== undefined) {
+        extendedMetadata = Object.assign(extendedMetadata, uniqueTokenOverride.extendedMeta);
     }
 
     if (extendedMetadata.collection_id === undefined) {
@@ -382,8 +260,8 @@ function getFullMetadata(id, network = 'mainnet') {
     }
     extendedMetadata.external_url = getExternalUrl(id, network);
 
-    //Special Handling on a particular token type
     const isBGC2019 = require('../mappings/Season2019/BGC2019Tokens').indexOf(id) != -1;
+
     if (isBGC2019) {
         extendedMetadata.name = `${extendedMetadata.name} (BGC 2019)`;
     }
@@ -394,20 +272,20 @@ function getFullMetadata(id, network = 'mainnet') {
         coreMetadata.label == 'Infinity' ||
         id == '57901359017265019780203575760548458000656522658244413105892691622458053129621' // lost Infinity token
     ) {
-        const Rarities = require('../mappings/Common/Attributes/Rarity/Rarities');
-        switch (coreMetadata.rarity) {
+        const oldRaritiesCoreMetadata = {...coreMetadata};
+        switch(coreMetadata.rarity) {
             case 2:
             case 3:
-                coreMetadata.rarityTier = Rarities.Legendary.rarityTier; //Legendary
+                oldRaritiesCoreMetadata.rarityTier = 'Legendary';
                 break;
             case 4:
             case 5:
             case 6:
-                coreMetadata.rarityTier = Rarities.Epic1.rarityTier; //Rare
+                oldRaritiesCoreMetadata.rarityTier = 'Epic';
                 break;
         }
-        openseaMetadata = getOpenseaMetadata(coreMetadata);
-        extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
+        openseaMetadata = getOpenseaMetadata(oldRaritiesCoreMetadata);
+        extendedMetadata.image = getImageUrl(extendedMetadata.name, oldRaritiesCoreMetadata, network);
     }
 
     const fullMetadata = {

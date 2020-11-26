@@ -43,7 +43,7 @@ const AstonMartinRedBullRacing = {
     teamId: '7',
     team: 'Aston Martin Red Bull Racing',
     car: 'RB15',
-    drivers: ['Alexander Albon', 'Max Verstappen'],
+    drivers: ['Pierre Gasly', 'Max Verstappen'],
 };
 const RenaultF1Team = {
     teamId: '8',
@@ -55,7 +55,7 @@ const RedBullToroRossoHonda = {
     teamId: '9',
     team: 'Red Bull Toro Rosso Honda',
     car: 'STR14',
-    drivers: ['Pierre Gasly', 'Daniil Kvyat'],
+    drivers: ['Alexander Albon', 'Daniil Kvyat'],
 };
 const ROKiTWilliamsRacing = {
     teamId: '10',

@@ -1,16 +1,15 @@
 const Types = require('./Types');
-const allTypes = Object.values(Types);
 
 const ByName = {};
 const ById = {};
 
-for (const type of allTypes) {
+for (const type of Types) {
     ByName[type.type] = type;
     ById[type.typeId] = type;
 }
 
 module.exports = {
-    All: allTypes,
+    All: Types,
     ByName,
     ById,
 };

@@ -1,4 +1,4 @@
-const Season = require('../Common/Attributes/Season');
+const Season = require('../CommonAttributes/Season');
 
 const _Season = '2019';
 const SeasonId = Season.ByName[_Season].seasonId;

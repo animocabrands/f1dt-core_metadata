@@ -2,20 +2,11 @@ const assert = require('assert');
 const isEqual = require('lodash.isequal');
 const { getCoreMetadata, getFullMetadata } = require('./src/utils/metadata');
 
-const tokenIds = [
-    '57897811519642769433138067471762254623735906850517137802921006713614358282351', // the 1-1-1
-    '57897811519642769449248426845109202255470907643272514279524697661152711147530', // crate content
-    '57901379722504060151894746502873436596150635022721073061159222569367836295189', // crate content
-    '57904892711394576548862646574578639720139642486097561241600186772244377108769', // crate content
-    '57899578366707547846132213613383306701917508869241355999935957264509760963035', // crate content
-];
-
-for (const tokenId of tokenIds) {
-    const coreMetadata = getCoreMetadata(tokenId);
-    console.log(coreMetadata);
-    const fullMetadata = getFullMetadata(tokenId);
-    console.log(fullMetadata);
-}
+const tokenId = '57897811519642769433138067471762254623735906850517137802921006713614358282351'; // the 1-1-1
+const coreMetadata = getCoreMetadata(tokenId);
+console.log(coreMetadata);
+const fullMetadata = getFullMetadata(tokenId);
+console.log(fullMetadata);
 
 const { createTokenId } = require('./src/utils/ids');
 
