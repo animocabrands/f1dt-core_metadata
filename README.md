@@ -17,10 +17,12 @@ Here is the current list of the core attributes:
 | typeId           | 240  | uint8  | yes | no  | yes | Numerical representation of the type of the token, for example _Car_, _Driver_ or _Gears_. |
 | subTypeId        | 232  | uint8  | no  | yes | yes | Numerical representation of the subType of the token, when applicable. For example _Gears_ have different possible subTypes such as _Helmet_ or _Gloves_. |
 | seasonId         | 224  | uint8  | yes | no  | yes | Numerical representation of the season of the token, for example _2019_. |
-| padding2         | 192  | uint32 | no  | N/A | no  | Reserved for later use. |
+| padding2         | 212  | uint32 | no  | N/A | no  | Reserved for later use. |
+| trackId          | 200  | uint8  | no  | yes | no  | Numerical representation of the track of the token, for example _Circuit de Monaco_. |
+| modelId          | 192  | uint8  | no  | yes | no  | Numerical representation of the model of the token, for example _Satsuma_. |
 | teamId           | 184  | uint8  | no  | yes | no  | Numerical representation of the team of the token, for example _Alfa Romeo Racing_. |
 | rarity           | 176  | uint8  | yes | no  | no  | The rarity level of the token. |
-| trackId          | 168  | uint8  | no  | yes | no  | Numerical representation of the track of the token, for example _Monaco_. |
+| countryId          | 168  | uint8  | no  | yes | no  | Numerical representation of the country of the token, for example _Monaco_. |
 | labelId          | 152  | uint16 | no  | no  | no  | Numerical representation of label of the token. Label are used for specific tokens and is intended to be used for collection and gamfication. |
 | driverId     | 136  | uint16 | no  | no  | no  | The driver number for a _Driver_. |
 | stat1            | 120  | uint16 | no  | yes | no  | The _Top Speed_ of a _Car_/_Part_/_Tyre_ **or** the _Stamina_ of a _Driver_/_Gear_. |
