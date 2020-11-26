@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.5
+## 1.1.0
 
 ### New Features
 * Add Track Segment layout for track NFTs
