@@ -76,7 +76,7 @@ function createTokenId(coreMetadata, validate = true) {
     switch(coreMetadata.typeId)
     {
         //Check type is track
-        case Types.Track.trackId:
+        case Types.Track.typeId:
             return createTrackTokenId(coreMetadata);
         default:
             return createNonTrackTokenId(coreMetadata);
