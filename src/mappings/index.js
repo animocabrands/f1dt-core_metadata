@@ -1,4 +1,4 @@
-const Common = require('./CommonAttributes');
+const Common = require('./Common');
 const Season2019 = require('./Season2019');
 const Season2020 = require('./Season2020');
 
