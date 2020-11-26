@@ -2,8 +2,9 @@ const Rarities = require('./Rarities');
 
 const ByRarity = {};
 const ByTier = {};
+const allRarities = Object.values(Rarities);
 
-for (const rarity of Rarities) {
+for (const rarity of allRarities) {
     ByRarity[rarity.rarity] = rarity;
     if (!ByTier[rarity.rarityTier]) {
         ByTier[rarity.rarityTier] = [];
@@ -12,7 +13,7 @@ for (const rarity of Rarities) {
 }
 
 module.exports = {
-    All: Rarities,
+    All: allRarities,
     ByRarity,
     ByTier,
 };
