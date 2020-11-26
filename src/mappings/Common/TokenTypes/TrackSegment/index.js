@@ -1,31 +1,68 @@
+import { NoSeason } from "../../Attributes/Season/Seasons";
+import { MonacoTrackSegments } from "./TrackSegments";
+
 const { createCollectionId } = require('../../../../utils/ids');
-const Season = require('../../Attributes/Season');
 const TrackSegments = require('./TrackSegments');
 
-const Type = 'Track';
-const TypeId = '6';
-const SubType = 'None';
-const SubTypeId = '0';
-const FullTypeId = '6,0';
-const Collection = `${Type} 0`;
-const CollectionId = createCollectionId(0, TypeId, SubTypeId);
+const Type = require('../../Attributes/Type/Types');
+const Track = require('../../Attributes/Track/Tracks');
 
-const ByTrackId = {};
+const type = Type.Track.type;
+const typeId = Type.Track.typeId;
+const subType = 'None';
+const subTypeId = '0';
+const fullTypeId = '6,0';
+const collection = `${type} ${NoSeason.seasonId}`;
+const collectionId = createCollectionId(NoSeason.seasonId, typeId, subTypeId);
 
-for (const segment of TrackSegments) 
-{
-    ByTrackId[segment.trackId] = segment;
+const getName = (trackId, rarity, trackSegmentId) => {
+    let trackSegment = {};
+    switch (trackId.toString())
+    {
+        case Track.CircuitdeMonaco.trackId:
+            trackSegment = MonacoTrackSegments;
+            break;          
+    }
+
+    //First Segment Id then fallback to rarity
+    if (trackSegmentId in trackSegment) {
+        return trackSegment[trackSegmentId].name;
+    }
+    else if(rarity in trackSegment) {
+        return trackSegment[rarity].name;
+    }
+
+    return '';
+}
+
+const getDescription = (trackId, rarity, trackSegmentId) => {
+    let trackSegment = {};
+    switch (trackId.toString())
+    {
+        case Track.CircuitdeMonaco.trackId:
+            trackSegment = MonacoTrackSegments;
+            break;
+    }
+
+    //First Segment Id then fallback to rarity
+    if (trackSegmentId in trackSegment) {
+        return trackSegment[trackSegmentId].description;
+    }
+    else if (rarity in trackSegment) {
+        return trackSegment[rarity].description;
+    }
+
+    return '';
 }
 
 module.exports = {
-    All: [...TrackSegments],
-    TrackSegments,
-    ByTrackId,
-    collection: Collection,
-    collectionId: CollectionId,
-    type: Type,
-    typeId: TypeId,
-    subType: SubType,
-    subTypeId: SubTypeId,
-    fullTypeId: FullTypeId,
+    getName,
+    getDescription,
+    collection: collection,
+    collectionId: collectionId,
+    type: type,
+    typeId: typeId,
+    subType: subType,
+    subTypeId: subTypeId,
+    fullTypeId: fullTypeId,
 };

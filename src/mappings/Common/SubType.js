@@ -2,7 +2,7 @@ const TokenTypes = require('./TokenTypes');
 
 const SubTypes = [
     TokenTypes.Driver,
-    TokenTypes.TrackSegments,
+    TokenTypes.TrackSegment,
     // ...TokenTypes.Part.All,
     // ...TokenTypes.Gear.All,
     // ...TokenTypes.Tyres.All,

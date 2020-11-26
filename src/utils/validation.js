@@ -123,7 +123,7 @@ function validateCommonMetadata(coreMetadata) {
         errors.push(error);
     }
     try {
-        validateAndMapCoreAttribute(commonMappings.Track, coreMetadata, 'track', false);
+        validateAndMapCoreAttribute(commonMappings.Country, coreMetadata, 'country', false);
     } catch (e) {
         errors.push(e);
     }

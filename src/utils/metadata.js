@@ -5,12 +5,10 @@ const { getExternalUrl, getImageUrl, getMetadataUrl } = require('./urls');
 
 const constants = require('../constants');
 const commonMappings = require('../mappings/Common');
-
-const RepairList = require('../mappings/RepairList');
-const RacingAttributes = require('../mappings/Common/Attributes/RacingAttributes');
-const Rarities = commonMappings.Attributes.Rarity.Rarities;
+const Types = require('../mappings/Common/Attributes/Type/Types');
 
 function getCoreMetadata(id) {
+    const RepairList = require('../mappings/RepairList');
     id = RepairList[id] || id;
     id = RepairList[id] || id; //For doubly wrong tokens
 
@@ -25,7 +23,7 @@ function getCoreMetadata(id) {
     const label         = commonMappings.Attributes.Label.ById[decoded.labelId].label;
     const season        = commonMappings.Attributes.Season.ById[decoded.seasonId].season;
     const rarityTier    = commonMappings.Attributes.Rarity.ByRarity[decoded.rarity].rarityTier;
-    const track         = commonMappings.Attributes.Track.ById[decoded.trackId].track;
+    const country       = commonMappings.Attributes.Country.ById[decoded.countryId].country;
 
     const fullTypeId    = `${decoded.typeId},${decoded.subTypeId}`;
 
@@ -33,22 +31,20 @@ function getCoreMetadata(id) {
     let team;
     let model;
     let driver;
-
+    
     //Non Track
-    if (type !== 'Track') {
+    if (type === Types.Track.type) {
+        subType = commonMappings.SubType.ByFullTypeId[fullTypeId].subType;
+        team    = commonMappings.Attributes.Team.ById[decoded.teamId].team;
+        model   = commonMappings.Attributes.Model.ById[decoded.modelId].model;
+        driver  = commonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
+    } else {
         let seasonMappings = require(`../mappings/Season${season}`);
         subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;        
         team    = seasonMappings.Attributes.Team.ById[decoded.teamId].team;
         model   = seasonMappings.Attributes.Model.ById[decoded.modelId].model;
         driver  = seasonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
-    }
-    else
-    {
-        subType = commonMappings.SubType.ByFullTypeId[fullTypeId].subType;
-        team    = commonMappings.Attributes.Team.ById[decoded.teamId].team;
-        model   = commonMappings.Attributes.Model.ById[decoded.modelId].model;
-        driver  = commonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
-    }
+    }    
 
     let coreMetadata = {
         seasonId: decoded.seasonId,
@@ -59,8 +55,8 @@ function getCoreMetadata(id) {
         subType,
         rarity: decoded.rarity,
         rarityTier,
-        trackId: decoded.trackId,
-        track,
+        countryId: decoded.countryId,
+        country,
         teamId: decoded.teamId,
         team,
         modelId: decoded.modelId,
@@ -73,7 +69,7 @@ function getCoreMetadata(id) {
     }
 
     //For Track Metadata
-    if (type === 'Track')
+    if (type === Types.Track.type)
     {
         //Do another decode
         decoded = decode(constants.TrackSegmentTokenBitsLayout, encoded);
@@ -81,13 +77,20 @@ function getCoreMetadata(id) {
             decoded[key] = Number(decoded[key].toString(10));
         }
 
+        const track = commonMappings.Attributes.Track.ById[decoded.trackId];
+
         const trackSegment = {
-            segmentId: decoded['track.segmentId'],
-            zoneId: decoded['track.zoneId'],
-            earnings: decoded['track.earnings']
+            segmentId: decoded['trackSegment.segmentId'],
+            zoneId: decoded['trackSegment.zoneId'],
+            earnings: decoded['trackSegment.earnings']
         }
 
-        coreMetadata = { ...coreMetadata, ...{trackSegment: trackSegment } };
+        coreMetadata = { 
+            ...coreMetadata, 
+            ...{track: track.track},
+            ...{trackId: decoded.trackId},
+            ...{trackSegment: trackSegment } 
+        };
     }
     else
     {
@@ -96,14 +99,14 @@ function getCoreMetadata(id) {
         //Setting up racing attributes
         let racingAttributes;
         switch (type) {
-            case 'Car':
-            case 'Part':
-            case 'Tyres':
-                racingAttributes = commonMappings.Attributes.RacingAttributes['Car']
+            case Types.Car.type:
+            case Types.Part.type:
+            case Types.Tyres.type:
+                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Car.type]
                 break;
-            case 'Driver':
-            case 'Gear':
-                racingAttributes = commonMappings.Attributes.RacingAttributes['Driver']
+            case Types.Driver.type:
+            case Types.Gear.type:
+                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Driver.type]
                 break;
             default:
                 racingAttributes = ['Stat 1', 'Stat 2', 'Stat 3'];
@@ -125,6 +128,7 @@ function getCoreMetadata(id) {
 
         coreMetadata = { ...coreMetadata, ...{racing: racing} }
     }
+    
     return coreMetadata;
 }
 
@@ -170,27 +174,27 @@ function getOpenseaMetadata(coreMetadata) {
     
 
     //Put the season flag if it is non track metadata
-    if (coreMetadata.type !== 'Track') {
+    if (coreMetadata.type !== Types.Track.type) {
         attributes.push({
             trait_type: 'season',
             value: coreMetadata.season,
         });
     }
 
-    if (coreMetadata.trackId) {
+    if (coreMetadata.countryId) {
+        attributes.push({
+            trait_type: 'country',
+            value: coreMetadata.country,
+        });
+    }
+
+    if (coreMetadata.type === Types.Track.type)
+    {
+        const track = commonMappings.Attributes.Track.ById[coreMetadata.trackId];
         attributes.push({
             trait_type: 'track',
-            value: coreMetadata.track,
+            value: track.track,
         });
-
-        //Inject the circuit if any
-        const track = commonMappings.Attributes.Track.ById[coreMetadata.trackId];
-        if (coreMetadata.type === 'Track' && track.circuit) {
-            attributes.push({
-                trait_type: 'circuit',
-                value: track.circuit,
-            });
-        }        
     }
 
     if (coreMetadata.teamId) {
@@ -217,19 +221,19 @@ function getOpenseaMetadata(coreMetadata) {
 
     if (coreMetadata.subTypeId) {
         switch (coreMetadata.type) {
-            case 'Gear':
+            case Types.Gear.type:
                 attributes.push({
                     trait_type: 'gear_type',
                     value: coreMetadata.subType,
                 });
                 break;
-            case 'Part':
+            case Types.Part.type:
                 attributes.push({
                     trait_type: 'part_type',
                     value: coreMetadata.subType,
                 });
                 break;
-            case 'Tyres':
+            case Types.Tyres.type:
                 attributes.push({
                     trait_type: 'tyres_type',
                     value: coreMetadata.subType,
@@ -238,7 +242,7 @@ function getOpenseaMetadata(coreMetadata) {
         }
     }
 
-    if (coreMetadata.type === 'Track') {
+    if (coreMetadata.type === Types.Track.type) {
         attributes.push({
             trait_type: 'segment_id',
             value: coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId)
@@ -255,16 +259,16 @@ function getOpenseaMetadata(coreMetadata) {
     {
         let racingAttributes = [];
         switch (coreMetadata.type) {
-            case 'Car':
-            case 'Part':
-            case 'Tyres':
-                racingAttributes = commonMappings.Attributes.RacingAttributes['Car'].map((attribute) =>
+            case Types.Car.type:
+            case Types.Part.type:
+            case Types.Tyres.type:
+                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Car.type].map((attribute) =>
                     attribute.toLowerCase().replace(' ', '_')
                 );
                 break;
-            case 'Driver':
-            case 'Gear':
-                racingAttributes = commonMappings.Attributes.RacingAttributes['Driver'].map((attribute) =>
+            case Types.Driver.type:
+            case Types.Gear.type:
+                racingAttributes = commonMappings.Attributes.RacingAttributes[Types.Driver.type].map((attribute) =>
                     attribute.toLowerCase().replace(' ', '_')
                 );
                 break;
@@ -311,30 +315,31 @@ function getFullMetadata(id, network = 'mainnet') {
 
     let extendedMetadata = {};
 
-    //For season's token
-    if (coreMetadata.season !== '0')
+    const Seasons = require('../mappings/Common/Attributes/Season/Seasons');  
+    if (coreMetadata.season !== Seasons.NoSeason.season)
     {
+        //For season's token
         const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
         const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
     
         switch (coreMetadata.type) {
-            case 'Car':
+            case Types.Car.type:
                 if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
                     extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta };
                 } else if (coreMetadata.model != 'None') {
                     extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta };
                 }
                 break;
-            case 'Driver':
+            case Types.Driver.type:
                 if (coreMetadata.driver != 'None') {
                     extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta };
                 } else if (coreMetadata.model) {
                     extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta };
                 }
                 break;
-            case 'Part':
-            case 'Gear':
-            case 'Tyres':
+            case Types.Part.type:
+            case Types.Gear.type:
+            case Types.Tyres.type:
                 extendedMetadata = {
                     ...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta,
                 };
@@ -350,10 +355,15 @@ function getFullMetadata(id, network = 'mainnet') {
     }
     else
     {
+        //No Seasons Token
         switch (coreMetadata.type) {
-            case 'Track':
-                let eMeta = {...commonMappings.TokenTypes.TrackSegments.ByTrackId[coreMetadata.trackId].extendedMeta};
-                eMeta.name = eMeta.name + ' ' + coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId);
+            case Types.Track.type:
+                const trackSegmentId = coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId); 
+                let eMeta = {
+                    name: commonMappings.TokenTypes.TrackSegment.getName(coreMetadata.trackId, coreMetadata.rarity, trackSegmentId),
+                    description: commonMappings.TokenTypes.TrackSegment.getDescription(coreMetadata.trackId, coreMetadata.rarity, trackSegmentId)
+                };
+                eMeta.name = eMeta.name + ' ' + trackSegmentId;
                 extendedMetadata = { ...eMeta };
                 break;
         }
@@ -371,6 +381,7 @@ function getFullMetadata(id, network = 'mainnet') {
     }
     extendedMetadata.external_url = getExternalUrl(id, network);
 
+    //Special Handling on a particular token type
     const isBGC2019 = require('../mappings/Season2019/BGC2019Tokens').indexOf(id) != -1;
     if (isBGC2019) {
         extendedMetadata.name = `${extendedMetadata.name} (BGC 2019)`;
@@ -382,6 +393,7 @@ function getFullMetadata(id, network = 'mainnet') {
         coreMetadata.label == 'Infinity' ||
         id == '57901359017265019780203575760548458000656522658244413105892691622458053129621' // lost Infinity token
     ) {
+        const Rarities = require('../mappings/Common/Attributes/Rarity/Rarities');
         switch (coreMetadata.rarity) {
             case 2:
             case 3:

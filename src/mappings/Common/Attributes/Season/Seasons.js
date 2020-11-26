@@ -15,4 +15,4 @@ const Season2020 = {
     seasonId: '3',
 };
 
-module.exports = [NoSeason, Season2018, Season2019, Season2020];
+module.exports = {NoSeason, Season2018, Season2019, Season2020};

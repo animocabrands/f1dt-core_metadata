@@ -1,7 +1,7 @@
 const Driver = require("./Driver");
-const TrackSegments = require("./TrackSegment");
+const TrackSegment = require("./TrackSegment");
 
 module.exports = {
     Driver,
-    TrackSegments
+    TrackSegment
 };
