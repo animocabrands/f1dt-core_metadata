@@ -1,4 +1,4 @@
-//The key is based on rarity and segmentId
+//The key is based on rarity
 let MonacoTrackSegments = {
     '0' : { 
         name: 'Grand Prix de Monaco',
