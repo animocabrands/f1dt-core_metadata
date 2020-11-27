@@ -1,20 +1,21 @@
 //The key is based on rarity
-const monacaTrackDesc = "Home to the illustrious FORMULA 1 GRAND PRIX DE MONACO (“Monaco Grand Prix”),  the Circuit de Monaco is a track laid out on the city streets of Monte Carlo and La Condamine in the principality of Monaco, one of the most glamorous and prestigious locations in motorsport. The Monaco Grand Prix was established in 1929 and is considered one of the world’s most important automobile races.";
+const monacaTrackName = "Formula 1 Grand Prix de Monaco 2020";
+const monacaTrackDesc = "The illustrious FORMULA 1 GRAND PRIX DE MONACO is laid out on the city streets of Monte Carlo and La Condamine in the principality of Monaco. The FORMULA 1 GRAND PRIX DE MONACO has been on the Formula 1 calendar since its inception in 1950 and is considered one of the most glamorous and prestigious events in the sport.";
 let MonacoTrackSegments = {
     '0' : { 
-        name: 'Grand Prix de Monaco',
+        name: monacaTrackName,
         description: monacaTrackDesc
     },
     '1' : {
-        name: 'Grand Prix de Monaco',
+        name: monacaTrackName,
         description: monacaTrackDesc
     },
     '2' : {
-        name: 'Grand Prix de Monaco',
+        name: monacaTrackName,
         description: monacaTrackDesc
     },
     '4' : {
-        name: 'Grand Prix de Monaco',
+        name: monacaTrackName,
         description: monacaTrackDesc
     }
 }
