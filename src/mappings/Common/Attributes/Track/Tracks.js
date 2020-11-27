@@ -1,4 +1,4 @@
-import Countries from "../Country/Countries"
+const Countries = require("../Country/Countries");
 
 const NoTrack = {
     track: 'None',

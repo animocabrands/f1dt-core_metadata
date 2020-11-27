@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.6
+### Improvements
+* Removed opensea attributes `earning_share` for Tracks 
+
+## 1.1.5
+
+### Bugfix
+* Fix the ES6 runtime issue in TrackSegment.js
+
 ## 1.1.0
 
 ### New Features

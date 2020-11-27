@@ -1,9 +1,7 @@
-import { NoSeason } from "../../Attributes/Season/Seasons";
-import { MonacoTrackSegments } from "./TrackSegments";
+const Seasons = require("../../Attributes/Season/Seasons");
+const TrackSegments = require("./TrackSegments");
 
 const { createCollectionId } = require('../../../../utils/ids');
-const TrackSegments = require('./TrackSegments');
-
 const Type = require('../../Attributes/Type/Types');
 const Track = require('../../Attributes/Track/Tracks');
 
@@ -12,15 +10,15 @@ const typeId = Type.Track.typeId;
 const subType = 'None';
 const subTypeId = '0';
 const fullTypeId = '6,0';
-const collection = `${type} ${NoSeason.seasonId}`;
-const collectionId = createCollectionId(NoSeason.seasonId, typeId, subTypeId);
+const collection = `${type} ${Seasons.NoSeason.seasonId}`;
+const collectionId = createCollectionId(Seasons.NoSeason.seasonId, typeId, subTypeId);
 
 const getName = (trackId, rarity, segment) => {
     let trackSegment = {};
     switch (trackId.toString())
     {
         case Track.CircuitdeMonaco.trackId:
-            trackSegment = MonacoTrackSegments;
+            trackSegment = TrackSegments.MonacoTrackSegments;
             break;          
     }
 
@@ -40,7 +38,7 @@ const getDescription = (trackId, rarity, segment) => {
     switch (trackId.toString())
     {
         case Track.CircuitdeMonaco.trackId:
-            trackSegment = MonacoTrackSegments;
+            trackSegment = TrackSegments.MonacoTrackSegments;
             break;
     }
 

@@ -1,26 +1,33 @@
 {
-  "name": "@animoca/f1dt-core_metadata",
-  "version": "1.1.0",
-  "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
-  "main": "src/index.js",
-  "scripts": {
-    "prettier": "prettier --write src"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:animocabrands/f1dt-core_metadata.git"
-  },
-  "author": "Animoca Brands",
-  "license": "MIT",
-  "dependencies": {
-    "@animoca/blockchain-inventory_metadata": "^0.0.1",
-    "big-integer": "^1.6.48",
-    "bits.js": "^0.1.1",
-    "lodash.isequal": "^4.5.0"
-},
-"devDependencies": {
-    "commander": "^6.0.0",
-    "assert": "^2.0.0",
-    "prettier": "^2.0.5"
-  }
+    "name": "@animoca/f1dt-core_metadata",
+    "version": "1.1.6",
+    "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
+    "main": "src/index.js",
+    "scripts": {
+        "prettier": "prettier --write src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:animocabrands/f1dt-core_metadata.git"
+    },
+    "author": "Animoca Brands",
+    "license": "MIT",
+    "dependencies": {
+        "@animoca/blockchain-inventory_metadata": "^0.0.1",
+        "big-integer": "^1.6.48",
+        "bits.js": "^0.1.1",
+        "lodash.isequal": "^4.5.0"
+    },
+    "devDependencies": {
+        "commander": "^6.0.0",
+        "assert": "^2.0.0",
+        "prettier": "^2.0.5",
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.8.7",
+        "@babel/node": "^7.8.7",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/preset-env": "^7.8.7",
+        "@babel/register": "^7.8.6",
+        "nodemon": "^2.0.6"
+    }
 }
