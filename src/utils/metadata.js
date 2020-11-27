@@ -248,10 +248,10 @@ function getOpenseaMetadata(coreMetadata) {
             value: coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId)
         });
 
-        attributes.push({
-            trait_type: 'earning_share',
-            value: coreMetadata.trackSegment.earnings/10**7 + '%'
-        })
+        // attributes.push({
+        //     trait_type: 'earning_share',
+        //     value: coreMetadata.trackSegment.earnings/10**7 + '%'
+        // })
     }
 
     //Racing attributes
