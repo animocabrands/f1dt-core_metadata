@@ -1,4 +1,8 @@
 # Changelog
+## 1.1.8
+* Updated youtube url for Australia Edition 2020
+* Added 70th Anniversary Edition Apex car
+
 ## 1.1.7
 * Updated Track segment name and description
 
