@@ -1,4 +1,6 @@
 # Changelog
+## 1.1.7
+* Updated Track segment name and description
 
 ## 1.1.6
 ### Improvements
