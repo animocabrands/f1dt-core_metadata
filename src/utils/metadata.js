@@ -380,6 +380,10 @@ function getFullMetadata(id, network = 'mainnet') {
     if (extendedMetadata.image === undefined) {
         extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
     }
+    else {
+        //To use the override image file name in extended metadata
+        extendedMetadata.image = getImageUrl(extendedMetadata.image, coreMetadata, network);
+    }
     extendedMetadata.external_url = getExternalUrl(id, network);
 
     //Special Handling on a particular token type
