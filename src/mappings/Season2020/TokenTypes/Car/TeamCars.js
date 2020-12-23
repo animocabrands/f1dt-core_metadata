@@ -1,94 +1,104 @@
-const Team = require('../../../Common/Attributes/Team');
 const Teams = require('../../Attributes/Team/Teams');
 
-const C38 = {
-    car: 'C38',
-    team: Teams.AlfaRomeoRacing.team,
+const C39 = {
+    car: 'C39',
+    team: Teams.AlfaRomeoRacingORLEN.team,
     extendedMetadata: {
-        name: 'C38',
+        name: 'C39',
         description:
-            'Powered by a Ferrari engine, a distinctive front wing and nose section make for a unique and intelligent design.',
+            "Aerodynamically, the car has some minor refinements compared to the 2019 car. Changes to the front brake ducts has led to an entire rebuild of the front suspension."
     },
 };
-const SF90 = {
-    car: 'SF90',
+const AT01 = {
+    car: 'AT01',
+    team: Teams.ScuderiaAlphaTauriHonda,
+    extendedMetadata: {
+        name: 'AT01',
+        description:
+            "The first AlphaTauri is an evolution of the 2019 STR14, with changes focusing on the suspension and the electronics systems."
+    },
+};
+const SF1000 = {
+    car: 'SF1000',
     team: Teams.ScuderiaFerrari.team,
     extendedMetadata: {
-        name: 'SF90',
+        name: 'SF1000',
         description:
-            'Named for the 90th anniversary of Scuderia Ferrari, this car is lighter and more aerodynamic than ever, with a unique front wing.',
+            "The SF1000 is the 66th car built by Ferrari in Formula 1. The main difference from last years SF90 are the significant changes in aerodynamic downforce and balance."
     },
 };
-const VF19 = {
-    car: 'VF-19',
+const VF20 = {
+    car: 'VF-20',
     team: Teams.HaasF1Team.team,
     extendedMetadata: {
-        name: 'VF-19',
+        name: 'VF-20',
         description:
-            'Sporting a radically engineered front wing and improved airflow in general, the VF-19 has taken some insightful notes from Ferrari.',
+            "The VF-20 is Haas's fifth car in Formula 1. It carries a Ferrari 065 engine, along with Ferrari steering systems and transmission."
     },
 };
-const MCL34 = {
-    car: 'MCL34',
+const MCL35 = {
+    car: 'MCL35',
     team: Teams.McLarenF1Team.team,
     extendedMetadata: {
-        name: 'MCL34',
+        name: 'MCL35',
         description:
-            'Pushing the axle forward and fitting a new front suspension means a new and improved chassis for the MCL34.',
+            "The new McLaren MCL35, powered by a Renault E-Tech 20 engine, helped McLaren secure a 3rd place finish in the 2020 season - their highest since 2012."
     },
 };
-const W10 = {
-    car: 'W10',
-    team: Teams.MercedesAMGPetronasMotorsport.team,
+const W11EQPowerPlus = {
+    car: 'W11 EQ Power+',
+    team: Teams.MercedesAMGPetronasFormulaOneTeam.team,
     extendedMetadata: {
-        name: 'W10',
-        description:
-            'Lighter, more aerodynamic and an improved suspension over its predecessor make for a powerful car with reduced rear tire wear.',
+        name: 'W11 EQ Power+',
+        description: "The Mercedes car is an evolution on last year's Championship winning car, with changes to over 10,000 components making it the fastest Mercedes yet."
     },
 };
-const RP19 = {
-    car: 'RP19',
-    team: Teams.SpScoreRacingPointF1Team.team,
+const RP20 = {
+    car: 'RP20',
+    team: Teams.BWTRacingPointF1Team.team,
     extendedMetadata: {
-        name: 'RP19',
-        description: "Marking the first Racing Point design, the RP19 remains similar to last year's platform.",
+        name: 'RP20',
+        description:
+            "The main changes to this year's Racing Point car are to aerodynamics, with the RP20 using new front and rear wing designs."
     },
 };
-const RB15 = {
-    car: 'RB15',
-    team: Teams.AstonMartinRedBullRacing.team,
+const RB16 = {
+    car: 'RB16',
+    team: Teams.AstonMartinRedBullRacing,
     extendedMetadata: {
-        name: 'RB15',
+        name: 'RB16',
         description:
-            'A new Honda engine and a re-designed rear end to match mark a welcome addition of power to a competitive chassis.',
+            "The RB16 is a step up from last year's car, and took Red Bull to second place in the Constructor Standings for 2020."
     },
 };
-const RS19 = {
-    car: 'R.S.19',
-    team: Teams.RenaultF1Team.team,
+const RS20 = {
+    car: 'R.S.20',
+    team: Teams.RenaultDPWorldF1Team.team,
     extendedMetadata: {
-        name: 'R.S.19',
+        name: 'R.S.20',
         description:
-            'Although similar to the previous model in many ways, the R.S.19 sports a number of subtle aerodynamic improvements.',
+            "The Renault R.S.20 uses the Renault E-Tech 20 power unit, developed and built in France, with the chassis manufactured in the U.K."
     },
 };
-const STR14 = {
-    car: 'STR14',
-    team: Teams.RedBullToroRossoHonda.team,
+const FW43 = {
+    car: 'FW43',
+    team: Teams.WilliamsRacing.team,
     extendedMetadata: {
-        name: 'STR14',
+        name: 'FW43',
         description:
-            'With a host of aerodynamic changes and a rear end tested by their sister team, the STR14 is a simple but effective platform.',
-    },
-};
-const FW42 = {
-    car: 'FW42',
-    team: Teams.ROKiTWilliamsRacing.team,
-    extendedMetadata: {
-        name: 'FW42',
-        description:
-            'The FW42 has new aerodynamic upgrades compared to its predecessor and is powered by a Mercedes engine.',
+            "The FW43 has made some improvements on the FW42, and is Williams' car for their 44th year in the sport."
     },
 };
 
-module.exports = {C38, SF90, VF19, MCL34, W10, RP19, RB15, RS19, STR14, FW42};
+module.exports = {
+    C39, 
+    AT01, 
+    SF1000, 
+    VF20, 
+    MCL35, 
+    W11EQPowerPlus, 
+    RP20, 
+    RB16, 
+    RS20, 
+    FW43
+};

@@ -1,6 +1,8 @@
+const Models = require('../../Attributes/Model/Models');
+
 const SatsumaDriver = {
     driver: 'Satsuma Driver',
-    model: 'Satsuma',
+    model: Models.SatsumaModel.model,
     extendedMetadata: {
         name: 'Satsuma Driver',
         description:
@@ -9,7 +11,7 @@ const SatsumaDriver = {
 };
 const CarbonDriver = {
     driver: 'Carbon Driver',
-    model: 'Carbon',
+    model: Models.CarbonModel.model,
     extendedMetadata: {
         name: 'Carbon Driver',
         description:
@@ -18,7 +20,7 @@ const CarbonDriver = {
 };
 const JetDriver = {
     driver: 'Jet Driver',
-    model: 'Jet',
+    model: Models.JetModel.model,
     extendedMetadata: {
         name: 'Jet Driver',
         description:
@@ -27,7 +29,7 @@ const JetDriver = {
 };
 const TiburonDriver = {
     driver: 'Tiburon Driver',
-    model: 'Tiburon',
+    model: Models.TiburonModel.model,
     extendedMetadata: {
         name: 'Tiburon Driver',
         description:
@@ -36,7 +38,7 @@ const TiburonDriver = {
 };
 const CloverDriver = {
     driver: 'Clover Driver',
-    model: 'Clover',
+    model: Models.CloverModel.model,
     extendedMetadata: {
         name: 'Clover Driver',
         description:
@@ -45,7 +47,7 @@ const CloverDriver = {
 };
 const RayDriver = {
     driver: 'Ray Driver',
-    model: 'Ray',
+    model: Models.RayModel.model,
     extendedMetadata: {
         name: 'Ray Driver',
         description:
@@ -54,7 +56,7 @@ const RayDriver = {
 };
 const PlumeDriver = {
     driver: 'Plume Driver',
-    model: 'Plume',
+    model: Models.PlumeModel.model,
     extendedMetadata: {
         name: 'Plume Driver',
         description:
@@ -63,7 +65,7 @@ const PlumeDriver = {
 };
 const SparkDriver = {
     driver: 'Spark Driver',
-    model: 'Spark',
+    model: Models.SparkModel.model,
     extendedMetadata: {
         name: 'Spark Driver',
         description:
@@ -72,7 +74,7 @@ const SparkDriver = {
 };
 const CharDriver = {
     driver: 'Char Driver',
-    model: 'Char',
+    model: Models.CharModel.model,
     extendedMetadata: {
         name: 'Char Driver',
         description:
@@ -81,7 +83,7 @@ const CharDriver = {
 };
 const FossilDriver = {
     driver: 'Fossil Driver',
-    model: 'Fossil',
+    model: Models.FossilModel.model,
     extendedMetadata: {
         name: 'Fossil Driver',
         description:

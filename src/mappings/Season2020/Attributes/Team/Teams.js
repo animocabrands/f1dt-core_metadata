@@ -2,45 +2,45 @@ const NoTeam = {
     teamId: '0',
     team: 'None',
 };
-const AlfaRomeoRacing = {
+const AlfaRomeoRacingORLEN = {
     teamId: '1',
-    team: 'Alfa Romeo Racing'
+    team: 'Alfa Romeo Racing ORLEN'
+};
+const ScuderiaAlphaTauriHonda = {
+    teamId: '2',
+    team: 'Scuderia AlphaTauri Honda'
 };
 const ScuderiaFerrari = {
-    teamId: '2',
+    teamId: '3',
     team: 'Scuderia Ferrari'
 };
 const HaasF1Team = {
-    teamId: '3',
+    teamId: '4',
     team: 'Haas F1® Team'
 };
 const McLarenF1Team = {
-    teamId: '4',
+    teamId: '5',
     team: 'McLaren F1® Team'
 };
-const MercedesAMGPetronasMotorsport = {
-    teamId: '5',
-    team: 'Mercedes-AMG Petronas Motorsport'
-};
-const SpScoreRacingPointF1Team = {
+const MercedesAMGPetronasFormulaOneTeam = {
     teamId: '6',
-    team: 'SpScore Racing Point F1® Team'
+    team: 'Mercedes-AMG Petronas Formula One Team'
+};
+const BWTRacingPointF1Team = {
+    teamId: '7',
+    team: 'BWT Racing Point F1® Team'
 };
 const AstonMartinRedBullRacing = {
-    teamId: '7',
+    teamId: '8',
     team: 'Aston Martin Red Bull Racing'
 };
-const RenaultF1Team = {
-    teamId: '8',
-    team: 'Renault F1® Team'
-};
-const RedBullToroRossoHonda = {
+const RenaultDPWorldF1Team = {
     teamId: '9',
-    team: 'Red Bull Toro Rosso Honda'
+    team: 'Renault DP World F1® Team'
 };
-const ROKiTWilliamsRacing = {
+const WilliamsRacing = {
     teamId: '10',
-    team: 'ROKiT Williams Racing'
+    team: 'Williams Racing'
 };
 const F1DeltaTimeTeam = {
     teamId: '111',
@@ -49,15 +49,15 @@ const F1DeltaTimeTeam = {
 
 module.exports = {
     NoTeam,
-    AlfaRomeoRacing,
+    AlfaRomeoRacingORLEN,
+    ScuderiaAlphaTauriHonda,
     ScuderiaFerrari,
     HaasF1Team,
     McLarenF1Team,
-    MercedesAMGPetronasMotorsport,
-    SpScoreRacingPointF1Team,
+    MercedesAMGPetronasFormulaOneTeam,
+    BWTRacingPointF1Team,
     AstonMartinRedBullRacing,
-    RenaultF1Team,
-    RedBullToroRossoHonda,
-    ROKiTWilliamsRacing,
-    F1DeltaTimeTeam,
+    RenaultDPWorldF1Team,
+    WilliamsRacing,
+    F1DeltaTimeTeam
 };

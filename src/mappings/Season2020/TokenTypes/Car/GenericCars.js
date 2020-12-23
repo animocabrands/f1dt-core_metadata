@@ -1,94 +1,106 @@
 const Models = require('../../Attributes/Model/Models');
 
-const SatsumaCar = {
-    car: 'Satsuma Car',
-    model: Models.SatsumaModel.model,
+const RiptideCar = {
+    car: 'Riptide',
+    model: Models.RiptideModel.model,
     extendedMetadata: {
-        name: 'Satsuma Car',
+        name: 'Riptide',
         description:
-            'Satsuma cars are backed by some of the best engineers around, crafters of premium machines, with near peerless engines. Every season you can guarantee that a Satsuma will be carrying some of the best technology available.',
+            'As the Riptide name and livery would suggest, this car is known for its ferocity and water-like pliability.'
     },
 };
-const CarbonCar = {
-    car: 'Carbon Car',
-    model: Models.CarbonModel.model,
+const SaberCar = {
+    car: 'Saber',
+    model: Models.SaberModel.model,
     extendedMetadata: {
-        name: 'Carbon Car',
+        name: 'Saber',
         description:
-            'Carbon cars are known for being tirelessly maintained and tweaked every race, every season. Perfection is the pursuit, and the Carbon car takes steps towards it every season.',
+            'The Saber car lives up to the name, with aerodynamics that allow it to cut through the air, maximising downforce along the way.'
     },
 };
-const JetCar = {
-    car: 'Jet Car',
-    model: Models.JetModel.model,
+const CosmoCar = {
+    car: 'Cosmo',
+    model: Models.CosmoModel.model,
     extendedMetadata: {
-        name: 'Jet Car',
+        name: 'Cosmo',
         description:
-            'Reliability and Jet go hand in hand. Although not the fastest on the grid, you can guarantee that a Jet car will always finish any Grand Prix® it enters.',
+            'Cutting edge engineering, with performance to match, the Cosmo car represents an evolution in sporting technology.'
     },
 };
-const TiburonCar = {
-    car: 'Tiburon Car',
-    model: Models.TiburonModel.model,
+const SpecterCar = {
+    car: 'Specter',
+    model: Models.SpecterModel.model,
     extendedMetadata: {
-        name: 'Tiburon Car',
+        name: 'Specter',
         description:
-            'The Tiburon car demonstrates the evolution of aerodynamics. It converts all air flow during a race into an advantage.',
+            'Agile and flexible, the Specter makes tight corners and overtaking opportunities an easy task.'
     },
 };
-const CloverCar = {
-    car: 'Clover Car',
-    model: Models.CloverModel.model,
+const PythonCar = {
+    car: 'Python',
+    model: Models.PythonModel.model,
     extendedMetadata: {
-        name: 'Clover Car',
+        name: 'Python',
         description:
-            "Clover cars are known for a ruggedness that isn't often associated with the sport. But this moniker is accurate, as a Clover car will perform on any track in any weather and always finish.",
+            'Raw power and high downforce - the Python sticks to the track like no other.'
     },
 };
-const RayCar = {
-    car: 'Ray Car',
-    model: Models.RayModel.model,
+const HornetCar = {
+    car: 'Hornet',
+    model: Models.HornetModel.model,
     extendedMetadata: {
-        name: 'Ray Car',
+        name: 'Hornet',
         description:
-            'New to the grid, Ray cars are making an impression on the grid. They perform consistently with great speed and have a good track record for finishing races.',
+            'Blistering acceleration and ferocious corner exits are hallmarks of the Hornet.'
     },
 };
-const PlumeCar = {
-    car: 'Plume Car',
-    model: Models.PlumeModel.model,
+const ShutdownCar = {
+    car: 'Shutdown',
+    model: Models.ShutdownModel.model,
     extendedMetadata: {
-        name: 'Plume Car',
+        name: 'Shutdown',
         description:
-            'Plume are another car known for reliability. Engineered to push boundaries and perform on the limits of racing, they consistently finish races.',
+            'Contrary to what its name may suggest, the almost rugged Shutdown car is reliable, sturdy and masterfully machined.'
     },
 };
-const SparkCar = {
-    car: 'Spark Car',
-    model: Models.SparkModel.model,
+const EmpressCar = {
+    car: 'Empress',
+    model: Models.EmpressModel.model,
     extendedMetadata: {
-        name: 'Spark Car',
+        name: 'Empress',
         description:
-            'Not known to have the most innovative engineering, Spark cars are all about speed, especially when it comes to cornering. They race through turns at an unrivalled pace and challenge any car for pace on the straights.',
+            "Regal and commanding, the Empress car's presence on the track is not to be ignored, or you may find yourself quickly behind it."
     },
 };
-const CharCar = {
-    car: 'Char Car',
-    model: Models.CharModel.model,
+const TalonCar = {
+    car: 'Talon',
+    model: Models.TalonModel.model,
     extendedMetadata: {
-        name: 'Char Car',
+        name: 'Talon',
         description:
-            'The chasis of a Char has seen every track many times over. It can be relied upon to consistently deliver speed and results. Fast, agile, and sturdy, it stays around for a reason.',
+            'Focused on speed and running tight lines, the Talon is able to stick to the quickest racing line with ease regardless of surface condition.'
     },
 };
-const FossilCar = {
-    car: 'Fossil Car',
-    model: Models.FossilModel.model,
+const WrathCar = {
+    car: 'Wrath',
+    model: Models.WrathModel.model,
     extendedMetadata: {
-        name: 'Fossil Car',
+        name: 'Wrath',
         description:
-            'Drivers say that Fossil cars seem to "behave". They\'re agile and able to dance to the whim of the driver. It\'s easy to look good when behind the wheel of the Fossil.',
+            "Air flow superiority makes the Wrath convert every stream into an efficient force."
     },
 };
 
-module.exports = {SatsumaCar, CarbonCar, JetCar, TiburonCar, CloverCar, RayCar, PlumeCar, SparkCar, CharCar, FossilCar};
+module.exports = {
+    RiptideCar, 
+    SaberCar, 
+    CosmoCar, 
+    SpecterCar,
+    PythonCar,
+    HornetCar,
+    ShutdownCar,
+    EmpressCar,
+    TalonCar,
+    WrathCar
+};
+
