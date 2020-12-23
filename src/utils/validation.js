@@ -373,9 +373,8 @@ function validateSeasonMetadata(coreMetadata) {
         if (driver === undefined) {
             errors.push(new AttributeNameNotFound('driver', 'driverId', coreMetadata.driverId));
         }
-        // console.log(seasonMappings.Attributes.Team.ByDriver);
         // console.log(driver);
-        const team = seasonMappings.Attributes.Team.ByDriver[driver.driver];
+        const team = seasonMappings.Attributes.Team.ByName[driver.team];
         if (coreMetadata.teamId != team.teamId) {
             errors.push(
                 new WrongLinkedAttribute(

@@ -43,7 +43,7 @@ const FossilModel = {
     modelId: '10',
 };
 
-module.exports = [
+module.exports = {
     NoModel,
     SatsumaModel,
     CarbonModel,
@@ -55,4 +55,4 @@ module.exports = [
     SparkModel,
     CharModel,
     FossilModel,
-];
+};

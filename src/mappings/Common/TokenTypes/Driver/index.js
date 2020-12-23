@@ -1,7 +1,10 @@
 const { createCollectionId } = require('../../../../utils/ids');
 const Season = require('../../Attributes/Season');
+
 const TeamDrivers = require('./TeamDrivers');
+const allTeamDrivers = Object.values(TeamDrivers);
 const GenericDrivers = require('./GenericDrivers');
+const allGenericDrivers = Object.values(GenericDrivers);
 
 
 const Type = 'Driver';
@@ -17,20 +20,20 @@ const ById = {};
 const ByModel = {};
 const ByTokenId = {};
 
-for (const teamDriver of TeamDrivers) {
+for (const teamDriver of allTeamDrivers) {
     ById[teamDriver.driverId] = teamDriver;
     ByName[teamDriver.driver] = teamDriver;
 }
 
-for (const genericDriver of GenericDrivers) {
+for (const genericDriver of allGenericDrivers) {
     ByModel[genericDriver.model] = genericDriver;
     ByName[genericDriver.driver] = genericDriver;
 }
 
 module.exports = {
-    All: [...TeamDrivers, ...GenericDrivers],
-    TeamDrivers,
-    GenericDrivers,
+    All: [...allTeamDrivers, ...allGenericDrivers],
+    allTeamDrivers,
+    allGenericDrivers,
     ByModel,
     ById,
     ByName,

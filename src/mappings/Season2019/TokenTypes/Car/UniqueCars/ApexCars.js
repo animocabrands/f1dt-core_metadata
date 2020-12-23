@@ -1,6 +1,9 @@
+const Teams = require('../../../Attributes/Team/Teams');
+
 const The111 = {
     car: '1-1-1',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811519642769433138067471762254623735906850517137802921006713614358282351',
         name: '1-1-1',
         description:
@@ -10,7 +13,8 @@ const The111 = {
 };
 const MonacoEdition2019 = {
     car: 'Monaco Edition 2019',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811519642769433138069716634478554741710118661826030124595906477970950025',
         name: 'Monaco Edition 2019',
         description:
@@ -20,7 +24,8 @@ const MonacoEdition2019 = {
 };
 const FranceEdition2019 = {
     car: 'France Edition 2019',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811519642769433138070464923316868178625280398936564751629620782852736964',
         name: 'France Edition 2019',
         description:
@@ -30,7 +35,8 @@ const FranceEdition2019 = {
 };
 const JapanEdition2019 = {
     car: 'Japan Edition 2019',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811519642769433138073832223089278520463945971602252805153562392419895211',
         name: 'Japan Edition 2019',
         description:
@@ -40,7 +46,8 @@ const JapanEdition2019 = {
 };
 const ChinaEdition2019AzureDragon = {
     car: 'China Edition 2019 Azure Dragon',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811519642769433138068594201221084622890182495614891308888603627425367044',
         name: 'China Edition 2019 Azure Dragon',
         description:
@@ -51,7 +58,8 @@ const ChinaEdition2019AzureDragon = {
 };
 const ChinaEdition2019VermilionBird = {
     car: 'China Edition 2019 Vermilion Bird',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811519642769433138068594201221084579025658630379725657226027280206136471',
         name: 'China Edition 2019 Vermilion Bird',
         description:
@@ -61,11 +69,11 @@ const ChinaEdition2019VermilionBird = {
     },
 };
 
-module.exports = [
+module.exports = {
     The111,
     MonacoEdition2019,
     FranceEdition2019,
     JapanEdition2019,
     ChinaEdition2019AzureDragon,
     ChinaEdition2019VermilionBird,
-];
+};

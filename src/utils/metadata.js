@@ -325,30 +325,30 @@ function getFullMetadata(id, network = 'mainnet') {
         switch (coreMetadata.type) {
             case Types.Car.type:
                 if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta };
+                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMetadata };
                 } else if (coreMetadata.model != 'None') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta };
+                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMetadata };
                 }
                 break;
             case Types.Driver.type:
                 if (coreMetadata.driver != 'None') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta };
+                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMetadata };
                 } else if (coreMetadata.model) {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta };
+                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMetadata };
                 }
                 break;
             case Types.Part.type:
             case Types.Gear.type:
             case Types.Tyres.type:
                 extendedMetadata = {
-                    ...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta,
+                    ...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMetadata,
                 };
                 break;
         }
     
         const uniqueTokenOverride = seasonMappings.TokenTypes[coreMetadata.type].ByTokenId[id];
         if (uniqueTokenOverride !== undefined) {
-            extendedMetadata = {...extendedMetadata, ...uniqueTokenOverride.extendedMeta};
+            extendedMetadata = {...extendedMetadata, ...uniqueTokenOverride.extendedMetadata};
         }
     
         extendedMetadata.collection = seasonMappings.SubType.ByFullTypeId[fullTypeId].collection;

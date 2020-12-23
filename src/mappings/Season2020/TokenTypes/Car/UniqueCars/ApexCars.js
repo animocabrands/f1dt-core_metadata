@@ -1,6 +1,9 @@
+const Teams = require('../../../Attributes/Team/Teams');
+
 const AustraliaEdition2020 = {
     car: 'Australia Edition 2020',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811546602716100288707640607942812070358492881230413164737582123465049089',
         name: 'Australia Edition 2020',
         description:
@@ -12,7 +15,8 @@ const AustraliaEdition2020 = {
 
 const BahrainEdition2020 = {
     car: 'Bahrain Edition 2020',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811546602716100288708014752361968688459106541463509520898166032185688064',
         name: 'Bahrain Edition 2020',
         description: 'The Bahrain Edition 2020 car features glittering, circular ripples, on its livery with a pearlescent colour profile, together with sinuous lines representing the waters of Bahrain\'s shoreline.',
@@ -22,7 +26,8 @@ const BahrainEdition2020 = {
 
 const SeventythAnniversaryEdition = {
     car : '70th Anniversary Edition',
-    extendedMeta: {
+    team: Teams.F1DeltaTimeTeam.team,
+    extendedMetadata: {
         id: '57897811546602716100288707266463523655339273864666056753785796013120060129280',
         name: '70th Anniversary Edition',
         description: 'The 70th Anniversary Edition car is in celebration of the 70th anniversary of Formula 1. This car represents the long history of Formula 1 which has seen decades of innovation and the very best of technology and engineering combined with the peak of teamwork. The result - the fastest cars in the world, driven by some of the best and most precise drivers. All of these aspects when brought together have delivered decades of monumental moments.',
@@ -30,4 +35,4 @@ const SeventythAnniversaryEdition = {
     }
 }
 
-module.exports = [AustraliaEdition2020, BahrainEdition2020, SeventythAnniversaryEdition];
+module.exports = {AustraliaEdition2020, BahrainEdition2020, SeventythAnniversaryEdition};

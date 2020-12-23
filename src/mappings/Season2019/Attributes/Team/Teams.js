@@ -1,75 +1,53 @@
 const NoTeam = {
     teamId: '0',
     team: 'None',
-    drivers: [],
 };
 const AlfaRomeoRacing = {
     teamId: '1',
-    team: 'Alfa Romeo Racing',
-    car: 'C38',
-    drivers: ['Kimi Räikkönen', 'Antonio Giovinazzi'],
+    team: 'Alfa Romeo Racing'
 };
 const ScuderiaFerrari = {
     teamId: '2',
-    team: 'Scuderia Ferrari',
-    car: 'SF90',
-    drivers: ['Sebastian Vettel', 'Charles Leclerc'],
+    team: 'Scuderia Ferrari'
 };
 const HaasF1Team = {
     teamId: '3',
-    team: 'Haas F1® Team',
-    car: 'VF-19',
-    drivers: ['Romain Grosjean', 'Kevin Magnussen'],
+    team: 'Haas F1® Team'
 };
 const McLarenF1Team = {
     teamId: '4',
-    team: 'McLaren F1® Team',
-    car: 'MCL34',
-    drivers: ['Lando Norris', 'Carlos Sainz'],
+    team: 'McLaren F1® Team'
 };
 const MercedesAMGPetronasMotorsport = {
     teamId: '5',
-    team: 'Mercedes-AMG Petronas Motorsport',
-    car: 'W10',
-    drivers: ['Lewis Hamilton', 'Valtteri Bottas'],
+    team: 'Mercedes-AMG Petronas Motorsport'
 };
 const SpScoreRacingPointF1Team = {
     teamId: '6',
-    team: 'SpScore Racing Point F1® Team',
-    car: 'RP19',
-    drivers: ['Sergio Pérez', 'Lance Stroll'],
+    team: 'SpScore Racing Point F1® Team'
 };
 const AstonMartinRedBullRacing = {
     teamId: '7',
-    team: 'Aston Martin Red Bull Racing',
-    car: 'RB15',
-    drivers: ['Alexander Albon', 'Max Verstappen'],
+    team: 'Aston Martin Red Bull Racing'
 };
 const RenaultF1Team = {
     teamId: '8',
-    team: 'Renault F1® Team',
-    car: 'R.S.19',
-    drivers: ['Daniel Ricciardo', 'Nico Hülkenberg'],
+    team: 'Renault F1® Team'
 };
 const RedBullToroRossoHonda = {
     teamId: '9',
-    team: 'Red Bull Toro Rosso Honda',
-    car: 'STR14',
-    drivers: ['Pierre Gasly', 'Daniil Kvyat'],
+    team: 'Red Bull Toro Rosso Honda'
 };
 const ROKiTWilliamsRacing = {
     teamId: '10',
-    team: 'ROKiT Williams Racing',
-    car: 'FW42',
-    drivers: ['George Russell', 'Robert Kubica'],
+    team: 'ROKiT Williams Racing'
 };
 const F1DeltaTimeTeam = {
     teamId: '111',
     team: 'F1® Delta Time',
-    drivers: [],
 };
 
-module.exports = [
+module.exports = {
     NoTeam,
     AlfaRomeoRacing,
     ScuderiaFerrari,
@@ -82,4 +60,4 @@ module.exports = [
     RedBullToroRossoHonda,
     ROKiTWilliamsRacing,
     F1DeltaTimeTeam,
-];
+};

@@ -4,6 +4,6 @@ const NoTeam = {
     drivers: [],
 };
 
-module.exports = [
+module.exports = {
     NoTeam
-];
+};

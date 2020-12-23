@@ -3,6 +3,6 @@ const NoDriver = {
     driver: 'None',
 };
 
-module.exports = [
+module.exports = {
     NoDriver
-];
+};
