@@ -1,6 +1,8 @@
+const Models = require('../../Attributes/Model/Models');
+
 const SatsumaCar = {
     car: 'Satsuma Car',
-    model: 'Satsuma',
+    model: Models.SatsumaModel.model,
     extendedMetadata: {
         name: 'Satsuma Car',
         description:
@@ -9,7 +11,7 @@ const SatsumaCar = {
 };
 const CarbonCar = {
     car: 'Carbon Car',
-    model: 'Carbon',
+    model: Models.CarbonModel.model,
     extendedMetadata: {
         name: 'Carbon Car',
         description:
@@ -18,7 +20,7 @@ const CarbonCar = {
 };
 const JetCar = {
     car: 'Jet Car',
-    model: 'Jet',
+    model: Models.JetModel.model,
     extendedMetadata: {
         name: 'Jet Car',
         description:
@@ -27,7 +29,7 @@ const JetCar = {
 };
 const TiburonCar = {
     car: 'Tiburon Car',
-    model: 'Tiburon',
+    model: Models.TiburonModel.model,
     extendedMetadata: {
         name: 'Tiburon Car',
         description:
@@ -36,7 +38,7 @@ const TiburonCar = {
 };
 const CloverCar = {
     car: 'Clover Car',
-    model: 'Clover',
+    model: Models.CloverModel.model,
     extendedMetadata: {
         name: 'Clover Car',
         description:
@@ -45,7 +47,7 @@ const CloverCar = {
 };
 const RayCar = {
     car: 'Ray Car',
-    model: 'Ray',
+    model: Models.RayModel.model,
     extendedMetadata: {
         name: 'Ray Car',
         description:
@@ -54,7 +56,7 @@ const RayCar = {
 };
 const PlumeCar = {
     car: 'Plume Car',
-    model: 'Plume',
+    model: Models.PlumeModel.model,
     extendedMetadata: {
         name: 'Plume Car',
         description:
@@ -63,7 +65,7 @@ const PlumeCar = {
 };
 const SparkCar = {
     car: 'Spark Car',
-    model: 'Spark',
+    model: Models.SparkModel.model,
     extendedMetadata: {
         name: 'Spark Car',
         description:
@@ -72,7 +74,7 @@ const SparkCar = {
 };
 const CharCar = {
     car: 'Char Car',
-    model: 'Char',
+    model: Models.CharModel.model,
     extendedMetadata: {
         name: 'Char Car',
         description:
@@ -81,7 +83,7 @@ const CharCar = {
 };
 const FossilCar = {
     car: 'Fossil Car',
-    model: 'Fossil',
+    model: Models.FossilModel.model,
     extendedMetadata: {
         name: 'Fossil Car',
         description:
