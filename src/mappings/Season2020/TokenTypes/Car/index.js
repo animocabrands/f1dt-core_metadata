@@ -22,18 +22,18 @@ const ByModel = {};
 const ByTokenId = {};
 
 for (const teamCar of allTeamCars) {
-    ByName[teamCar.car] = teamCar;
+    ByName[teamCar.name] = teamCar;
     ByTeam[teamCar.team] = teamCar;
 }
 
 for (const genericCar of allGenericCars) {
-    ByName[genericCar.car] = genericCar;
+    ByName[genericCar.name] = genericCar;
     ByModel[genericCar.model] = genericCar;
 }
 
 for (const uniqueCar of allUniqueCars) {
-    ByName[uniqueCar.car] = uniqueCar;
-    ByTokenId[uniqueCar.extendedMetadata.id] = uniqueCar;
+    ByName[uniqueCar.name] = uniqueCar;
+    ByTokenId[uniqueCar.id] = uniqueCar;
 }
 
 module.exports = {

@@ -18,16 +18,15 @@ const CollectionId = createCollectionId(Season.ById['0'].seasonId, TypeId, SubTy
 const ByName = {};
 const ById = {};
 const ByModel = {};
-const ByTokenId = {};
 
 for (const teamDriver of allTeamDrivers) {
     ById[teamDriver.driverId] = teamDriver;
-    ByName[teamDriver.driver] = teamDriver;
+    ByName[teamDriver.name] = teamDriver;
 }
 
 for (const genericDriver of allGenericDrivers) {
     ByModel[genericDriver.model] = genericDriver;
-    ByName[genericDriver.driver] = genericDriver;
+    ByName[genericDriver.name] = genericDriver;
 }
 
 module.exports = {
@@ -37,7 +36,6 @@ module.exports = {
     ByModel,
     ById,
     ByName,
-    ByTokenId,
     collection: Collection,
     collectionId: CollectionId,
     typeId: TypeId,
