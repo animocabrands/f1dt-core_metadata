@@ -2,7 +2,7 @@ const { getCoreMetadata } = require('./src/utils/metadata');
 const { createTokenId } = require('./src/utils/ids');
 const assert = require('assert').strict;
 
-const scores = {
+const t1Scores = {
     '0': {
         min: 900,
         max: 1001,
@@ -45,7 +45,85 @@ const scores = {
     },
 };
 
-const buildTokens = (tokenType, rarity) => {
+const t2Scores = {
+    '1': {
+        min: 500,
+        max: 600,
+    },
+    '2': {
+        min: 440,
+        max: 520,
+    },
+    '3': {
+        min: 390,
+        max: 450,
+    },
+    '4': {
+        min: 340,
+        max: 395,
+    },
+    '5': {
+        min: 320,
+        max: 345,
+    },
+    '6': {
+        min: 300,
+        max: 325,
+    },
+    '7': {
+        min: 270,
+        max: 310,
+    },
+    '8': {
+        min: 250,
+        max: 280,
+    },
+    '9': {
+        min: 200,
+        max: 255,
+    },
+};
+
+const t3Scores = {
+    '1': {
+        min: 500,
+        max: 600,
+    },
+    '2': {
+        min: 440,
+        max: 525,
+    },
+    '3': {
+        min: 390,
+        max: 460,
+    },
+    '4': {
+        min: 340,
+        max: 395,
+    },
+    '5': {
+        min: 320,
+        max: 350,
+    },
+    '6': {
+        min: 300,
+        max: 335,
+    },
+    '7': {
+        min: 270,
+        max: 330,
+    },
+    '8': {
+        min: 250,
+        max: 290,
+    },
+    '9': {
+        min: 200,
+        max: 255,
+    },
+};
+
+const buildTokens = (tokenType, rarity, scores) => {
     try {
         const min = scores[rarity].min;
         const max = scores[rarity].max;
@@ -78,32 +156,110 @@ const buildTokens = (tokenType, rarity) => {
     }
 }
 
+const verifyNonDriverStatsNfts = (tokens) => {
+    for (const token of tokens) {
+        const metadata = getCoreMetadata(token);
+        assert(metadata);
+        const racingData = metadata.racing;
+        assert(racingData);
+
+        const stat1 = racingData['Top Speed'];
+        assert(stat1 >= min && stat1 <= max);
+        const stat2 = racingData['Acceleration'];
+        assert(stat2 >= min && stat2 <= max);
+        const stat3 = racingData['Grip'];
+        assert(stat3 >= min && stat3 <= max);
+    }
+}
+
+const verifyDriverStatsNfts = (tokens) => {
+    for (const token of tokens) {
+        const metadata = getCoreMetadata(token);
+        assert(metadata);
+        const racingData = metadata.racing;
+        assert(racingData);
+
+        const stat1 = racingData['Stamina'];
+        assert(stat1 >= min && stat1 <= max);
+        const stat2 = racingData['Aggression'];
+        assert(stat2 >= min && stat2 <= max);
+        const stat3 = racingData['Concentration'];
+        assert(stat3 >= min && stat3 <= max);
+    }
+}
+
 describe('RandomizedNfts', function() {
     describe.only('#car', function() {
         it("Check racing attributes are in range", function() {
             this.timeout(1000 * 60 * 60 * 3);
 
-            const scoresMap = new Map(Object.entries(scores));
+            const scoresMap = new Map(Object.entries(t1Scores));
             scoresMap.forEach((val, key) => {
                 console.log("Testing rarity " + key);
 
-                const min = val.min;
-                const max = val.max;
-                const tokens = buildTokens('Car', key);
+                const tokens = buildTokens('Car', key, t1Scores);
                 console.log("Created "+ tokens.length + " tokens for " + key);
-                for (const t of tokens) {
-                    const metadata = getCoreMetadata(t);
-                    assert(metadata);
-                    const racingData = metadata.racing;
-                    assert(racingData);
+                verifyNonDriverStatsNfts(tokens);
+            });
+        });
+    });
 
-                    const stat1 = racingData['Top Speed'];
-                    assert(stat1 >= min && stat1 <= max);
-                    const stat2 = racingData['Acceleration'];
-                    assert(stat2 >= min && stat2 <= max);
-                    const stat3 = racingData['Grip'];
-                    assert(stat3 >= min && stat3 <= max);
-                }
+    describe.only('#driver', function() {
+        it("Check racing attributes are in range", function() {
+            this.timeout(1000 * 60 * 60 * 3);
+
+            const scoresMap = new Map(Object.entries(t1Scores));
+            scoresMap.forEach((val, key) => {
+                console.log("Testing rarity " + key);
+
+                const tokens = buildTokens('Driver', key, t1Scores);
+                console.log("Created "+ tokens.length + " tokens for " + key);
+                verifyDriverStatsNfts(tokens);
+            });
+        });
+    });
+
+    describe.only('#gear', function() {
+        it("Check racing attributes are in range", function() {
+            this.timeout(1000 * 60 * 60 * 3);
+
+            const scoresMap = new Map(Object.entries(t2Scores));
+            scoresMap.forEach((val, key) => {
+                console.log("Testing rarity " + key);
+
+                const tokens = buildTokens('Gear', key, t2Scores);
+                console.log("Created "+ tokens.length + " tokens for " + key);
+                verifyNonDriverStatsNfts(tokens);
+            });
+        });
+    });
+
+    describe.only('#part', function() {
+        it("Check racing attributes are in range", function() {
+            this.timeout(1000 * 60 * 60 * 3);
+
+            const scoresMap = new Map(Object.entries(t2Scores));
+            scoresMap.forEach((val, key) => {
+                console.log("Testing rarity " + key);
+
+                const tokens = buildTokens('Part', key, t2Scores);
+                console.log("Created "+ tokens.length + " tokens for " + key);
+                verifyDriverStatsNfts(tokens);
+            });
+        });
+    });
+
+    describe.only('#tyres', function() {
+        it("Check racing attributes are in range", function() {
+            this.timeout(1000 * 60 * 60 * 3);
+
+            const scoresMap = new Map(Object.entries(t3Scores));
+            scoresMap.forEach((val, key) => {
+                console.log("Testing rarity " + key);
+
+                const tokens = buildTokens('Tyres', key, t3Scores);
+                console.log("Created "+ tokens.length + " tokens for " + key);
+                verifyNonDriverStatsNfts(tokens);
             });
         });
     });
