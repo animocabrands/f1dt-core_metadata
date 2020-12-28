@@ -123,28 +123,71 @@ const t3Scores = {
     },
 };
 
-const buildTokens = (tokenType, rarity, scores) => {
+const createTestTokenId = (tokenType, rarity, stat1, stat2, stat3) => {
+    if (tokenType == 'Car' || tokenType == 'Driver') {
+        return createTokenId({
+            type: tokenType,
+            subType: 'None',
+            season: '2019',
+            rarity: rarity,
+            teamId: '1',
+            racing: {
+                stat1: stat1,
+                stat2: stat2,
+                stat3: stat3,
+            }
+        });
+    } else if (tokenType == 'Gear') {
+        return createTokenId({
+            type: tokenType,
+            season: '2019',
+            rarity: rarity,
+            subTypeId: '1',
+            subType: 'Gloves',
+            racing: {
+                stat1: stat1,
+                stat2: stat2,
+                stat3: stat3,
+            }
+        });
+    } else if (tokenType == 'Tyres') {
+        return createTokenId({
+            type: tokenType,
+            season: '2019',
+            rarity: rarity,
+            subTypeId: '1',
+            subType: 'Soft',
+            racing: {
+                stat1: stat1,
+                stat2: stat2,
+                stat3: stat3,
+            }
+        });
+    } else {
+        return createTokenId({
+            type: tokenType,
+            season: '2019',
+            rarity: rarity,
+            subTypeId: '1',
+            subType: 'Power Unit',
+            racing: {
+                stat1: stat1,
+                stat2: stat2,
+                stat3: stat3,
+            }
+        });
+    }
+}
+
+const buildTokens = (tokenType, rarity, min, max) => {
     try {
-        const min = scores[rarity].min;
-        const max = scores[rarity].max;
         const slotCount = max - min + 1;
         const squaredSlotCount = slotCount * slotCount;
         var tokens = new Array(squaredSlotCount * slotCount);
         for (let i = 0; i < slotCount; i++) {
             for (let j = 0; j < slotCount; j++) {
                 for (let k = 0; k < slotCount; k++) {
-                    const t = createTokenId({
-                        type: tokenType,
-                        subType: 'None',
-                        season: '2019',
-                        team: 'Alfa Romeo Racing',
-                        rarity: rarity,
-                        racing: {
-                            stat1: min + i,
-                            stat2: min + j,
-                            stat3: min + k,
-                        }
-                    });
+                    const t = createTestTokenId(tokenType, rarity, min + i, min + j, min + k)
                     tokens[i * squaredSlotCount + j * slotCount + k] = t;
                 }
             }
@@ -156,7 +199,7 @@ const buildTokens = (tokenType, rarity, scores) => {
     }
 }
 
-const verifyNonDriverStatsNfts = (tokens) => {
+const verifyNonDriverStatsNfts = (tokens, min, max) => {
     for (const token of tokens) {
         const metadata = getCoreMetadata(token);
         assert(metadata);
@@ -172,7 +215,7 @@ const verifyNonDriverStatsNfts = (tokens) => {
     }
 }
 
-const verifyDriverStatsNfts = (tokens) => {
+const verifyDriverStatsNfts = (tokens, min, max) => {
     for (const token of tokens) {
         const metadata = getCoreMetadata(token);
         assert(metadata);
@@ -188,78 +231,78 @@ const verifyDriverStatsNfts = (tokens) => {
     }
 }
 
-describe('RandomizedNfts', function() {
-    describe.only('#car', function() {
-        it("Check racing attributes are in range", function() {
+describe('RandomizedNfts', async function() {
+    describe.only('#car', async function() {
+        it("Check racing attributes are in range", async function() {
             this.timeout(1000 * 60 * 60 * 3);
 
             const scoresMap = new Map(Object.entries(t1Scores));
             scoresMap.forEach((val, key) => {
                 console.log("Testing rarity " + key);
 
-                const tokens = buildTokens('Car', key, t1Scores);
+                const tokens = buildTokens('Car', key, val.min, val.max);
                 console.log("Created "+ tokens.length + " tokens for " + key);
-                verifyNonDriverStatsNfts(tokens);
+                verifyNonDriverStatsNfts(tokens, val.min, val.max);
             });
         });
     });
 
-    describe.only('#driver', function() {
-        it("Check racing attributes are in range", function() {
+    describe.only('#driver', async function() {
+        it("Check racing attributes are in range", async function() {
             this.timeout(1000 * 60 * 60 * 3);
 
             const scoresMap = new Map(Object.entries(t1Scores));
             scoresMap.forEach((val, key) => {
                 console.log("Testing rarity " + key);
 
-                const tokens = buildTokens('Driver', key, t1Scores);
+                const tokens = buildTokens('Driver', key, val.min, val.max);
                 console.log("Created "+ tokens.length + " tokens for " + key);
-                verifyDriverStatsNfts(tokens);
+                verifyDriverStatsNfts(tokens, val.min, val.max);
             });
         });
     });
 
-    describe.only('#gear', function() {
-        it("Check racing attributes are in range", function() {
+    describe.only('#gear', async function() {
+        it("Check racing attributes are in range", async function() {
             this.timeout(1000 * 60 * 60 * 3);
 
             const scoresMap = new Map(Object.entries(t2Scores));
             scoresMap.forEach((val, key) => {
                 console.log("Testing rarity " + key);
 
-                const tokens = buildTokens('Gear', key, t2Scores);
+                const tokens = buildTokens('Gear', key, val.min, val.max);
                 console.log("Created "+ tokens.length + " tokens for " + key);
-                verifyNonDriverStatsNfts(tokens);
+                verifyDriverStatsNfts(tokens, val.min, val.max);
             });
         });
     });
 
-    describe.only('#part', function() {
-        it("Check racing attributes are in range", function() {
+    describe.only('#part', async function() {
+        it("Check racing attributes are in range", async function() {
             this.timeout(1000 * 60 * 60 * 3);
 
             const scoresMap = new Map(Object.entries(t2Scores));
             scoresMap.forEach((val, key) => {
                 console.log("Testing rarity " + key);
 
-                const tokens = buildTokens('Part', key, t2Scores);
+                const tokens = buildTokens('Part', key, val.min, val.max);
                 console.log("Created "+ tokens.length + " tokens for " + key);
-                verifyDriverStatsNfts(tokens);
+                verifyNonDriverStatsNfts(tokens, val.min, val.max);
             });
         });
     });
 
-    describe.only('#tyres', function() {
-        it("Check racing attributes are in range", function() {
+    describe.only('#tyres', async function() {
+        it("Check racing attributes are in range", async function() {
             this.timeout(1000 * 60 * 60 * 3);
 
             const scoresMap = new Map(Object.entries(t3Scores));
             scoresMap.forEach((val, key) => {
                 console.log("Testing rarity " + key);
 
-                const tokens = buildTokens('Tyres', key, t3Scores);
+                const tokens = buildTokens('Tyres', key, val.min, val.max);
                 console.log("Created "+ tokens.length + " tokens for " + key);
-                verifyNonDriverStatsNfts(tokens);
+                verifyNonDriverStatsNfts(tokens, val.min, val.max);
             });
         });
     });
