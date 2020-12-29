@@ -23,13 +23,13 @@
         "assert": "^2.0.0",
         "commander": "^6.0.0",
         "nodemon": "^2.0.6",
-        "prettier": "^2.0.5"
+        "prettier": "^2.0.5",
+        "mocha": "^8.2.1"
     },
     "dependencies": {
         "@animoca/blockchain-inventory_metadata": "^0.0.1",
         "big-integer": "^1.6.48",
         "bits.js": "^0.1.1",
-        "lodash.isequal": "^4.5.0",
-        "mocha": "^8.2.1"
+        "lodash.isequal": "^4.5.0"
     }
 }
