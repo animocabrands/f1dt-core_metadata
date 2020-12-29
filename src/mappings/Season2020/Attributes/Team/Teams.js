@@ -6,37 +6,37 @@ const AlfaRomeoRacingORLEN = {
     teamId: '1',
     team: 'Alfa Romeo Racing ORLEN'
 };
-const ScuderiaAlphaTauriHonda = {
-    teamId: '2',
-    team: 'Scuderia AlphaTauri Honda'
-};
 const ScuderiaFerrari = {
-    teamId: '3',
+    teamId: '2',
     team: 'Scuderia Ferrari'
 };
 const HaasF1Team = {
-    teamId: '4',
+    teamId: '3',
     team: 'Haas F1® Team'
 };
 const McLarenF1Team = {
-    teamId: '5',
+    teamId: '4',
     team: 'McLaren F1® Team'
 };
 const MercedesAMGPetronasFormulaOneTeam = {
-    teamId: '6',
+    teamId: '5',
     team: 'Mercedes-AMG Petronas Formula One Team'
 };
 const BWTRacingPointF1Team = {
-    teamId: '7',
+    teamId: '6',
     team: 'BWT Racing Point F1® Team'
 };
 const AstonMartinRedBullRacing = {
-    teamId: '8',
+    teamId: '7',
     team: 'Aston Martin Red Bull Racing'
 };
 const RenaultDPWorldF1Team = {
-    teamId: '9',
+    teamId: '8',
     team: 'Renault DP World F1® Team'
+};
+const ScuderiaAlphaTauriHonda = {
+    teamId: '9',
+    team: 'Scuderia AlphaTauri Honda'
 };
 const WilliamsRacing = {
     teamId: '10',
