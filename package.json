@@ -1,6 +1,6 @@
 {
     "name": "@animoca/f1dt-core_metadata",
-    "version": "1.1.8",
+    "version": "1.2.0",
     "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
     "main": "src/index.js",
     "scripts": {
@@ -12,12 +12,6 @@
     },
     "author": "Animoca Brands",
     "license": "MIT",
-    "dependencies": {
-        "@animoca/blockchain-inventory_metadata": "^0.0.1",
-        "big-integer": "^1.6.48",
-        "bits.js": "^0.1.1",
-        "lodash.isequal": "^4.5.0"
-    },
     "devDependencies": {
         "commander": "^6.0.0",
         "assert": "^2.0.0",
@@ -29,5 +23,11 @@
         "@babel/preset-env": "^7.8.7",
         "@babel/register": "^7.8.6",
         "nodemon": "^2.0.6"
+    },
+    "dependencies": {
+        "@animoca/blockchain-inventory_metadata": "^0.0.1",
+        "big-integer": "^1.6.48",
+        "bits.js": "^0.1.1",
+        "lodash.isequal": "^4.5.0"
     }
 }

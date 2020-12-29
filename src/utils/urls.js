@@ -1,16 +1,23 @@
-const config = require('../../config');
-const Type = require('../mappings/Common/Attributes/Type/Types');
+const config = require('../config');
+const Types = require('../mappings/Common/Attributes/Type/Types');
+const Rarities = require('../mappings/Common/Attributes/Rarity/Rarities');
 
 function getImageKey(name, coreMetadata) {
     const tier = coreMetadata.rarityTier.toLowerCase();
 
     switch (coreMetadata.type) {
-        case Type.Track.type:
+        case Types.Track.type:
             return `${name.replace(/\s+/g, '')}.png`;
-        case Type.Car.type:
-        case Type.Driver.type:
+        case Types.Car.type:
+            if (coreMetadata.rarity.toString() === Rarities.Apex.rarity) {
+                return `${name.replace(/\s+/g, '')}.png`;
+            }
+            else {
+                return `${coreMetadata.season}_${name.replace(/\s+/g, '')}_${tier}.png`;
+            }
+        case Types.Driver.type:
             return `${coreMetadata.season}_${name.replace(/\s+/g, '')}_${tier}.png`;
-        case Type.Tyres.type:
+        case Types.Tyres.type:
             return `${coreMetadata.season}_${name.toLowerCase().replace(/\s+/g, '')}_${tier}.png`;
         default:
             return `${coreMetadata.season}_${coreMetadata.subType.toLowerCase().replace(/\s+/, '')}_${tier}.png`;
@@ -18,7 +25,7 @@ function getImageKey(name, coreMetadata) {
 }
 
 function getImageUrl(name, coreMetadata, network = 'mainnet') {
-    return `${config[network].assets_url}/image/${getImageKey(name, coreMetadata)}`;
+    return `${config[network].image_url}/image/nft/${getImageKey(name, coreMetadata)}`;
 }
 
 function getExternalUrl(id, network = 'mainnet') {

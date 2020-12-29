@@ -1,4 +1,8 @@
 # Changelog
+## 1.2.0
+* Migrate image url to another CDN
+* Forced Apex car to generate image url using getImageUrl
+
 ## 1.1.8
 * Updated youtube url for Australia Edition 2020
 * Added 70th Anniversary Edition Apex car
