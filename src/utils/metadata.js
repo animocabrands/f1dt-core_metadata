@@ -334,10 +334,10 @@ function getFullMetadata(id, network = 'mainnet') {
                             description: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].description
                         };
 
-                        if (seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].image !== undefined) {
+                        if (seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].imageName !== undefined) {
                             extendedMetadata = {
                                 ...extendedMetadata,
-                                image: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].image
+                                image: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].imageName
                             }
                         }
                     }
@@ -346,7 +346,7 @@ function getFullMetadata(id, network = 'mainnet') {
                         extendedMetadata = {
                             name: seasonMappings.TokenTypes.Car.ByTokenId[id].name,
                             description: seasonMappings.TokenTypes.Car.ByTokenId[id].description,
-                            image: seasonMappings.TokenTypes.Car.ByTokenId[id].image,
+                            image: seasonMappings.TokenTypes.Car.ByTokenId[id].imageName,
                             youtube_url: seasonMappings.TokenTypes.Car.ByTokenId[id].youtube_url,
                         }
                     }
@@ -412,12 +412,12 @@ function getFullMetadata(id, network = 'mainnet') {
     extendedMetadata.collection_url = getMetadataUrl(extendedMetadata.collection_id, network);
 
     //Image
-    if (extendedMetadata.image === undefined) {
+    if (extendedMetadata.imageName === undefined) {
         extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
     }
     else {
         //To use the override image file name in extended metadata
-        extendedMetadata.image = getImageUrl(extendedMetadata.image, coreMetadata, network);
+        extendedMetadata.image = getImageUrl(extendedMetadata.imageName, coreMetadata, network);
     }
     
     //External Url

@@ -1,6 +1,6 @@
 const NoDriver = {
     driverId: '0',
-    driver: 'None',
+    name: 'None',
 };
 
 module.exports = {

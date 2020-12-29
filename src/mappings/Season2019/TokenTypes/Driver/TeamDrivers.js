@@ -2,7 +2,7 @@ const Teams = require('../../Attributes/Team/Teams');
 
 const NoDriver = {
     driverId: '0',
-    driver: 'None',
+    name: 'None',
 };
 const DanielRicciardo = {
     driverId: '3',

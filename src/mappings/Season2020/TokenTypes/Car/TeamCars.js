@@ -27,7 +27,7 @@ const MCL35 = {
 };
 const W11EQPowerPlus = {
     name: 'W11 EQ Power+',
-    image: 'W11 EQ Power Plus',
+    imageName: 'W11 EQ Power Plus',
     team: Teams.MercedesAMGPetronasFormulaOneTeam.team,
     description: "The Mercedes car is an evolution on last year's Championship winning car, with changes to over 10,000 components making it the fastest Mercedes yet."
 };
