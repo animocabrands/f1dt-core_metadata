@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "scripts": {
         "prettier": "prettier --write src",
-        "test": "mocha"
+        "test": "mocha --timeout 180000"
     },
     "repository": {
         "type": "git",
