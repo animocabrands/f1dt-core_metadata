@@ -333,6 +333,13 @@ function getFullMetadata(id, network = 'mainnet') {
                             name: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].name,
                             description: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].description
                         };
+
+                        if (seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].image !== undefined) {
+                            extendedMetadata = {
+                                ...extendedMetadata,
+                                image: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].image
+                            }
+                        }
                     }
                     else {
                         //Apex or First Edition
