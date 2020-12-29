@@ -1,5 +1,5 @@
 # Changelog
-## 1.2.0
+## 1.2.1
 * Migrate image url to another CDN
 * Forced Apex car to generate image url using getImageUrl
 
