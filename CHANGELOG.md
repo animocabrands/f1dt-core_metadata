@@ -1,4 +1,9 @@
 # Changelog
+
+## 2.0.0
+* Added 2020 NFTs
+* Code cleanup (removing extendedMeta in TokenTypes)
+
 ## 1.2.1
 * Migrate image url to another CDN
 * Forced Apex car to generate image url using getImageUrl
