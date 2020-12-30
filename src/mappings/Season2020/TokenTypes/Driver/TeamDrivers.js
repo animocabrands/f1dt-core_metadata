@@ -6,7 +6,7 @@ const NoDriver = {
 };
 const KimiRaikkonen = {
     driverId: '7',
-    name: 'Kimi Raikkonen',
+    name: 'Kimi Räikkönen',
     team: Teams.AlfaRomeoRacingORLEN.team,
     description: 'Kimi Räikkönen, otherwise known as "The Iceman", continues 2020 with Alfa Romeo. He has since become the driver with the most Grand Prix starts, surpassing the previous record of 324.'
 };
@@ -78,7 +78,7 @@ const ValtteriBottas = {
 };
 const SergioPerez = {
     driverId: '11',
-    name: 'Sergio Perez',
+    name: 'Sergio Pérez',
     team: Teams.BWTRacingPointF1Team.team,
     description: 'Sergio Perez began the 2019 season strongly, ending the season in 10th place overall.'
 };
