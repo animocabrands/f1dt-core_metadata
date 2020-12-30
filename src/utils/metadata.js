@@ -334,6 +334,7 @@ function getFullMetadata(id, network = 'mainnet') {
                             description: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].description
                         };
 
+                        //image override
                         if (seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].imageName !== undefined) {
                             extendedMetadata = {
                                 ...extendedMetadata,
@@ -364,6 +365,14 @@ function getFullMetadata(id, network = 'mainnet') {
                         name: seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].name,
                         description: seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].description,                  
                     };
+
+                    //image override
+                    if (seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].imageName !== undefined) {
+                        extendedMetadata = {
+                            ...extendedMetadata,
+                            image: seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].imageName
+                        }
+                    }
                 } else if (coreMetadata.model) {
                     extendedMetadata = { 
                         name: seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].name,
@@ -412,12 +421,12 @@ function getFullMetadata(id, network = 'mainnet') {
     extendedMetadata.collection_url = getMetadataUrl(extendedMetadata.collection_id, network);
 
     //Image
-    if (extendedMetadata.imageName === undefined) {
+    if (extendedMetadata.image === undefined) {
         extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
     }
     else {
         //To use the override image file name in extended metadata
-        extendedMetadata.image = getImageUrl(extendedMetadata.imageName, coreMetadata, network);
+        extendedMetadata.image = getImageUrl(extendedMetadata.image, coreMetadata, network);
     }
     
     //External Url

@@ -43,7 +43,7 @@ const EmpressDriver = {
 const TalonDriver = {
     name: Models.TalonModel.model + " Driver",
     model: Models.TalonModel.model,
-    description: 'Few are as complete and skilled as the Char driver. Composed, but not reserved. They attack, but do so without danger ever being present.'
+    description: 'Sharp and aware, Talon drivers are skilled overtakers and can defend and attack in equal measure. '
 };
 const WrathDriver = {
     name: Models.WrathModel.model + " Driver",

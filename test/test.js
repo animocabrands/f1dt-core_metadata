@@ -1,6 +1,6 @@
 const assert = require('assert');
 const isEqual = require('lodash.isequal');
-const { getCoreMetadata, getFullMetadata } = require('../../src/utils/metadata');
+const { getCoreMetadata, getFullMetadata } = require('../src/utils/metadata');
 
 const tokenIds = [
     '57897811519642769433138067471762254623735906850517137802921006713614358282351', // the 1-1-1
@@ -17,7 +17,7 @@ for (const tokenId of tokenIds) {
     console.log(fullMetadata);
 }
 
-const { createTokenId } = require('../../src/utils/ids');
+const { createTokenId } = require('../src/utils/ids');
 
 let tokenId1, tokenId2;
 

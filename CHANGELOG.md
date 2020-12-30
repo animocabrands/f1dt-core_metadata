@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1
+* Updated generic driver description
+* Fixed image override settings is not working
+* Fixed Kimi Räikkönen and Sergio Pérez image url is not correct
+
 ## 2.0.0
 * Added 2020 NFTs
 * Code cleanup (removing extendedMeta in TokenTypes)
