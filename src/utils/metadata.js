@@ -8,7 +8,7 @@ const commonMappings = require('../mappings/Common');
 const Types = require('../mappings/Common/Attributes/Type/Types');
 
 function getCoreMetadata(id) {
-    const RepairList = require('../mappings/RepairList');
+    const RepairList = require('../RepairList');
     id = RepairList[id] || id;
     id = RepairList[id] || id; //For doubly wrong tokens
 
@@ -37,13 +37,13 @@ function getCoreMetadata(id) {
         subType = commonMappings.SubType.ByFullTypeId[fullTypeId].subType;
         team    = commonMappings.Attributes.Team.ById[decoded.teamId].team;
         model   = commonMappings.Attributes.Model.ById[decoded.modelId].model;
-        driver  = commonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
+        driver  = commonMappings.TokenTypes.Driver.ById[decoded.driverId].name;
     } else {
         let seasonMappings = require(`../mappings/Season${season}`);
         subType = seasonMappings.SubType.ByFullTypeId[fullTypeId].subType;        
         team    = seasonMappings.Attributes.Team.ById[decoded.teamId].team;
         model   = seasonMappings.Attributes.Model.ById[decoded.modelId].model;
-        driver  = seasonMappings.TokenTypes.Driver.ById[decoded.driverId].driver;
+        driver  = seasonMappings.TokenTypes.Driver.ById[decoded.driverId].name;
     }    
 
     let coreMetadata = {
@@ -321,34 +321,64 @@ function getFullMetadata(id, network = 'mainnet') {
         //For season's token
         const fullTypeId = `${coreMetadata.typeId},${coreMetadata.subTypeId}`;
         const seasonMappings = require(`../mappings/Season${coreMetadata.season}`);
+        const Teams = require(`../mappings/Season${coreMetadata.season}/Attributes/Team/Teams`);
+        const Models = require(`../mappings/Season${coreMetadata.season}/Attributes/Model/Models`);
     
         switch (coreMetadata.type) {
             case Types.Car.type:
-                if (coreMetadata.team != 'None' && coreMetadata.team != 'F1® Delta Time') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].extendedMeta };
-                } else if (coreMetadata.model != 'None') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].extendedMeta };
+                if (coreMetadata.team != Teams.NoTeam.team) {
+                    //Team Car
+                    if (coreMetadata.team != Teams.F1DeltaTimeTeam.team) {
+                        extendedMetadata = { 
+                            name: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].name,
+                            description: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].description
+                        };
+
+                        if (seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].imageName !== undefined) {
+                            extendedMetadata = {
+                                ...extendedMetadata,
+                                image: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].imageName
+                            }
+                        }
+                    }
+                    else {
+                        //Apex or First Edition
+                        extendedMetadata = {
+                            name: seasonMappings.TokenTypes.Car.ByTokenId[id].name,
+                            description: seasonMappings.TokenTypes.Car.ByTokenId[id].description,
+                            image: seasonMappings.TokenTypes.Car.ByTokenId[id].imageName,
+                            youtube_url: seasonMappings.TokenTypes.Car.ByTokenId[id].youtube_url,
+                        }
+                    }
+                } else if (coreMetadata.model != Models.NoModel.model) {
+                    //Model Car
+                    extendedMetadata = { 
+                        name: seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].name,
+                        description: seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].description                    
+                     };
                 }
                 break;
             case Types.Driver.type:
                 if (coreMetadata.driver != 'None') {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].extendedMeta };
+                    extendedMetadata = { 
+                        name: seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].name,
+                        description: seasonMappings.TokenTypes.Driver.ByName[coreMetadata.driver].description,                  
+                    };
                 } else if (coreMetadata.model) {
-                    extendedMetadata = { ...seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].extendedMeta };
+                    extendedMetadata = { 
+                        name: seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].name,
+                        description: seasonMappings.TokenTypes.Driver.ByModel[coreMetadata.model].description
+                    };
                 }
                 break;
             case Types.Part.type:
             case Types.Gear.type:
             case Types.Tyres.type:
                 extendedMetadata = {
-                    ...seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].extendedMeta,
+                    name: seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].name,
+                    description: seasonMappings.TokenTypes[coreMetadata.type].ByFullTypeId[fullTypeId].description
                 };
                 break;
-        }
-    
-        const uniqueTokenOverride = seasonMappings.TokenTypes[coreMetadata.type].ByTokenId[id];
-        if (uniqueTokenOverride !== undefined) {
-            extendedMetadata = {...extendedMetadata, ...uniqueTokenOverride.extendedMeta};
         }
     
         extendedMetadata.collection = seasonMappings.SubType.ByFullTypeId[fullTypeId].collection;
@@ -370,20 +400,27 @@ function getFullMetadata(id, network = 'mainnet') {
         }
     }
 
+    //Collection Id
     if (extendedMetadata.collection_id === undefined) {
         extendedMetadata.collection_id = inventoryIds.NonFungible.getCollectionId(
             BigInteger(id),
             constants.CollectionMaskLength
         );
     }
+
+    //Collection Url
     extendedMetadata.collection_url = getMetadataUrl(extendedMetadata.collection_id, network);
-    if (extendedMetadata.image === undefined) {
+
+    //Image
+    if (extendedMetadata.imageName === undefined) {
         extendedMetadata.image = getImageUrl(extendedMetadata.name, coreMetadata, network);
     }
     else {
         //To use the override image file name in extended metadata
-        extendedMetadata.image = getImageUrl(extendedMetadata.image, coreMetadata, network);
+        extendedMetadata.image = getImageUrl(extendedMetadata.imageName, coreMetadata, network);
     }
+    
+    //External Url
     extendedMetadata.external_url = getExternalUrl(id, network);
 
     //Special Handling on a particular token type

@@ -1,23 +1,22 @@
 const Gears = require('./Gears');
+const allGears = Object.values(Gears);
 
 const TypeId = '3';
 
 const ByName = {};
 const BySubTypeId = {};
 const ByFullTypeId = {};
-const ByTokenId = {};
 
-for (const gear of Gears) {
+for (const gear of allGears) {
     ByName[gear.subType] = gear;
     BySubTypeId[gear.subTypeId] = gear;
     ByFullTypeId[gear.fullTypeId] = gear;
 }
 
 module.exports = {
-    All: Gears,
+    All: allGears,
     ByName,
     BySubTypeId,
     ByFullTypeId,
-    ByTokenId,
     typeId: TypeId,
 };

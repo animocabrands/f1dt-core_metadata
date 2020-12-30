@@ -4,7 +4,8 @@
     "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
     "main": "src/index.js",
     "scripts": {
-        "prettier": "prettier --write src"
+        "prettier": "prettier --write src",
+        "test": "mocha --timeout 180000"
     },
     "repository": {
         "type": "git",
@@ -13,16 +14,17 @@
     "author": "Animoca Brands",
     "license": "MIT",
     "devDependencies": {
-        "commander": "^6.0.0",
-        "assert": "^2.0.0",
-        "prettier": "^2.0.5",
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.8.7",
         "@babel/node": "^7.8.7",
         "@babel/plugin-proposal-class-properties": "^7.8.3",
         "@babel/preset-env": "^7.8.7",
         "@babel/register": "^7.8.6",
-        "nodemon": "^2.0.6"
+        "assert": "^2.0.0",
+        "commander": "^6.0.0",
+        "nodemon": "^2.0.6",
+        "prettier": "^2.0.5",
+        "mocha": "^8.2.1"
     },
     "dependencies": {
         "@animoca/blockchain-inventory_metadata": "^0.0.1",

@@ -2,7 +2,7 @@ const config = require('../config');
 const Types = require('../mappings/Common/Attributes/Type/Types');
 const Rarities = require('../mappings/Common/Attributes/Rarity/Rarities');
 
-function getImageKey(name, coreMetadata) {
+function getImageName(name, coreMetadata) {
     const tier = coreMetadata.rarityTier.toLowerCase();
 
     switch (coreMetadata.type) {
@@ -25,7 +25,7 @@ function getImageKey(name, coreMetadata) {
 }
 
 function getImageUrl(name, coreMetadata, network = 'mainnet') {
-    return `${config[network].image_url}/image/nft/${getImageKey(name, coreMetadata)}`;
+    return `${config[network].assets_url}/image/nft/${getImageName(name, coreMetadata)}`;
 }
 
 function getExternalUrl(id, network = 'mainnet') {
@@ -33,7 +33,7 @@ function getExternalUrl(id, network = 'mainnet') {
 }
 
 function getMetadataUrl(id, network = 'mainnet') {
-    return `${config[network].assets_url}/json/${id}`;
+    return `${config[network].nft_url}/json/${id}`;
 }
 
 module.exports = {

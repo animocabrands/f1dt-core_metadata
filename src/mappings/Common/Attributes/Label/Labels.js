@@ -27,4 +27,4 @@ const GrandPrix2020 = {
     labelId: '7',
 };
 
-module.exports = [NoLabel, Prime, GrandPrix2019, Infinity, Meow, FirstEdition, GrandPrix2020];
+module.exports = {NoLabel, Prime, GrandPrix2019, Infinity, Meow, FirstEdition, GrandPrix2020};

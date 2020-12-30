@@ -4,6 +4,10 @@ const TeamCars = require('./TeamCars');
 const GenericCars = require('./GenericCars');
 const UniqueCars = require('./UniqueCars');
 
+const allGenericCars = Object.values(GenericCars);
+const allUniqueCars = Object.values(UniqueCars);
+const allTeamCars = Object.values(TeamCars);
+
 const Type = 'Car';
 const TypeId = '1';
 const SubType = 'None';
@@ -17,26 +21,26 @@ const ByTeam = {};
 const ByModel = {};
 const ByTokenId = {};
 
-for (const teamCar of TeamCars) {
-    ByName[teamCar.car] = teamCar;
+for (const teamCar of allTeamCars) {
+    ByName[teamCar.name] = teamCar;
     ByTeam[teamCar.team] = teamCar;
 }
 
-for (const genericCar of GenericCars) {
-    ByName[genericCar.car] = genericCar;
+for (const genericCar of allGenericCars) {
+    ByName[genericCar.name] = genericCar;
     ByModel[genericCar.model] = genericCar;
 }
 
-for (const uniqueCar of UniqueCars) {
-    ByName[uniqueCar.car] = uniqueCar;
-    ByTokenId[uniqueCar.extendedMeta.id] = uniqueCar;
+for (const uniqueCar of allUniqueCars) {
+    ByName[uniqueCar.name] = uniqueCar;
+    ByTokenId[uniqueCar.id] = uniqueCar;
 }
 
 module.exports = {
-    All: [...TeamCars, ...GenericCars, ...UniqueCars],
-    TeamCars,
-    GenericCars,
-    UniqueCars,
+    All: [...allTeamCars, ...allGenericCars, ...allUniqueCars],
+    allTeamCars,
+    allGenericCars,
+    allUniqueCars,
     ByName,
     ByTeam,
     ByModel,
