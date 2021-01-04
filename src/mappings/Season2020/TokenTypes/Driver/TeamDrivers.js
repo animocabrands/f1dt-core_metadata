@@ -45,7 +45,7 @@ const RomainGrosjean = {
     driverId: '8',
     name: 'Romain Grosjean',
     team: Teams.HaasF1Team.team,
-    description: "Romain Grosjean's best place finish of the 2019 Formula 1 season came in Germany, as he went on to finish 7th."
+    description: "Romain Grosjean's best place finish in 2020 was 9th during the German Grand Prix™, with a crash cutting his season short during an incident in Bahrain."
 };
 const KevinMagnussen = {
     driverId: '20',
@@ -69,7 +69,7 @@ const LewisHamilton = {
     driverId: '44',
     name: 'Lewis Hamilton',
     team: Teams.MercedesAMGPetronasFormulaOneTeam.team,
-    description: 'Lewis Hamilton is one of the most successful drivers ever to race, with records in podiums, wins, and pole positions, as well as numerous Championships.'
+    description: 'Lewis Hamilton is one of the most successful drivers ever to race, and in 2020 equalled the record of 7 Drivers Championships, and broke the previous wins record of Grand Prix(tm) wins, achieving 95.'
 };
 const ValtteriBottas = {
     driverId: '77',
@@ -82,49 +82,49 @@ const SergioPerez = {
     name: 'Sergio Pérez',
     imageName: 'SergioPerez',
     team: Teams.BWTRacingPointF1Team.team,
-    description: 'Sergio Pérez began the 2019 season strongly, ending the season in 10th place overall.'
+    description: 'In a solid season, Sergio Pérez achieved his first race win in Bahrain, at the Sahkir Grand Prix™.'
 };
 const LanceStroll = {
     driverId: '18',
     name: 'Lance Stroll',
     team: Teams.BWTRacingPointF1Team.team,
-    description: 'Lance Stroll joined Racing Point in 2019, with a good maiden season which saw him get 4th place in Germany.'
+    description: 'Lance Stroll achieved a podium finish at Monza, finishing 3rd, and then went on to replicate this at the end of the season in Bahrain with a second 3rd place finish for 2020.'
 };
 const MaxVerstappen = {
     driverId: '33',
     name: 'Max Verstappen',
     team: Teams.AstonMartinRedBullRacing.team,
-    description: "Max Verstappen's fourth season at Red Bull saw him with his best record to date, finishing the season 3rd overall on points."
+    description: "With 11 podiums and 2 wins, Max Verstappen ended the season 3rd in the Drivers' Championship for the second year running."
 };
 const AlexanderAlbon = {
     driverId: '23',
     name: 'Alexander Albon',
     team: Teams.AstonMartinRedBullRacing.team,
-    description: 'In August 2019, Albon moved from Toro Rosso to Red Bull. He earned his highest finished - 4th - in Japan, and went on to win the Rookie of the Year.'
+    description: 'The Tuscan Grand Prix™ saw Alexander Albon achieve his first career podium finish, and he went on to achieve a second podium in Bahrain.'
 };
 const DanielRicciardo = {
     driverId: '3',
     name: 'Daniel Ricciardo',
     team: Teams.RenaultDPWorldF1Team.team,
-    description: 'Daniel Ricciardo moved to Renault in 2019. His best finish of the year was in Italy when he finished 4th.'
+    description: "Daniel Ricciardo was able to get Renault's first podium finish since 2011, with a 3rd place finish at the Eifel Grand Prix™."
 };
 const EstebanOcon = {
     driverId: '31',
     name: 'Esteban Ocon',
     team: Teams.RenaultDPWorldF1Team.team,
-    description: 'Esteban Ocon returns as a full time Formula 1 driver this season, joining Renault.'
+    description: 'Esteban Ocon returned as a full time Formula 1 driver in 2020, with his best finish of the season coming in Bahrain with a 2nd place finish.'
 };
 const GeorgeRussell = {
     driverId: '63',
     name: 'George Russell',
     team: Teams.WilliamsRacing.team,
-    description: 'George Russell made his Formula 1 debut last season with Williams, and continues with Williams in 2020.'
+    description: 'George Russell continued with Williams in 2020, and after a one race stint with Mercedes achieved his first points in Formula 1.'
 };
 const NicholasLatifi = {
     driverId: '6',
     name: 'Nicholas Latifi',
     team: Teams.WilliamsRacing.team,
-    description: 'Nicholas Latifi joins the grid in 2020, racing with Williams.'
+    description: 'Nicholas Latifi joined the grid in 2020 with Williams, and had a solid debut season with the British team.'
 };
 
 module.exports = {
