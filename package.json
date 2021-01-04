@@ -5,7 +5,8 @@
     "main": "src/index.js",
     "scripts": {
         "prettier": "prettier --write src",
-        "test": "mocha --timeout 180000"
+        "test": "mocha --timeout 180000",
+        "debug": "nodemon --exec babel-node"
     },
     "repository": {
         "type": "git",

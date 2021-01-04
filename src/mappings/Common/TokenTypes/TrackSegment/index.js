@@ -19,15 +19,17 @@ const getName = (trackId, rarity, segment) => {
     {
         case Track.CircuitdeMonaco.trackId:
             trackSegment = TrackSegments.MonacoTrackSegments;
-            break;          
+            break;
+        case Track.CircuitdeBelgian.trackId:
+            trackSegment = TrackSegments.BelgiumTrackSegments;
+            break;
     }
 
-    //First Segment Id then fallback to rarity
-    if (segment in trackSegment) {
-        return trackSegment[segment].name;
+    if (trackSegment(segment) !== undefined) {
+        return trackSegment(segment).name;
     }
-    else if(rarity in trackSegment) {
-        return trackSegment[rarity].name;
+    else if (trackSegment(rarity) !== undefined){
+        return trackSegment(rarity).name;
     }
 
     return '';
@@ -40,14 +42,17 @@ const getDescription = (trackId, rarity, segment) => {
         case Track.CircuitdeMonaco.trackId:
             trackSegment = TrackSegments.MonacoTrackSegments;
             break;
+        case Track.CircuitdeBelgian.trackId:
+            trackSegment = TrackSegments.BelgiumTrackSegments;
+            break;
     }
 
     //First Segment Id then fallback to rarity
-    if (segment in trackSegment) {
-        return trackSegment[segment].description;
+    if (trackSegment(segment) !== undefined) {
+        return trackSegment(segment).description;
     }
-    else if (rarity in trackSegment) {
-        return trackSegment[rarity].description;
+    else if (trackSegment(rarity) !== undefined) {
+        return trackSegment(rarity).description;
     }
 
     return '';
