@@ -3,6 +3,9 @@ const { createTokenId } = require('../../src/utils/ids');
 const BigInteger = require('big-integer');
 
 try {
+    //Monaco Track 1A
+    // const tokenId = '57906645701046769624701038793205201920385629599121490370346791920872332460032';
+
     //Belgium Track 1A
     const tokenId = createTokenId({
         // using mapped values
@@ -20,9 +23,6 @@ try {
     });
     console.log(tokenId);
     console.log(JSON.stringify(getFullMetadata(tokenId)));
-
-    //Monaco Track 1A
-    console.log(JSON.stringify(getFullMetadata('57906645701046769624701038793205201920385629599121490370346791920872332460032')));
 } catch (e) {
     console.error(e);
 }

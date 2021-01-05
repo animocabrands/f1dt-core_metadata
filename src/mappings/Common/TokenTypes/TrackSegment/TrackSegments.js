@@ -13,8 +13,8 @@ const MonacoTrackSegments = (rarity) => {
     }    
 }
 
-const belgiumTrackName = 'Formula 1 Rolex Belgian Grand Prix 2020';
-const belgiumTrackDesc = 'The illustrious FORMULA 1 GRAND PRIX DE BELGIAN';
+const belgiumTrackName = 'Formula 1 Grand Prix de Spa-Francorchamps 2020';
+const belgiumTrackDesc = 'Set in 300 acres of forest in the mountains of Belgium, Circuit de Spa-Francorchamps is one of Formula 1’s most challenging and historic race tracks. The legendary circuit has been hosting the FORMULA 1 BELGIAN GRAND PRIX since 1925.';
 const BelgiumTrackSegments = (rarity) => {
     switch(rarity) {
         default:

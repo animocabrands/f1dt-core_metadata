@@ -13,7 +13,7 @@ const CircuitdeMonaco = {
 
 const CircuitdeBelgian = {
     trackId: '2',
-    track: 'Circuit de Belgian',
+    track: 'Circuit de Spa-Francorchamps',
     countryId: Countries.Belgium
 }
 
