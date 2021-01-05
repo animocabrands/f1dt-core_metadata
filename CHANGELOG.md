@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.2
+* Added Belgium Track Segment
+
 ## 2.0.1
 * Updated generic driver description
 * Fixed image override settings is not working

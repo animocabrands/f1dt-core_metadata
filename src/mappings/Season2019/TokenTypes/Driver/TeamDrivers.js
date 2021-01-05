@@ -25,6 +25,7 @@ const SebastianVettel = {
 const KimiRaikkonen = {
     driverId: '7',
     name: 'Kimi Räikkönen',
+    imageName: 'KimiRaikkonen',
     team: Teams.AlfaRomeoRacing.team,
     description: 'Kimi Räikkönen is a Finnish driver competing for Alfa Romeo Racing. After starting his F1 career with Sauber 19 years ago, in 2019 he will race in his 300th Formula 1 Grand Prix™.'
 };
@@ -43,6 +44,7 @@ const PierreGasly = {
 const SergioPerez = {
     driverId: '11',
     name: 'Sergio Pérez',
+    imageName: 'SergioPerez',
     team: Teams.SpScoreRacingPointF1Team.team,
     description: 'Sergio Pérez is a Mexican driver competing for Racing Point. A solid, analytical driver, this is his 6th season driving for Racing Point.'
 };
@@ -79,8 +81,9 @@ const DaniilKvyat = {
 const NicoHulkenberg = {
     driverId: '27',
     name: 'Nico Hülkenberg',
+    imageName: 'NicoHulkenberg',
     team: Teams.RenaultF1Team.team,
-    description: 'Nico Hulkenberg is a German driver competing for Renault. A strategic midfield driver, he earns solid points.',
+    description: 'Nico Hülkenberg is a German driver competing for Renault. A strategic midfield driver, he earns solid points.',
 };
 const MaxVerstappen = {
     driverId: '33',
