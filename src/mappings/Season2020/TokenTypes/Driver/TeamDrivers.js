@@ -9,37 +9,37 @@ const KimiRaikkonen = {
     name: 'Kimi Räikkönen',
     imageName: 'KimiRaikkonen',
     team: Teams.AlfaRomeoRacingORLEN.team,
-    description: 'Kimi Räikkönen, otherwise known as "The Iceman", continues 2020 with Alfa Romeo. He has since become the driver with the most Grand Prix starts, surpassing the previous record of 324.'
+    description: 'Kimi Räikkönen, otherwise known as "The Iceman", continues 2020 with Alfa Romeo. He has since become the driver with the most Grand Prix™ starts, surpassing the previous record of 324.'
 };
 const AntonioGiovinazzi = {
     driverId: '99',
     name: 'Antonio Giovinazzi',
     team: Teams.AlfaRomeoRacingORLEN.team,
-    description: "During the 2019 Formula 1 season, Antonio Giovinazzi became the first Italian driver in nearly 10 years to win points in a Grand Prix."
+    description: "Antonio Giovinazzi had a solid second season with Alfa Romeo in 2020, achieving points at three Grands Prix™, finishing the season 17th in the drivers' championship."
 };
 const PierreGasly = {
     driverId: '10',
     name: 'Pierre Gasly',
     team: Teams.ScuderiaAlphaTauriHonda.team,
-    description: "Pierre Gasly had previously won Toro Rosso their highest ever finish in a Grand Prix with second place in Brazil."
+    description: "In 2020 Pierre Gasly became the first Frenchman to win a Grand Prix™ in 24 years and gave his team, Alpha Tauri, their first race victory since 2008."
 };
 const DaniilKvyat = {
     driverId: '26',
     name: 'Daniil Kvyat',
     team: Teams.ScuderiaAlphaTauriHonda.team,
-    description: 'Damiil Kvyat returned to Toro Rosso in 2019 for the third time, and has been retained for the switch to AlphaTauri.'
+    description: "Daniil Kvyat grabbed his first points of the 2020 season at Austria, at the Styrian Grand Prix™ and went on to have a strong 4th place finish at Imola."
 };
 const SebastianVettel = {
     driverId: '5',
     name: 'Sebastian Vettel',
     team: Teams.ScuderiaFerrari.team,
-    description: 'Sebastian Vettel has won 4 Championships during his career, amassing 53 wins in the process.'
+    description: 'A decorated driver with 4 Championships during his career, Sebastian Vettel had a tough 2020 season. But he still managed a podium finish in Turkey, ultimately ending 13th in the driver championship.'
 };
 const CharlesLeclerc = {
     driverId: '16',
     name: 'Charles Leclerc',
     team: Teams.ScuderiaFerrari.team,
-    description: 'During a successful 2019 season with Ferrari, Charles Leclerc won the most pole positions of any driver through the season.'
+    description: "Charles Leclerc ended the 2020 season with 98 points, securing 8th in the drivers' championship. He managed 2 podium finishes during this challenging season."
 };
 const RomainGrosjean = {
     driverId: '8',
@@ -51,19 +51,19 @@ const KevinMagnussen = {
     driverId: '20',
     name: 'Kevin Magnussen',
     team: Teams.HaasF1Team.team,
-    description: 'In 2019, Kevin Magnussen set the fastest lap in Singapore, which he had also done the year prior.'
+    description: 'Kevin Magnussen had a tough season in the Haas during 2020, with his highest finish of the season being 10th in the Hungarian Grand Prix™.'
 };
 const CarlosSainz = {
     driverId: '55',
     name: 'Carlos Sainz',
     team: Teams.McLarenF1Team.team,
-    description: 'After joining McLaren at the beginning of the 2019 season, Carlos Sainz went on to get his first podium finish in Formula 1.'
+    description: 'Carlos Sainz had his best season so far in 2020, getting his second podium and a 2nd place finish in Italian Grand Prix™. He also achieved his first fastest lap in Austria, setting a new lap record in the process.'
 };
 const LandoNorris = {
     driverId: '4',
     name: 'Lando Norris',
     team: Teams.McLarenF1Team.team,
-    description: 'Lando Norris continues with McLaren in 2020, after his impressive debut season in 2019.'
+    description: "In 2020, Lando Norris achieved the feat of becoming the third youngest driver to get on a podium at the Austrian Grand Prix™. It was a strong season that saw McLaren reach 3rd in the constructors' championship."
 };
 const LewisHamilton = {
     driverId: '44',
@@ -75,7 +75,7 @@ const ValtteriBottas = {
     driverId: '77',
     name: 'Valtteri Bottas',
     team: Teams.MercedesAMGPetronasFormulaOneTeam.team,
-    description: 'In the first race of the 2019 season, Valtteri Bottas put together the fastest lap, and ended up taking first place in Australia. 2019 was his best season to date.'
+    description: "Valtteri Bottas achieved 11 podium finishes in 2020, with 2 of those being wins. His performance contributed to Mercedes winning the Constructors' Championship."
 };
 const SergioPerez = {
     driverId: '11',

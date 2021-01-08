@@ -1,4 +1,6 @@
 # Changelog
+## 2.0.3
+* Updated 2020 Team Drivers description
 
 ## 2.0.2
 * Added Belgium Track Segment
