@@ -75,7 +75,7 @@ const ValtteriBottas = {
     driverId: '77',
     name: 'Valtteri Bottas',
     team: Teams.MercedesAMGPetronasFormulaOneTeam.team,
-    description: "Valtteri Bottas achieved 11 podium finishes in 2020, with 2 of those being wins. His performance contributed to Mercedes winning the Constructors' Championship. "
+    description: "Valtteri Bottas achieved 11 podium finishes in 2020, with 2 of those being wins. His performance contributed to Mercedes winning the Constructors' Championship."
 };
 const SergioPerez = {
     driverId: '11',
