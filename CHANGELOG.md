@@ -1,4 +1,7 @@
 # Changelog
+## 2.0.4
+* Fixed Lewis Hamilton description
+
 ## 2.0.3
 * Updated 2020 Team Drivers description
 

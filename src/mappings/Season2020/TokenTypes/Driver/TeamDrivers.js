@@ -69,7 +69,7 @@ const LewisHamilton = {
     driverId: '44',
     name: 'Lewis Hamilton',
     team: Teams.MercedesAMGPetronasFormulaOneTeam.team,
-    description: 'Lewis Hamilton is one of the most successful drivers ever to race, and in 2020 equalled the record of 7 Drivers Championships, and broke the previous wins record of Grand Prix(tm) wins, achieving 95.'
+    description: 'Lewis Hamilton is one of the most successful drivers ever to race, and in 2020 equalled the record of 7 Drivers Championships, and broke the previous wins record of Grand Prix™ wins, achieving 95.'
 };
 const ValtteriBottas = {
     driverId: '77',
