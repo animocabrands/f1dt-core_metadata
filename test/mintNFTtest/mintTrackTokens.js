@@ -28,7 +28,7 @@ try {
     console.error(e);
 }
 
-const rarityToSegmentIdRangeMap = {
+const segmentIdRangeMap = {
     '1': { // Monaco
         '1': { // Legendary
             min: 'B'.charCodeAt(0),
@@ -42,15 +42,15 @@ const rarityToSegmentIdRangeMap = {
             min: 'I'.charCodeAt(0),
             max: 'P'.charCodeAt(0),
         },
-    }
+    },
 };
 
-const rarityToTrackCountMap = {
+const trackCountMap = {
     '1': { // Monaco
         '1': 12, // Legendary
         '2': 20, // Epic
         '4': 25, // Rare
-    }
+    },
 };
 
 const rarityToEarningsMap = {
@@ -82,12 +82,12 @@ describe('Tracks', function() {
         it("Build tokens", function() {
             const trackIds = Object.keys(TrackById).filter(key => key !== '0' && key !== '2');
             trackIds.forEach(trackId => {
-                const rangeMap = new Map(Object.entries(rarityToSegmentIdRangeMap[trackId]));
+                const rangeMap = new Map(Object.entries(segmentIdRangeMap[trackId]));
                 rangeMap.forEach((range, rarity) => {
                     const earnings = rarityToEarningsMap[rarity];
                     for (let i = range.min; i <= range.max; i++) {
                         const segmentId = '' + i;
-                        for (let j = 1; j <= rarityToTrackCountMap[trackId][rarity]; j++) {
+                        for (let j = 1; j <= trackCountMap[trackId][rarity]; j++) {
                             const zoneId = '' + j;
                             const country = TrackById[trackId].countryId.country;
                             const tokenId = createTrackTokenId(rarity, country, trackId, segmentId, zoneId, earnings);
