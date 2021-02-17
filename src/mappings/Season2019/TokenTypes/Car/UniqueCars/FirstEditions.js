@@ -52,6 +52,7 @@ const HaasF1TeamFirstEdition = {
     name: 'Haas First Edition',
     team: Teams.HaasF1Team.team,
     id: '57897811519642769430490106739117151866133748323199397351218951843666148201361',
+    description: 'Sporting a radically engineered front wing and improved airflow in general, the VF-19 will be a force to reckoned with in 2019.',
     youtube_url: 'https://www.youtube.com/watch?v=hV_9E0liIPA'
 };
 const ROKiTWilliamsRacingFirstEdition = {

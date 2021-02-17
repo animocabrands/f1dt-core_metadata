@@ -309,6 +309,27 @@ function getOpenseaMetadata(coreMetadata) {
     return attributes;
 }
 
+function getTokenExtendedMetadata(token, metadata = {}) {
+    if (token !== undefined) {
+        if (token.name !== undefined) {
+            metadata.name = token.name;
+        }
+
+        if (token.description !== undefined) {
+            metadata.description = token.description;
+        }
+
+        if (token.imageName !== undefined) {
+            metadata.image = token.imageName;
+        }
+
+        if (token.youtube_url !== undefined) {
+            metadata.youtube_url = token.youtube_url;
+        }
+    }
+
+    return metadata;
+}
 function getFullMetadata(id, network = 'mainnet') {
     const coreMetadata = getCoreMetadata(id);
     let openseaMetadata = getOpenseaMetadata(coreMetadata);
@@ -327,36 +348,19 @@ function getFullMetadata(id, network = 'mainnet') {
         switch (coreMetadata.type) {
             case Types.Car.type:
                 if (coreMetadata.team != Teams.NoTeam.team) {
-                    //Team Car
-                    if (coreMetadata.team != Teams.F1DeltaTimeTeam.team) {
-                        extendedMetadata = { 
-                            name: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].name,
-                            description: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].description
-                        };
+                    const teamCar = seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team];
+                    const specialCar = seasonMappings.TokenTypes.Car.ByTokenId[id];
 
-                        //image override
-                        if (seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].imageName !== undefined) {
-                            extendedMetadata = {
-                                ...extendedMetadata,
-                                image: seasonMappings.TokenTypes.Car.ByTeam[coreMetadata.team].imageName
-                            }
-                        }
+                    if (teamCar !== undefined) {
+                        extendedMetadata = getTokenExtendedMetadata(teamCar, extendedMetadata);
                     }
-                    else {
-                        //Apex or First Edition
-                        extendedMetadata = {
-                            name: seasonMappings.TokenTypes.Car.ByTokenId[id].name,
-                            description: seasonMappings.TokenTypes.Car.ByTokenId[id].description,
-                            image: seasonMappings.TokenTypes.Car.ByTokenId[id].imageName,
-                            youtube_url: seasonMappings.TokenTypes.Car.ByTokenId[id].youtube_url,
-                        }
+
+                    if (specialCar !== undefined) {
+                        extendedMetadata = getTokenExtendedMetadata(specialCar, extendedMetadata);
                     }
                 } else if (coreMetadata.model != Models.NoModel.model) {
-                    //Model Car
-                    extendedMetadata = { 
-                        name: seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].name,
-                        description: seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model].description                    
-                     };
+                    const modelCar = seasonMappings.TokenTypes.Car.ByModel[coreMetadata.model];
+                    extendedMetadata = getTokenExtendedMetadata(modelCar, extendedMetadata);
                 }
                 break;
             case Types.Driver.type:
