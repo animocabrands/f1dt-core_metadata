@@ -36,7 +36,7 @@ const ChinaEdition2019AzureDragon = {
     id: '57897811519642769433138068594201221084622890182495614891308888603627425367044',
     description:
         'The China Edition 2019 Azure Dragon NFT is the first of the F1® Delta Time “Four Guardians” race cars. The Azure Dragon (Qinglong in Chinese) is a mythological creature representing the East and the season of spring. The black and azure livery of the “China Edition 2019 Azure Dragon” is embellished by two gold dragons, each holding square-holed Chinese coins that represent great wealth for the car’s owner.',
-    youtube_url: 'https://youtu.be/gXdJdxL91Fs'
+    youtube_url: 'https://www.youtube.com/watch?v=gXdJdxL91Fs'
 };
 const ChinaEdition2019VermilionBird = {
     name: 'China Edition 2019 Vermilion Bird',
