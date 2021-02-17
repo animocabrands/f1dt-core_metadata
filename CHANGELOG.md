@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.6
+* Fixed First edition Cars are missing youtube_url attribute
+
 ## 2.0.5
 * Revert tokenId: 57899578366707547814966713827535462487986658084231150927309255110625459205623 from team Aston Martin back to Toro Rosso
 
