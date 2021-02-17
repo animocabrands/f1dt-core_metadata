@@ -1,4 +1,6 @@
 # Changelog
+## 2.0.8
+* Fixed China Azure Dragon edition youtube url is using a shortern youtube url
 
 ## 2.0.7
 * Fixed FirstEdition car images should be align with the team car image
