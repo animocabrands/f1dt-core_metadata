@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.7
+* Fixed FirstEdition car images should be align with the team car image
+
 ## 2.0.6
 * Fixed First edition Cars are missing youtube_url attribute
 
