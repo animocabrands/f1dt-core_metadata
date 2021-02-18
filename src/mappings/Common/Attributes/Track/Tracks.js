@@ -8,13 +8,13 @@ const NoTrack = {
 const CircuitdeMonaco = {
     trackId: '1',
     track: 'Circuit de Monaco',
-    countryId: Countries.Monaco
+    countryId: Countries.Monaco.countryId
 };
 
 const CircuitdeBelgian = {
     trackId: '2',
     track: 'Circuit de Spa-Francorchamps',
-    countryId: Countries.Belgium
+    countryId: Countries.Belgium.countryId
 }
 
 module.exports = {
