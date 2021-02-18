@@ -1,4 +1,8 @@
 # Changelog
+
+## 2.0.9
+* Minor fix on Track.js countryId should use the countryId in Countries.js instead of an object
+
 ## 2.0.8
 * Fixed China Azure Dragon edition youtube url is using a shortern youtube url
 

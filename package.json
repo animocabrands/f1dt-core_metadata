@@ -1,6 +1,6 @@
 {
     "name": "@animoca/f1dt-core_metadata",
-    "version": "2.0.8",
+    "version": "2.0.9",
     "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
     "main": "src/index.js",
     "scripts": {
