@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0.9
+* Minor fix on Track.js countryId should use the countryId in Countries.js instead of an object
+
+## 2.0.8
+* Fixed China Azure Dragon edition youtube url is using a shortern youtube url
+
+## 2.0.7
+* Fixed FirstEdition car images should be align with the team car image
+
+## 2.0.6
+* Fixed First edition Cars are missing youtube_url attribute
+
 ## 2.0.5
 * Revert tokenId: 57899578366707547814966713827535462487986658084231150927309255110625459205623 from team Aston Martin back to Toro Rosso
 
