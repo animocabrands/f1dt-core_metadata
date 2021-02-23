@@ -25,7 +25,33 @@ const BelgiumTrackSegments = (rarity) => {
     }
 }
 
+const silverstoneTrackName = 'Formula 1 Pirelli British Grand Prix 2020';
+const silverstoneTrackDesc = 'Set in 2.71 acres of forest in the mountains of Silverstone(this is temp text), Circuit de Spa-Francorchamps is one of Formula 1’s most challenging and historic race tracks. The legendary circuit has been hosting the FORMULA 1 BELGIAN GRAND PRIX since 1925.';
+const SilverstoneTrackSegments = (rarity) => {
+    switch(rarity) {
+        default:
+            return { 
+                name: silverstoneTrackName,
+                description: silverstoneTrackDesc
+            };
+    }
+}
+
+const monzaTrackName = 'FORMULA 1 GRAN PREMIO HEINEKEN D’ITALIA 2020 - Monza';
+const monzaTrackDesc = 'Set in 3.14 acres of forest in the mountains of Monza(this is temp text), Circuit de Spa-Francorchamps is one of Formula 1’s most challenging and historic race tracks. The legendary circuit has been hosting the FORMULA 1 BELGIAN GRAND PRIX since 1925.';
+const MonzaTrackSegments = (rarity) => {
+    switch(rarity) {
+        default:
+            return { 
+                name: monzaTrackName,
+                description: monzaTrackDesc
+            };
+    }
+}
+
 module.exports = {
     MonacoTrackSegments,
-    BelgiumTrackSegments
+    BelgiumTrackSegments,
+    SilverstoneTrackSegments,
+    MonzaTrackSegments,
 };

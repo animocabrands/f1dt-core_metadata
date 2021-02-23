@@ -14,28 +14,24 @@ const collection = `${type} ${Seasons.NoSeason.seasonId}`;
 const collectionId = createCollectionId(Seasons.NoSeason.seasonId, typeId, subTypeId);
 
 const getName = (trackId, rarity, segment) => {
-    let trackSegment = {};
-    switch (trackId.toString())
-    {
-        case Track.CircuitdeMonaco.trackId:
-            trackSegment = TrackSegments.MonacoTrackSegments;
-            break;
-        case Track.CircuitdeBelgian.trackId:
-            trackSegment = TrackSegments.BelgiumTrackSegments;
-            break;
-    }
-
-    if (trackSegment(segment) !== undefined) {
-        return trackSegment(segment).name;
-    }
-    else if (trackSegment(rarity) !== undefined){
-        return trackSegment(rarity).name;
+    const trackSegment = getTrackSegment(trackId, rarity, segment);
+    if (trackSegment) {
+        return trackSegment.name;
     }
 
     return '';
 }
 
 const getDescription = (trackId, rarity, segment) => {
+    const trackSegment = getTrackSegment(trackId, rarity, segment);
+    if (trackSegment) {
+        return trackSegment.description;
+    }
+
+    return '';
+}
+
+const getTrackSegment = (trackId, rarity, segment) => {
     let trackSegment = {};
     switch (trackId.toString())
     {
@@ -45,17 +41,21 @@ const getDescription = (trackId, rarity, segment) => {
         case Track.CircuitdeBelgian.trackId:
             trackSegment = TrackSegments.BelgiumTrackSegments;
             break;
+        case Track.CircuitSilverstone.trackId:
+            trackSegment = TrackSegments.SilverstoneTrackSegments;
+            break;
+        case Track.CircuitMonza.trackId:
+            trackSegment = TrackSegments.MonzaTrackSegments;
+            break;
     }
 
     //First Segment Id then fallback to rarity
     if (trackSegment(segment) !== undefined) {
-        return trackSegment(segment).description;
+        return trackSegment(segment);
     }
-    else if (trackSegment(rarity) !== undefined) {
-        return trackSegment(rarity).description;
+    else if (trackSegment(rarity) !== undefined){
+        return trackSegment(rarity);
     }
-
-    return '';
 }
 
 module.exports = {
