@@ -47,6 +47,9 @@ const getTrackSegment = (trackId, rarity, segment) => {
         case Track.CircuitMonza.trackId:
             trackSegment = TrackSegments.MonzaTrackSegments;
             break;
+        case Track.CircuitShanghai.trackId:
+            trackSegment = TrackSegments.ShanghaiTrackSegments;
+            break;
     }
 
     //First Segment Id then fallback to rarity
