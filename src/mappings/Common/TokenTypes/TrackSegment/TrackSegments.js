@@ -49,7 +49,7 @@ const MonzaTrackSegments = (rarity) => {
     }
 }
 
-const shanghaiTrackName = 'FORMULA 1 CHINESE Grand Prix 2020';
+const shanghaiTrackName = 'Formula 1 Chinese Grand Prix 2020';
 const shanghaiTrackDesc = 'Set in 3.14 acres of forest in the mountains of Shanghai(this is temp text), Circuit de Spa-Francorchamps is one of Formula 1’s most challenging and historic race tracks. The legendary circuit has been hosting the FORMULA 1 BELGIAN GRAND PRIX since 1925.';
 const ShanghaiTrackSegments = (rarity) => {
     switch(rarity) {
