@@ -19,7 +19,7 @@ const CircuitdeBelgian = {
 
 const CircuitSilverstone = {
     trackId: '3',
-    track: 'Silverstone Circuit',
+    track: 'Silverstone',
     countryId: Countries.GreatBritain.countryId
 }
 
@@ -29,10 +29,17 @@ const CircuitMonza = {
     countryId: Countries.Italy.countryId
 }
 
+const CircuitShanghai = {
+    trackId: '5',
+    track: 'Shanghai International Circuit',
+    countryId: Countries.China.countryId
+}
+
 module.exports = {
     NoTrack,
     CircuitdeMonaco,
     CircuitdeBelgian,
     CircuitSilverstone,
     CircuitMonza,
+    CircuitShanghai,
 };

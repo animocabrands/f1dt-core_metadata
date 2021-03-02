@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0
+* Updated Track name for Silverstone
+* Added Shanghai track
+* Added/Updated track segment name for Silverstone, Monza and Shanghai
+
 ## 2.0.9
 * Minor fix on Track.js countryId should use the countryId in Countries.js instead of an object
 
