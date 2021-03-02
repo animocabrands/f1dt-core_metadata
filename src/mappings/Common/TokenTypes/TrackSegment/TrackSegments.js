@@ -26,7 +26,7 @@ const BelgiumTrackSegments = (rarity) => {
 }
 
 const silverstoneTrackName = 'Formula 1 Pirelli British Grand Prix 2020';
-const silverstoneTrackDesc = 'Set in 2.71 acres of forest in the mountains of Silverstone(this is temp text), Circuit de Spa-Francorchamps is one of Formula 1’s most challenging and historic race tracks. The legendary circuit has been hosting the FORMULA 1 BELGIAN GRAND PRIX since 1925.';
+const silverstoneTrackDesc = 'Silverstone is a circuit that has gone through several layout changes in its time. The current iteration features 4 straight sections and the fastest combination of turns across any Formula 1® circuits. The iconic section of Copse, Maggots and Becketts will push your car to its limits. The chicane at Vale will test you if you’ve got enough power to slingshot onto the start-finish straight ahead of your opponents.';
 const SilverstoneTrackSegments = (rarity) => {
     switch(rarity) {
         default:
@@ -50,7 +50,7 @@ const MonzaTrackSegments = (rarity) => {
 }
 
 const shanghaiTrackName = 'Formula 1 Chinese Grand Prix 2020';
-const shanghaiTrackDesc = 'Set in 3.14 acres of forest in the mountains of Shanghai(this is temp text), Circuit de Spa-Francorchamps is one of Formula 1’s most challenging and historic race tracks. The legendary circuit has been hosting the FORMULA 1 BELGIAN GRAND PRIX since 1925.';
+const shanghaiTrackDesc = 'Inspired by the Chinese character “上”, the Shanghai International Circuit is a state-of-the-art facility, designed by Herman Tilke in 2003. It has hosted the Chinese Grand Prix 16 times, located just on the outskirts of the global financial hub. Like the bustling city of Shanghai itself, the circuit has everything, from the ever tightening corners of Turn 1 and 2, the high-speed sweepers of Turns 7 and 8, to the 1.2km back straight.';
 const ShanghaiTrackSegments = (rarity) => {
     switch(rarity) {
         default:
