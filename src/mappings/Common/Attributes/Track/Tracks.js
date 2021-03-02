@@ -19,13 +19,13 @@ const CircuitdeBelgian = {
 
 const CircuitSilverstone = {
     trackId: '3',
-    track: 'Silverstone Circuit',
+    track: 'Silverstone',
     countryId: Countries.GreatBritain.countryId
 }
 
 const CircuitMonza = {
     trackId: '4',
-    track: 'Autodromo Nazionale Monza',
+    track: 'Autodromo Nazionale di Monza',
     countryId: Countries.Italy.countryId
 }
 

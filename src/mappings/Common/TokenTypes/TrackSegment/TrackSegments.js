@@ -37,8 +37,8 @@ const SilverstoneTrackSegments = (rarity) => {
     }
 }
 
-const monzaTrackName = 'FORMULA 1 GRAN PREMIO HEINEKEN D’ITALIA 2020 - Monza';
-const monzaTrackDesc = 'Set in 3.14 acres of forest in the mountains of Monza(this is temp text), Circuit de Spa-Francorchamps is one of Formula 1’s most challenging and historic race tracks. The legendary circuit has been hosting the FORMULA 1 BELGIAN GRAND PRIX since 1925.';
+const monzaTrackName = "Formula 1 Gran Premio Heineken d'Italia 2020";
+const monzaTrackDesc = 'A little trip north of Milan will bring you to a rather iconic F1® circuit, otherwise known as the “Temple of Speed”. Having hosted the Italian Grand Prix™ from as early as 1922, the Autodromo Nazionale di Monza, will not only be a proving ground for your car’s sheer pace, but will undoubtedly test your accuracy when it comes to braking.';
 const MonzaTrackSegments = (rarity) => {
     switch(rarity) {
         default:
