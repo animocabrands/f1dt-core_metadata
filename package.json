@@ -32,5 +32,8 @@
         "big-integer": "^1.6.48",
         "bits.js": "^0.1.1",
         "lodash.isequal": "^4.5.0"
+    },
+    "publishConfig": {
+        "@animoca:registry": "https://nexus3.animocabrands.com/repository/npm/"
     }
 }
