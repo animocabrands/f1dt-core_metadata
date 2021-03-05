@@ -7,7 +7,8 @@ function getImageName(name, coreMetadata) {
 
     switch (coreMetadata.type) {
         case Types.Track.type:
-            return `${name.replace(/\s+/g, '')}.png`;
+            const segmentSuffix = coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId);
+            return `${coreMetadata.track.replace(/\s+/g, '')}${segmentSuffix}.png`;
         case Types.Car.type:
             if (coreMetadata.rarity.toString() === Rarities.Apex.rarity) {
                 return `${name.replace(/\s+/g, '')}.png`;
