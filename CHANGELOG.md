@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.1
+* Updated image name for all existing tracks
+
 ## 2.1.0
 * Updated Track name for Silverstone
 * Added Shanghai track
