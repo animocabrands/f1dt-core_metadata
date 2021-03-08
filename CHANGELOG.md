@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.2
+* Updated descriptions for Silverstone, Monza and Shanghai tracks
+
 ## 2.1.1
 * Updated image name for all existing tracks
 
