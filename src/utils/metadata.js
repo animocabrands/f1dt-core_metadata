@@ -133,12 +133,13 @@ function getCoreMetadata(id) {
 }
 
 function getOpenseaMetadata(coreMetadata) {
+    const typeValue = coreMetadata.type === "Track" ? "Event Segment" : coreMetadata.type;
 
     //Define common attributes
     let attributes = [
         {
             trait_type: 'type',
-            value: coreMetadata.type,
+            value: typeValue,
         },
         {
             trait_type: 'tier',
@@ -192,7 +193,7 @@ function getOpenseaMetadata(coreMetadata) {
     {
         const track = commonMappings.Attributes.Track.ById[coreMetadata.trackId];
         attributes.push({
-            trait_type: 'event segment',
+            trait_type: 'track',
             value: track.track,
         });
     }
