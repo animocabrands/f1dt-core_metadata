@@ -192,7 +192,7 @@ function getOpenseaMetadata(coreMetadata) {
     {
         const track = commonMappings.Attributes.Track.ById[coreMetadata.trackId];
         attributes.push({
-            trait_type: 'event segment',
+            trait_type: 'track',
             value: track.track,
         });
     }
