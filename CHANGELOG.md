@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.4
+* Fixed track nft types in opensea attribute are messed up.
+
 ## 2.1.3
 * Updated track nft type name on opensea from 'track' to 'event segment'
 
