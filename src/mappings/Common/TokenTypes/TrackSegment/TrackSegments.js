@@ -26,7 +26,7 @@ const BelgiumTrackSegments = (rarity) => {
 }
 
 const silverstoneTrackName = 'Formula 1 Pirelli British Grand Prix 2020';
-const silverstoneTrackDesc = 'Silverstone is a circuit that has gone through several layout changes in its time. The current iteration features 4 straight sections and the fastest combination of turns across any Formula 1® circuits. The iconic section of Copse, Maggots and Becketts will push your car to its limits. The chicane at Vale will test you if you’ve got enough power to slingshot onto the start-finish straight ahead of your opponents.';
+const silverstoneTrackDesc = 'The FORMULA 1 BRITISH GRAND PRIX is “the local“ for the majority of Formula 1® teams, many of whom are based in the UK. As the event draws in, union jacks spread far and wide, with the race weekend bringing together motorsport legends and fans to celebrate heroes present and past.';
 const SilverstoneTrackSegments = (rarity) => {
     switch(rarity) {
         default:
@@ -38,7 +38,7 @@ const SilverstoneTrackSegments = (rarity) => {
 }
 
 const monzaTrackName = "Formula 1 Gran Premio Heineken d'Italia 2020";
-const monzaTrackDesc = 'A little trip north of Milan will bring you to a rather iconic F1® circuit, otherwise known as the “Temple of Speed”. Having hosted the Italian Grand Prix™ from as early as 1922, the Autodromo Nazionale di Monza, will not only be a proving ground for your car’s sheer pace, but will undoubtedly test your accuracy when it comes to braking.';
+const monzaTrackDesc = "A feature of the Formula 1® calendar since 1950, the FORMULA 1 GRAN PREMIO D'ITALIA provides a platform for the sheer speed of Formula 1 cars. To win at the Autodromo Nazionale di Monza, affectionately known as the “Temple of Speed,” is to win the respect of the Tifosi, whose passion can be heard and felt for miles around the historic circuit. During a Grand Prix™ weekend, the town comes alive with a fiery spirit and the united love for motorsport.";
 const MonzaTrackSegments = (rarity) => {
     switch(rarity) {
         default:
@@ -50,7 +50,7 @@ const MonzaTrackSegments = (rarity) => {
 }
 
 const shanghaiTrackName = 'Formula 1 Chinese Grand Prix 2020';
-const shanghaiTrackDesc = 'Inspired by the Chinese character “上”, the Shanghai International Circuit is a state-of-the-art facility, designed by Herman Tilke in 2003. It has hosted the Chinese Grand Prix 16 times, located just on the outskirts of the global financial hub. Like the bustling city of Shanghai itself, the circuit has everything, from the ever tightening corners of Turn 1 and 2, the high-speed sweepers of Turns 7 and 8, to the 1.2km back straight.';
+const shanghaiTrackDesc = 'One of the newest Grand Prix™ to grace the calendar, the FORMULA 1 CHINESE GRAND PRIX opens a window to a world where the drivers and teams are worshiped, and burning rubber reigns supreme. While the sport continues to bloom in the region, there is no doubt that the local scene is passionate and growing fast. ';
 const ShanghaiTrackSegments = (rarity) => {
     switch(rarity) {
         default:
