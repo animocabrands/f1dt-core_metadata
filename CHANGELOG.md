@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.3
+* Updated track nft type name on opensea from 'track' to 'event segment'
+
 ## 2.1.2
 * Updated descriptions for Silverstone, Monza and Shanghai tracks
 
