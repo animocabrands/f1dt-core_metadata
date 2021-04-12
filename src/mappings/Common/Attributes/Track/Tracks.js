@@ -35,6 +35,18 @@ const CircuitShanghai = {
     countryId: Countries.China.countryId
 }
 
+const CircuitBahrain = {
+    trackId: '6',
+    track: 'Bahrain International Circuit',
+    countryId: Countries.Bahrain.countryId
+}
+
+const CircuitAustralia = {
+    trackId: '7',
+    track: 'Albert Park Circuit',
+    countryId: Countries.Australia.countryId
+}
+
 module.exports = {
     NoTrack,
     CircuitdeMonaco,
@@ -42,4 +54,6 @@ module.exports = {
     CircuitSilverstone,
     CircuitMonza,
     CircuitShanghai,
+    CircuitBahrain,
+    CircuitAustralia,
 };

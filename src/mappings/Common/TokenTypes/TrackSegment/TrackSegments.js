@@ -1,14 +1,14 @@
 const Rarities = require('../../Attributes/Rarity/Rarities');
 
 //The key is based on rarity
-const monacaTrackName = "Formula 1 Grand Prix de Monaco 2020";
-const monacaTrackDesc = "The illustrious FORMULA 1 GRAND PRIX DE MONACO is laid out on the city streets of Monte Carlo and La Condamine in the principality of Monaco. The FORMULA 1 GRAND PRIX DE MONACO has been on the Formula 1 calendar since its inception in 1950 and is considered one of the most glamorous and prestigious events in the sport.";
+const monacoTrackName = "Formula 1 Grand Prix de Monaco 2020";
+const monacoTrackDesc = "The illustrious FORMULA 1 GRAND PRIX DE MONACO is laid out on the city streets of Monte Carlo and La Condamine in the principality of Monaco. The FORMULA 1 GRAND PRIX DE MONACO has been on the Formula 1 calendar since its inception in 1950 and is considered one of the most glamorous and prestigious events in the sport.";
 const MonacoTrackSegments = (rarity) => {
     switch(rarity) {
         default:
             return { 
-                name: monacaTrackName,
-                description: monacaTrackDesc
+                name: monacoTrackName,
+                description: monacoTrackDesc
             };
     }    
 }
@@ -50,7 +50,7 @@ const MonzaTrackSegments = (rarity) => {
 }
 
 const shanghaiTrackName = 'Formula 1 Chinese Grand Prix 2020';
-const shanghaiTrackDesc = 'One of the newest Grand Prix™ to grace the calendar, the FORMULA 1 CHINESE GRAND PRIX opens a window to a world where the drivers and teams are worshiped, and burning rubber reigns supreme. While the sport continues to bloom in the region, there is no doubt that the local scene is passionate and growing fast. ';
+const shanghaiTrackDesc = 'One of the newest Grand Prix™ to grace the calendar, the FORMULA 1 CHINESE GRAND PRIX opens a window to a world where the drivers and teams are worshiped, and burning rubber reigns supreme. While the sport continues to bloom in the region, there is no doubt that the local scene is passionate and growing fast.';
 const ShanghaiTrackSegments = (rarity) => {
     switch(rarity) {
         default:
@@ -61,10 +61,36 @@ const ShanghaiTrackSegments = (rarity) => {
     }
 }
 
+const bahrainTrackName = 'Formula 1 Bahrain Grand Prix 2021';
+const bahrainTrackDesc = '';
+const BahrainTrackSegments = (rarity) => {
+    switch(rarity) {
+        default:
+            return {
+                name: bahrainTrackName,
+                description: bahrainTrackDesc
+            };
+    }
+}
+
+const australiaTrackName = 'Formula 1 Rolex Australia Grand Prix 2021';
+const australiaTrackDesc = '';
+const AustraliaTrackSegments = (rarity) => {
+    switch(rarity) {
+        default:
+            return {
+                name: australiaTrackName,
+                description: australiaTrackDesc
+            };
+    }
+}
+
 module.exports = {
     MonacoTrackSegments,
     BelgiumTrackSegments,
     SilverstoneTrackSegments,
     MonzaTrackSegments,
     ShanghaiTrackSegments,
+    BahrainTrackSegments,
+    AustraliaTrackSegments,
 };

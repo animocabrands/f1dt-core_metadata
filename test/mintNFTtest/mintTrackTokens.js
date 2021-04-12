@@ -88,6 +88,48 @@ const segmentIdRangeMap = {
             max: 'P'.charCodeAt(0),
         },
     },
+    '5': { // Shanghai
+        '1': { // Legendary
+            min: 'B'.charCodeAt(0),
+            max: 'C'.charCodeAt(0),
+        },
+        '2': { // Epic
+            min: 'D'.charCodeAt(0),
+            max: 'H'.charCodeAt(0),
+        },
+        '4': { // Rare
+            min: 'I'.charCodeAt(0),
+            max: 'P'.charCodeAt(0),
+        },
+    },
+    '6': { // Bahrain
+        '1': { // Legendary
+            min: 'B'.charCodeAt(0),
+            max: 'C'.charCodeAt(0),
+        },
+        '2': { // Epic
+            min: 'D'.charCodeAt(0),
+            max: 'H'.charCodeAt(0),
+        },
+        '4': { // Rare
+            min: 'I'.charCodeAt(0),
+            max: 'P'.charCodeAt(0),
+        },
+    },
+    '7': { // Shanghai
+        '1': { // Legendary
+            min: 'B'.charCodeAt(0),
+            max: 'C'.charCodeAt(0),
+        },
+        '2': { // Epic
+            min: 'D'.charCodeAt(0),
+            max: 'H'.charCodeAt(0),
+        },
+        '4': { // Rare
+            min: 'I'.charCodeAt(0),
+            max: 'P'.charCodeAt(0),
+        },
+    },
 };
 
 const trackCountMap = {
@@ -107,6 +149,21 @@ const trackCountMap = {
         '4': 25, // Rare
     },
     '4': { // Monza
+        '1': 12, // Legendary
+        '2': 20, // Epic
+        '4': 25, // Rare
+    },
+    '5': { // Shanghai
+        '1': 12, // Legendary
+        '2': 20, // Epic
+        '4': 25, // Rare
+    },
+    '6': { // Bahrain
+        '1': 12, // Legendary
+        '2': 20, // Epic
+        '4': 25, // Rare
+    },
+    '7': { // Australia
         '1': 12, // Legendary
         '2': 20, // Epic
         '4': 25, // Rare
