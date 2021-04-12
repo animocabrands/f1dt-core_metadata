@@ -1,8 +1,8 @@
 const NoDriver = {
-    driverId: '0',
-    name: 'None',
+  driverId: '0',
+  name: 'None',
 };
 
 module.exports = {
-    NoDriver
+  NoDriver,
 };

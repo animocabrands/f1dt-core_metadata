@@ -3,7 +3,7 @@ const mappings = require('./mappings');
 const utils = require('./utils');
 
 module.exports = {
-    constants,
-    mappings,
-    utils,
+  constants,
+  mappings,
+  utils,
 };
