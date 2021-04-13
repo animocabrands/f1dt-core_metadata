@@ -1,4 +1,4 @@
-const { createCollectionId } = require('../../../../utils/ids');
+const {createCollectionId} = require('../../../../utils/ids');
 const Season = require('../../Season');
 const TeamCars = require('./TeamCars');
 const GenericCars = require('./GenericCars');
@@ -22,34 +22,34 @@ const ByModel = {};
 const ByTokenId = {};
 
 for (const teamCar of allTeamCars) {
-    ByName[teamCar.name] = teamCar;
-    ByTeam[teamCar.team] = teamCar;
+  ByName[teamCar.name] = teamCar;
+  ByTeam[teamCar.team] = teamCar;
 }
 
 for (const genericCar of allGenericCars) {
-    ByName[genericCar.name] = genericCar;
-    ByModel[genericCar.model] = genericCar;
+  ByName[genericCar.name] = genericCar;
+  ByModel[genericCar.model] = genericCar;
 }
 
 for (const uniqueCar of allUniqueCars) {
-    ByName[uniqueCar.name] = uniqueCar;
-    ByTokenId[uniqueCar.id] = uniqueCar;
+  ByName[uniqueCar.name] = uniqueCar;
+  ByTokenId[uniqueCar.id] = uniqueCar;
 }
 
 module.exports = {
-    All: [...allTeamCars, ...allGenericCars, ...allUniqueCars],
-    allTeamCars,
-    allGenericCars,
-    allUniqueCars,
-    ByName,
-    ByTeam,
-    ByModel,
-    ByTokenId,
-    collection: Collection,
-    collectionId: CollectionId,
-    type: Type,
-    typeId: TypeId,
-    subType: SubType,
-    subTypeId: SubTypeId,
-    fullTypeId: FullTypeId,
+  All: [...allTeamCars, ...allGenericCars, ...allUniqueCars],
+  allTeamCars,
+  allGenericCars,
+  allUniqueCars,
+  ByName,
+  ByTeam,
+  ByModel,
+  ByTokenId,
+  collection: Collection,
+  collectionId: CollectionId,
+  type: Type,
+  typeId: TypeId,
+  subType: SubType,
+  subTypeId: SubTypeId,
+  fullTypeId: FullTypeId,
 };

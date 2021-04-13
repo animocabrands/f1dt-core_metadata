@@ -5,12 +5,12 @@ const ById = {};
 const ByName = {};
 
 for (const label of allLabels) {
-    ByName[label.label] = label;
-    ById[label.labelId] = label;
+  ByName[label.label] = label;
+  ById[label.labelId] = label;
 }
 
 module.exports = {
-    All: allLabels,
-    ByName,
-    ById,
+  All: allLabels,
+  ByName,
+  ById,
 };

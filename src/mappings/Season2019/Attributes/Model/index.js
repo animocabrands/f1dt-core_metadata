@@ -5,12 +5,12 @@ const ById = {};
 const ByName = {};
 
 for (const model of allModels) {
-    ById[model.modelId] = model;
-    ByName[model.model] = model;
+  ById[model.modelId] = model;
+  ByName[model.model] = model;
 }
 
 module.exports = {
-    All: allModels,
-    ById,
-    ByName,
+  All: allModels,
+  ById,
+  ByName,
 };
