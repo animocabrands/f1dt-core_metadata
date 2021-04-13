@@ -82,6 +82,7 @@ function getCoreMetadata(id) {
       segmentId: decoded['trackSegment.segmentId'],
       zoneId: decoded['trackSegment.zoneId'],
       earnings: decoded['trackSegment.earnings'],
+      eventSeason: decoded['trackSegment.eventSeason'],
     };
 
     coreMetadata = {
@@ -392,10 +393,7 @@ function getFullMetadata(id, network = 'mainnet') {
       case Types.Track.type:
         //segment e.g. 1A
         const segment = coreMetadata.trackSegment.zoneId + '' + String.fromCharCode(coreMetadata.trackSegment.segmentId);
-        let eMeta = {
-          name: commonMappings.TokenTypes.TrackSegment.getName(coreMetadata.trackId, coreMetadata.rarity, segment),
-          description: commonMappings.TokenTypes.TrackSegment.getDescription(coreMetadata.trackId, coreMetadata.rarity, segment),
-        };
+        let eMeta = commonMappings.TokenTypes.TrackSegment.getTrackSegment(coreMetadata.trackId, coreMetadata.trackSegment.eventSeason);
         eMeta.name = eMeta.name + ' ' + segment;
         extendedMetadata = {...eMeta};
         break;
