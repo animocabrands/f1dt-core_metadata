@@ -1,40 +1,39 @@
 {
-    "name": "@animoca/f1dt-core_metadata",
-    "version": "2.1.5",
-    "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:animocabrands/f1dt-core_metadata.git"
-    },
-    "author": "Animoca Brands",
-    "license": "MIT",
-    "main": "src/index.js",
-    "scripts": {
-        "prettier": "prettier --write src",
-        "test": "mocha --timeout 180000",
-        "debug": "nodemon --exec babel-node"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.8.4",
-        "@babel/core": "^7.8.7",
-        "@babel/node": "^7.8.7",
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/preset-env": "^7.8.7",
-        "@babel/register": "^7.8.6",
-        "assert": "^2.0.0",
-        "commander": "^6.0.0",
-        "nodemon": "^2.0.6",
-        "prettier": "^2.0.5",
-        "mocha": "^8.2.1",
-        "fs-extra": "^9.0.1"
-    },
-    "dependencies": {
-        "@animoca/blockchain-inventory_metadata": "^0.0.1",
-        "big-integer": "^1.6.48",
-        "bits.js": "^0.1.1",
-        "lodash.isequal": "^4.5.0"
-    },
-    "publishConfig": {
-        "@animoca:registry": "https://nexus3.animocabrands.com/repository/npm/"
-    }
+  "name": "@animoca/f1dt-core_metadata",
+  "version": "2.1.5",
+  "description": "Core metadata for F1 Delta Time. Usable in node and browser.",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:animocabrands/f1dt-core_metadata.git"
+  },
+  "author": "Animoca Brands",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "prettier": "prettier --write src",
+    "test": "mocha --timeout 180000",
+    "debug": "nodemon --exec babel-node",
+    "release:private": "scripts/release-package.sh private",
+    "release:public": "scripts/release-package.sh public"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/register": "^7.8.6",
+    "assert": "^2.0.0",
+    "commander": "^6.0.0",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.0.5",
+    "mocha": "^8.2.1",
+    "fs-extra": "^9.0.1"
+  },
+  "dependencies": {
+    "@animoca/blockchain-inventory_metadata": "^0.0.1",
+    "big-integer": "^1.6.48",
+    "bits.js": "^0.1.1",
+    "lodash.isequal": "^4.5.0"
+  }
 }
