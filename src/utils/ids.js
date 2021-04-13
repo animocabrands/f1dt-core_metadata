@@ -36,6 +36,8 @@ function createTrackTokenId(coreMetadata) {
       coreMetadata.trackSegment && coreMetadata.trackSegment.segmentId ? BigInteger(coreMetadata.trackSegment.segmentId) : BigInteger(),
     'trackSegment.earnings':
       coreMetadata.trackSegment && coreMetadata.trackSegment.earnings ? BigInteger(coreMetadata.trackSegment.earnings) : BigInteger(),
+    'trackSegment.eventSeason':
+      coreMetadata.trackSegment && coreMetadata.trackSegment.eventSeason ? BigInteger(coreMetadata.trackSegment.eventSeason) : BigInteger(),
     padding3: BigInteger(),
     counter: coreMetadata.counter ? BigInteger(coreMetadata.counter) : BigInteger(),
   };

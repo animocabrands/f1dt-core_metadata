@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.2.0
+* Added trackSegment.eventSeason core metadata.
+* Track segement names are based on eventSeason.
+
+## 2.1.6
+* Added missing description for Bahrain and Australia track segments.
+
+## 2.1.5
+* Added Bahrain and Australia track segments.
+
 ## 2.1.4
 * Fixed track nft types in opensea attribute are messed up.
 

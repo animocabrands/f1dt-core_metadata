@@ -13,61 +13,37 @@ const fullTypeId = '6,0';
 const collection = `${type} ${Seasons.NoSeason.seasonId}`;
 const collectionId = createCollectionId(Seasons.NoSeason.seasonId, typeId, subTypeId);
 
-const getName = (trackId, rarity, segment) => {
-  const trackSegment = getTrackSegment(trackId, rarity, segment);
-  if (trackSegment) {
-    return trackSegment.name;
-  }
-
-  return '';
-};
-
-const getDescription = (trackId, rarity, segment) => {
-  const trackSegment = getTrackSegment(trackId, rarity, segment);
-  if (trackSegment) {
-    return trackSegment.description;
-  }
-
-  return '';
-};
-
-const getTrackSegment = (trackId, rarity, segment) => {
+const getTrackSegment = (trackId, eventSeason) => {
   let trackSegment = {};
   switch (trackId.toString()) {
     case Track.CircuitdeMonaco.trackId:
-      trackSegment = TrackSegments.MonacoTrackSegments;
+      trackSegment = TrackSegments.MonacoTrackSegment;
       break;
     case Track.CircuitdeBelgian.trackId:
-      trackSegment = TrackSegments.BelgiumTrackSegments;
+      trackSegment = TrackSegments.BelgiumTrackSegment;
       break;
     case Track.CircuitSilverstone.trackId:
-      trackSegment = TrackSegments.SilverstoneTrackSegments;
+      trackSegment = TrackSegments.GreatBritainTrackSegment;
       break;
     case Track.CircuitMonza.trackId:
-      trackSegment = TrackSegments.MonzaTrackSegments;
+      trackSegment = TrackSegments.ItaliaTrackSegment;
       break;
     case Track.CircuitShanghai.trackId:
-      trackSegment = TrackSegments.ShanghaiTrackSegments;
+      trackSegment = TrackSegments.ChinaTrackSegment;
       break;
     case Track.CircuitBahrain.trackId:
-      trackSegment = TrackSegments.BahrainTrackSegments;
+      trackSegment = TrackSegments.BahrainTrackSegment;
       break;
     case Track.CircuitAustralia.trackId:
-      trackSegment = TrackSegments.AustraliaTrackSegments;
+      trackSegment = TrackSegments.AustraliaTrackSegment;
       break;
   }
 
-  //First Segment Id then fallback to rarity
-  if (trackSegment(segment) !== undefined) {
-    return trackSegment(segment);
-  } else if (trackSegment(rarity) !== undefined) {
-    return trackSegment(rarity);
-  }
+  return trackSegment(eventSeason.toString());
 };
 
 module.exports = {
-  getName,
-  getDescription,
+  getTrackSegment,
   collection: collection,
   collectionId: collectionId,
   type: type,
