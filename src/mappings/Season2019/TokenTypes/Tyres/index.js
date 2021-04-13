@@ -8,15 +8,15 @@ const BySubTypeId = {};
 const ByFullTypeId = {};
 
 for (const tyres of allTyres) {
-    ByName[tyres.subType] = tyres;
-    BySubTypeId[tyres.subTypeId] = tyres;
-    ByFullTypeId[tyres.fullTypeId] = tyres;
+  ByName[tyres.subType] = tyres;
+  BySubTypeId[tyres.subTypeId] = tyres;
+  ByFullTypeId[tyres.fullTypeId] = tyres;
 }
 
 module.exports = {
-    All: allTyres,
-    ByName,
-    BySubTypeId,
-    ByFullTypeId,
-    typeId: TypeId,
+  All: allTyres,
+  ByName,
+  BySubTypeId,
+  ByFullTypeId,
+  typeId: TypeId,
 };

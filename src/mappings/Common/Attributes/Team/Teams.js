@@ -1,8 +1,8 @@
 const NoTeam = {
-    teamId: '0',
-    team: 'None'
+  teamId: '0',
+  team: 'None',
 };
 
 module.exports = {
-    NoTeam
+  NoTeam,
 };

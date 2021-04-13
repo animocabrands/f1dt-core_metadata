@@ -1,11 +1,10 @@
-const { createCollectionId } = require('../../../../utils/ids');
+const {createCollectionId} = require('../../../../utils/ids');
 const Season = require('../../Attributes/Season');
 
 const TeamDrivers = require('./TeamDrivers');
 const allTeamDrivers = Object.values(TeamDrivers);
 const GenericDrivers = require('./GenericDrivers');
 const allGenericDrivers = Object.values(GenericDrivers);
-
 
 const Type = 'Driver';
 const TypeId = '2';
@@ -20,26 +19,26 @@ const ById = {};
 const ByModel = {};
 
 for (const teamDriver of allTeamDrivers) {
-    ById[teamDriver.driverId] = teamDriver;
-    ByName[teamDriver.name] = teamDriver;
+  ById[teamDriver.driverId] = teamDriver;
+  ByName[teamDriver.name] = teamDriver;
 }
 
 for (const genericDriver of allGenericDrivers) {
-    ByModel[genericDriver.model] = genericDriver;
-    ByName[genericDriver.name] = genericDriver;
+  ByModel[genericDriver.model] = genericDriver;
+  ByName[genericDriver.name] = genericDriver;
 }
 
 module.exports = {
-    All: [...allTeamDrivers, ...allGenericDrivers],
-    allTeamDrivers,
-    allGenericDrivers,
-    ByModel,
-    ById,
-    ByName,
-    collection: Collection,
-    collectionId: CollectionId,
-    typeId: TypeId,
-    subType: SubType,
-    subTypeId: SubTypeId,
-    fullTypeId: FullTypeId,
+  All: [...allTeamDrivers, ...allGenericDrivers],
+  allTeamDrivers,
+  allGenericDrivers,
+  ByModel,
+  ById,
+  ByName,
+  collection: Collection,
+  collectionId: CollectionId,
+  typeId: TypeId,
+  subType: SubType,
+  subTypeId: SubTypeId,
+  fullTypeId: FullTypeId,
 };

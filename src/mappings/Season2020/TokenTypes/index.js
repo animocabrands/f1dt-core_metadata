@@ -5,9 +5,9 @@ const Gear = require('./Gear');
 const Tyres = require('./Tyres');
 
 module.exports = {
-    Car,
-    Driver,
-    Part,
-    Gear,
-    Tyres,
+  Car,
+  Driver,
+  Part,
+  Gear,
+  Tyres,
 };
