@@ -67,7 +67,8 @@ const ShanghaiTrackSegments = (rarity) => {
 };
 
 const bahrainTrackName = 'Formula 1 Bahrain Grand Prix 2021';
-const bahrainTrackDesc = '';
+const bahrainTrackDesc =
+  'In the heart of the Sakhir desert, the FORMULA 1 BAHRAIN GRAND PRIX is a spectacle under the stars. It’s a clash of kings, lit up by floodlights, as royalty from around the world meet and mingle with generations of racing royalty. There’s plenty to do around the archipelago, as you spend the days touring temples or diving for pearls. Come nightfall however, attention turns to the 20 fastest drivers in the world, as they take to the track for a duel in the desert.';
 const BahrainTrackSegments = (rarity) => {
   switch (rarity) {
     default:
@@ -79,7 +80,8 @@ const BahrainTrackSegments = (rarity) => {
 };
 
 const australiaTrackName = 'Formula 1 Rolex Australia Grand Prix 2021';
-const australiaTrackDesc = '';
+const australiaTrackDesc =
+  'Melbourne, the cultural melting pot down under is the home of the FORMULA 1 AUSTRALIAN GRAND PRIX. For one week a year in the “Aussie Summer”, Australia plays host to the fastest race cars in the world. Barbecues and beef pies often find their place around the park, with fans enjoying the sun on picnic blankets as their racing heroes battle wheel to wheel.';
 const AustraliaTrackSegments = (rarity) => {
   switch (rarity) {
     default:
