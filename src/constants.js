@@ -52,7 +52,7 @@ const TrackSegmentTokenBitsLayout = [
   {name: 'trackSegment.zoneId', bits: 8}, // 128
   {name: 'trackSegment.segmentId', bits: 8}, // 120
   {name: 'trackSegment.earnings', bits: 32}, // 88
-  {name: 'trackSegment.eventSeason', bits: 16}, // 76
+  {name: 'trackSegment.eventSeason', bits: 16}, // 72
   {name: 'padding3', bits: 24}, // 48
   {name: 'counter', bits: 48}, // 0
 ].reverse();
