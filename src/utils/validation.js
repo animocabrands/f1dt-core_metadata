@@ -121,6 +121,11 @@ function validateCommonMetadata(coreMetadata) {
   } catch (e) {
     errors.push(e);
   }
+  try {
+    validateAndMapCoreAttribute(commonMappings.Track, coreMetadata, 'track', false);
+  } catch (e) {
+    errors.push(e);
+  }
 
   if (coreMetadata.rarity !== undefined) {
     const rarityTier = commonMappings.Rarity.ByRarity[coreMetadata.rarity].rarityTier;
