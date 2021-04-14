@@ -49,18 +49,16 @@ const GreatBritainTrackSegment = (eventSeason) => {
 };
 
 const ItaliaTrackSegment = (eventSeason) => {
-  const description =
-    "A feature of the Formula 1® calendar since 1950, the FORMULA 1 GRAN PREMIO D'ITALIA provides a platform for the sheer speed of Formula 1 cars. To win at the Autodromo Nazionale di Monza, affectionately known as the “Temple of Speed,” is to win the respect of the Tifosi, whose passion can be heard and felt for miles around the historic circuit. During a Grand Prix™ weekend, the town comes alive with a fiery spirit and the united love for motorsport.";
   switch (eventSeason) {
     case '2021':
       return {
-        name: "Formula 1 Gran Premio d'Italia 2021",
-        description: description,
+        name: "Formula 1® Gran Premio d'Italia 2021",
+        description: "A little trip north of Milan will bring you to a rather iconic F1® circuit, otherwise known as the “Temple of Speed”. Having hosted the Italian Grand Prix™ from as early as 1922, the Autodromo Nazionale di Monza, will not only be a proving ground for your car’s sheer pace, but will undoubtedly test your accuracy when it comes to braking.",
       };
     default:
       return {
-        name: 'Formula 1 Autodromo Nazionale di Monza 2020',
-        description: description,
+        name: 'Formula 1® Autodromo Nazionale di Monza 2020',
+        description: "A feature of the Formula 1® calendar since 1950, the FORMULA 1 GRAN PREMIO D'ITALIA provides a platform for the sheer speed of Formula 1 cars. To win at the Autodromo Nazionale di Monza, affectionately known as the “Temple of Speed,” is to win the respect of the Tifosi, whose passion can be heard and felt for miles around the historic circuit. During a Grand Prix™ weekend, the town comes alive with a fiery spirit and the united love for motorsport.",
       };
   }
 };
@@ -106,7 +104,7 @@ const AustraliaTrackSegment = (eventSeason) => {
   switch (eventSeason) {
     case '2021':
       return {
-        name: 'Formula 1 Rolex Australia Grand Prix 2021',
+        name: 'Formula 1 Australian Grand Prix 2021',
         description: description,
       };
     default:
