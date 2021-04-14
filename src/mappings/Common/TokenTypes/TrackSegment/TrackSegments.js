@@ -54,7 +54,7 @@ const ItaliaTrackSegment = (eventSeason) => {
   switch (eventSeason) {
     case '2021':
       return {
-        name: "Formula 1 Gran Premio Heineken d'Italia 2021",
+        name: "Formula 1 Gran Premio d'Italia 2021",
         description: description,
       };
     default:

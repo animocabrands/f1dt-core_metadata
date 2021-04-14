@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.2.1
+* Fixed Australian 2021 grand prix name.
+
 ## 2.2.0
 * Added trackSegment.eventSeason core metadata.
 * Track segement names are based on eventSeason.
