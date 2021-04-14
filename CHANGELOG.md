@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+* Updated Australia track segment name and track name
+* Updated Italy track segment name and description
+
 ## 2.2.0
 * Added trackSegment.eventSeason core metadata.
 * Track segement names are based on eventSeason.

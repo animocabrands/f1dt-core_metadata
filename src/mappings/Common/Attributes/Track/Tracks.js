@@ -43,7 +43,7 @@ const CircuitBahrain = {
 
 const CircuitAustralia = {
   trackId: '7',
-  track: 'Albert Park Circuit',
+  track: 'Albert Park',
   countryId: Countries.Australia.countryId,
 };
 
