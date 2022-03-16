@@ -1,5 +1,89 @@
 # Changelog
 
+## 2.2.1
+* Updated Australia track segment name and track name
+* Updated Italy track segment name and description
+
+## 2.2.0
+* Added trackSegment.eventSeason core metadata.
+* Track segement names are based on eventSeason.
+
+## 2.1.6
+* Added missing description for Bahrain and Australia track segments.
+
+## 2.1.5
+* Added Bahrain and Australia track segments.
+
+## 2.1.4
+* Fixed track nft types in opensea attribute are messed up.
+
+## 2.1.3
+* Updated track nft type name on opensea from 'track' to 'event segment'
+
+## 2.1.2
+* Updated descriptions for Silverstone, Monza and Shanghai tracks
+
+## 2.1.1
+* Updated image name for all existing tracks
+
+## 2.1.0
+* Updated Track name for Silverstone
+* Added Shanghai track
+* Added/Updated track segment name for Silverstone, Monza and Shanghai
+
+## 2.0.9
+* Minor fix on Track.js countryId should use the countryId in Countries.js instead of an object
+
+## 2.0.8
+* Fixed China Azure Dragon edition youtube url is using a shortern youtube url
+
+## 2.0.7
+* Fixed FirstEdition car images should be align with the team car image
+
+## 2.0.6
+* Fixed First edition Cars are missing youtube_url attribute
+
+## 2.0.5
+* Revert tokenId: 57899578366707547814966713827535462487986658084231150927309255110625459205623 from team Aston Martin back to Toro Rosso
+
+## 2.0.4
+* Fixed Lewis Hamilton description
+
+## 2.0.3
+* Updated 2020 Team Drivers description
+
+## 2.0.2
+* Added Belgium Track Segment
+
+## 2.0.1
+* Updated generic driver description
+* Fixed image override settings is not working
+* Fixed Kimi Räikkönen and Sergio Pérez image url is not correct
+
+## 2.0.0
+* Added 2020 NFTs
+* Code cleanup (removing extendedMeta in TokenTypes)
+
+## 1.2.1
+* Migrate image url to another CDN
+* Forced Apex car to generate image url using getImageUrl
+
+## 1.1.8
+* Updated youtube url for Australia Edition 2020
+* Added 70th Anniversary Edition Apex car
+
+## 1.1.7
+* Updated Track segment name and description
+
+## 1.1.6
+### Improvements
+* Removed opensea attributes `earning_share` for Tracks 
+
+## 1.1.5
+
+### Bugfix
+* Fix the ES6 runtime issue in TrackSegment.js
+
 ## 1.1.0
 
 ### New Features
