@@ -1,7 +1,7 @@
 const NoModel = {
-    model: 'None',
-    modelId: '0',
+  model: 'None',
+  modelId: '0',
 };
-module.exports = [
-    NoModel
-];
+module.exports = {
+  NoModel,
+};

@@ -5,12 +5,12 @@ const ById = {};
 const ByName = {};
 
 for (const season of allSeasons) {
-    ByName[season.season] = season;
-    ById[season.seasonId] = season;
+  ByName[season.season] = season;
+  ById[season.seasonId] = season;
 }
 
 module.exports = {
-    All: allSeasons,
-    ById,
-    ByName,
+  All: allSeasons,
+  ById,
+  ByName,
 };

@@ -1,15 +1,16 @@
 const Models = require('./Models');
+const allModels = Object.values(Models);
 
 const ById = {};
 const ByName = {};
 
-for (const model of Models) {
-    ById[model.modelId] = model;
-    ByName[model.model] = model;
+for (const model of allModels) {
+  ById[model.modelId] = model;
+  ByName[model.model] = model;
 }
 
 module.exports = {
-    All: Models,
-    ById,
-    ByName,
+  All: allModels,
+  ById,
+  ByName,
 };

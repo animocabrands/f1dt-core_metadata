@@ -5,12 +5,12 @@ const ByName = {};
 const ById = {};
 
 for (const type of allTypes) {
-    ByName[type.type] = type;
-    ById[type.typeId] = type;
+  ByName[type.type] = type;
+  ById[type.typeId] = type;
 }
 
 module.exports = {
-    All: allTypes,
-    ByName,
-    ById,
+  All: allTypes,
+  ByName,
+  ById,
 };

@@ -1,9 +1,8 @@
 const NoTeam = {
-    teamId: '0',
-    team: 'None',
-    drivers: [],
+  teamId: '0',
+  team: 'None',
 };
 
-module.exports = [
-    NoTeam
-];
+module.exports = {
+  NoTeam,
+};
